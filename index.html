@@ -111,6 +111,16 @@
 
         /*
         ========================================
+        Brand Section with Logo
+        ========================================
+        */
+        .navbar__brand-section {
+            display: flex;
+            align-items: center;
+        }
+
+        /*
+        ========================================
         Banner Image Styles
         ========================================
         */
@@ -118,7 +128,7 @@
             width: 200px;  /* Smaller fixed width */
             height: 50px;  /* Fixed height to maintain navbar height */
             overflow: hidden; /* Ensures image doesn't overflow */
-            margin: 0 1rem; /* Add some spacing around the image */
+            margin-left: 10px; /* 10px spacing after the brand text */
         }
         
         .banner-image img {
@@ -244,9 +254,11 @@
 
     <header class="navbar" role="banner">
         <div class="navbar__container">
-            <a href="#" class="navbar__brand" aria-label="Homepage">Renert Robotics</a>
-            <div class="banner-image">
-                <img src="Screenshot_2025-04-22_130549-removebg-preview.png" alt="Renert Robotics Logo">
+            <div class="navbar__brand-section">
+                <a href="#" class="navbar__brand" aria-label="Homepage">Renert Robotics</a>
+                <div class="banner-image">
+                    <img src="Screenshot_2025-04-22_130549-removebg-preview.png" alt="Renert Robotics Logo">
+                </div>
             </div>
             
             <button class="navbar__toggle" 
