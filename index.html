@@ -219,36 +219,10 @@
             .navbar__link--active {
                 background-color: var(--color-link-highlight);
             }
-            #image-area {
-              width: 100px;
-              height: 200px;
-              border: 2px solid black;
-              position: relative; /* to position the image inside */
-              overflow: hidden;   /* if you want to hide overflow */
-            }
-        
-            /* Style the image */
-            #image-area img {
-              position: absolute;
-              top: 60px;  /* distance from top of container */
-              left: 50px; /* distance from left of container */
-              width: 200px; /* adjust size */
-              height: auto;
-
-            #image-area1 {
-              width: 200px;
-              height: 200px;
-              border: 2px solid black;
-              position: relative; /* to position the image inside */
-              overflow: hidden;   /* if you want to hide overflow */
-            }
-        
-            /* Style the image */
-            #image-area1 img {
-              position: absolute;
-              top: 10px;  /* distance from top of container */
-              left: 10px; /* distance from left of container */
-              width: 200px; /* adjust size */
+            .banner-image {
+                width: 60%; /* Adjust percentage as needed */
+                max-width: 500px; /* Set maximum width */
+                height: auto; /* Maintain aspect ratio */
             }
         }
     </style>
@@ -258,7 +232,7 @@
     <header class="navbar" role="banner">
         <div class="navbar__container">
             <a href="#" class="navbar__brand" aria-label="Homepage">Renert Robotics</a>
-            <div id="image-area1">
+            <div class="banner-image">
                 <img src="Screenshot 2025-06-07 192336.png" alt="Example Image">
             </div>
             
@@ -285,10 +259,7 @@
     
     <main class="content">
         <h1>Renert Robotics!</h1>
-        <p>This is notttttttttttttt the official 31663 and 27361 Renert Robotics FTC Website</p>
-        <div id="image-area">
-            <img src="Screenshot 2025-06-07 192336.png" alt="Example Image">
-        </div>
+        <p>This is  the official 31663 and 27361 Renert Robotics FTC Website</p>
     </main>
     
     <script>
