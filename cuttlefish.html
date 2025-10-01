@@ -7,302 +7,314 @@
   <link rel="stylesheet" href="style.css"> <!-- optional if you want to reuse same CSS -->
   <style>
     :root {
-            --color-glass-bg: rgba(255, 255, 255, 0.2);
-            --color-glass-border: rgba(255, 255, 255, 0.3);
-            --color-link-highlight: rgba(255, 255, 255, 0.25);
-            
-            --color-text: #ffffff;
-            --color-focus-outline: #5ab1ff;
-            
-            --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            --font-weight-bold: 600;
-            
-            --blur-value: 10px;
-            --border-radius-soft: 8px;
-            --navbar-height: 70px;
-            --navbar-padding: 1.5rem;
-            --container-width: 1140px;
-            --transition-speed: 0.3s;
-        }
+      --color-glass-bg: rgba(255, 255, 255, 0.2);
+      --color-glass-border: rgba(255, 255, 255, 0.3);
+      --color-link-highlight: rgba(255, 255, 255, 0.25);
+      
+      --color-text: #ffffff;
+      --color-focus-outline: #5ab1ff;
+      
+      --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-weight-bold: 600;
+      
+      --blur-value: 10px;
+      --border-radius-soft: 8px;
+      --navbar-height: 70px;
+      --navbar-padding: 1.5rem;
+      --container-width: 1140px;
+      --transition-speed: 0.3s;
+    }
 
-        h1 {
-          font-size: 60px;
-        }
+    h1 {
+      font-size: 60px;
+    }
 
-        * {
-            box-sizing: border-box;
-        }
+    /* 👇 NEW SPACING RULES */
+    h3, h5 {
+      margin-top: 1rem;      /* space above */
+      margin-bottom: 0.3rem; /* tighter space below */
+    }
 
-        body {
-            margin: 0;
-            font-family: var(--font-family-sans-serif);
-            font-size: 1rem;
-            line-height: 1.5;
-            color: var(--color-text);
-            background-image: linear-gradient(90deg, #32bdd3, #89258d);
-            background-attachment: fixed;
-        }
-        
-        .content {
-            padding-top: 40px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: left;
-        }
-        
-        .content-container {
-            display: flex;
-            align-items: left;
-            width: 100%;
-        }
-        
-        .content-text {
-            flex: 0 0 auto;
-            text-align: left;
-            margin-left: 50px;
-            padding-right: 2rem;
-        }
+    p {
+      margin-top: 0.2rem;    /* very little space above */
+      margin-bottom: 0.8rem; /* small gap below */
+      line-height: 1.4;      /* slightly tighter line spacing */
+    }
 
-        /* Move the paragraph up by 40px */
-        .content-text p {
-            margin-top: -40px;
-        }
-        
-        .content-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-right: var(--navbar-padding);
-            padding-top: 60px;
-        }
-        
-        .content-image img {
-            height: 400px;
-            width: auto;
-            object-fit: contain;
-        }
-        
-        ul { list-style: none; margin: 0; padding: 0; }
-        a { text-decoration: none; color: inherit; }
+    * {
+      box-sizing: border-box;
+    }
 
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--navbar-height);
-            display: flex;
-            align-items: center;
-            z-index: 1000;
-            background: var(--color-glass-bg);
-            border-bottom: 1px solid var(--color-glass-border);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(var(--blur-value));
-            -webkit-backdrop-filter: blur(var(--blur-value));
-        }
+    body {
+      margin: 0;
+      font-family: var(--font-family-sans-serif);
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--color-text);
+      background-image: linear-gradient(90deg, #32bdd3, #89258d);
+      background-attachment: fixed;
+    }
+    
+    .content {
+      padding-top: 40px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+    }
+    
+    .content-container {
+      display: flex;
+      align-items: left;
+      width: 100%;
+    }
+    
+    .content-text {
+      flex: 0 0 auto;
+      text-align: left;
+      margin-left: 50px;
+      padding-right: 2rem;
+    }
 
-        .navbar__container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 var(--navbar-padding);
-        }
-        
-        .navbar__brand {
-            font-size: 1.5rem;
-            font-weight: var(--font-weight-bold);
-        }
-        
-        .navbar__brand,
-        .navbar__link {
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        }
+    /* Move the paragraph up by 40px */
+    .content-text p {
+      margin-top: -40px;
+    }
+    
+    .content-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-right: var(--navbar-padding);
+      padding-top: 60px;
+    }
+    
+    .content-image img {
+      height: 400px;
+      width: auto;
+      object-fit: contain;
+    }
+    
+    ul { list-style: none; margin: 0; padding: 0; }
+    a { text-decoration: none; color: inherit; }
 
-        .navbar__brand-section {
-            display: flex;
-            align-items: center;
-        }
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--navbar-height);
+      display: flex;
+      align-items: center;
+      z-index: 1000;
+      background: var(--color-glass-bg);
+      border-bottom: 1px solid var(--color-glass-border);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      backdrop-filter: blur(var(--blur-value));
+      -webkit-backdrop-filter: blur(var(--blur-value));
+    }
 
-        .banner-image {
-            width: 200px;
-            height: 50px;
-            overflow: hidden;
-            margin-left: -50px;
-        }        
-        .banner-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
+    .navbar__container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: var(--container-width);
+      margin: 0 auto;
+      padding: 0 var(--navbar-padding);
+    }
+    
+    .navbar__brand {
+      font-size: 1.5rem;
+      font-weight: var(--font-weight-bold);
+    }
+    
+    .navbar__brand,
+    .navbar__link {
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    }
 
-        .navbar__toggle {
-            display: block;
-            padding: 0.5rem;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            z-index: 1001;
-        }
-        
-        .navbar__toggle .bar {
-            display: block;
-            width: 25px;
-            height: 3px;
-            margin: 5px auto;
-            background-color: var(--color-text);
-            transition: all var(--transition-speed) ease-in-out;
-            border-radius: 2px;
-        }
+    .navbar__brand-section {
+      display: flex;
+      align-items: center;
+    }
 
-        .navbar__toggle.is-active .bar:nth-child(2) { opacity: 0; }
-        .navbar__toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-        .navbar__toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-        
-        .navbar__menu {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            position: absolute;
-            top: var(--navbar-height);
-            left: 0;
-            z-index: -1;
-            background: var(--color-glass-bg);
-            backdrop-filter: blur(var(--blur-value));
-            -webkit-backdrop-filter: blur(var(--blur-value));
-            border-top: 1px solid var(--color-glass-border);
-            padding-bottom: 1rem;
-        }
-        
-        .navbar__menu.is-active { 
-            display: flex; 
-            background-image: linear-gradient(90deg, #32bdd3, #89258d);
-        }
+    .banner-image {
+      width: 200px;
+      height: 50px;
+      overflow: hidden;
+      margin-left: -50px;
+    }        
+    .banner-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
-        .navbar__item { text-align: center; }
+    .navbar__toggle {
+      display: block;
+      padding: 0.5rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    
+    .navbar__toggle .bar {
+      display: block;
+      width: 25px;
+      height: 3px;
+      margin: 5px auto;
+      background-color: var(--color-text);
+      transition: all var(--transition-speed) ease-in-out;
+      border-radius: 2px;
+    }
 
-        .navbar__link {
-            display: block;
-            padding: 1.25rem;
-            font-weight: var(--font-weight-bold);
-            transition: background-color var(--transition-speed) ease;
-        }
-        
-        .navbar__link:hover, .navbar__link:focus {
-            background-color: var(--color-link-highlight);
-        }
+    .navbar__toggle.is-active .bar:nth-child(2) { opacity: 0; }
+    .navbar__toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .navbar__toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    
+    .navbar__menu {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+      position: absolute;
+      top: var(--navbar-height);
+      left: 0;
+      z-index: -1;
+      background: var(--color-glass-bg);
+      backdrop-filter: blur(var(--blur-value));
+      -webkit-backdrop-filter: blur(var(--blur-value));
+      border-top: 1px solid var(--color-glass-border);
+      padding-bottom: 1rem;
+    }
+    
+    .navbar__menu.is-active { 
+      display: flex; 
+      background-image: linear-gradient(90deg, #32bdd3, #89258d);
+    }
 
-        :is(.navbar__toggle, .navbar__link):focus-visible {
-            outline: 2px solid var(--color-focus-outline);
-            outline-offset: 2px;
-            border-radius: var(--border-radius-soft);
-        }
+    .navbar__item { text-align: center; }
 
-        @media (min-width: 768px) {
-            .navbar__toggle { display: none; }
+    .navbar__link {
+      display: block;
+      padding: 1.25rem;
+      font-weight: var(--font-weight-bold);
+      transition: background-color var(--transition-speed) ease;
+    }
+    
+    .navbar__link:hover, .navbar__link:focus {
+      background-color: var(--color-link-highlight);
+    }
 
-            .navbar__menu {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                position: static;
-                width: auto;
-                background-color: transparent !important;
-                background-image: none !important;
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                border: none;
-                z-index: 1;
-                padding: 0;
-            }
-            
-            .navbar__list {
-                display: flex;
-                align-items: center;
-            }
+    :is(.navbar__toggle, .navbar__link):focus-visible {
+      outline: 2px solid var(--color-focus-outline);
+      outline-offset: 2px;
+      border-radius: var(--border-radius-soft);
+    }
 
-            .navbar__item { margin-left: 0.5rem; }
+    @media (min-width: 768px) {
+      .navbar__toggle { display: none; }
 
-            .navbar__link {
-                padding: 0.6rem 1.1rem;
-                border-radius: var(--border-radius-soft);
-            }
-            
-            .navbar__link:hover,
-            .navbar__link:focus,
-            .navbar__link--active {
-                background-color: var(--color-link-highlight);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .content-container {
-                flex-direction: column;
-                padding: 0 var(--navbar-padding);
-            }
-            
-            .content-text {
-                text-align: center;
-                margin-left: 0;
-                padding: 0 0 2rem 0;
-            }
-            
-            .content-image img {
-                max-width: 100%;
-                height: auto;
-            }
-        }
-    </style>
+      .navbar__menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: static;
+        width: auto;
+        background-color: transparent !important;
+        background-image: none !important;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+        z-index: 1;
+        padding: 0;
+      }
+      
+      .navbar__list {
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar__item { margin-left: 0.5rem; }
+
+      .navbar__link {
+        padding: 0.6rem 1.1rem;
+        border-radius: var(--border-radius-soft);
+      }
+      
+      .navbar__link:hover,
+      .navbar__link:focus,
+      .navbar__link--active {
+        background-color: var(--color-link-highlight);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .content-container {
+        flex-direction: column;
+        padding: 0 var(--navbar-padding);
+      }
+      
+      .content-text {
+        text-align: center;
+        margin-left: 0;
+        padding: 0 0 2rem 0;
+      }
+      
+      .content-image img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <header class="navbar" role="banner">
-        <div class="navbar__container">
-            <div class="navbar__brand-section">
-                <div class="banner-image">
-                    <img src="Screenshot_2025-04-22_130549-removebg-preview.png" alt="Renert Robotics Logo">
-                </div>
-            </div>
-            
-            <button class="navbar__toggle" 
-                    id="navbarToggle" 
-                    aria-label="Toggle navigation" 
-                    aria-controls="navbarMenu" 
-                    aria-expanded="false">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            
-            <nav id="navbarMenu" class="navbar__menu" role="navigation" aria-labelledby="navbarToggle">
-                <ul class="navbar__list">
-                    <li class="navbar__item"><a href="index.html" class="navbar__link navbar__link--active">Home</a></li>
-                    <li class="navbar__item"><a href="cuttlefish.html" class="navbar__link">31663 Cuttlefish Robotics</a></li>
-                    <li class="navbar__item"><a href="#" class="navbar__link">27361 Octopi Robotics (Renert School)</a></li>
-                    <li class="navbar__item"><a href="#" class="navbar__link">Sponsor us!</a></li>
-                </ul>
-            </nav>
+  <header class="navbar" role="banner">
+    <div class="navbar__container">
+      <div class="navbar__brand-section">
+        <div class="banner-image">
+          <img src="Screenshot_2025-04-22_130549-removebg-preview.png" alt="Renert Robotics Logo">
         </div>
-    </header>
-    
-<body>
-  <div class="content">
-    <h1>31663 Cuttlefish Robotics</h1>
-    <p>
-      Welcome to the official page for <strong>Team 31663 Cuttlefish Robotics</strong>!  
-    </p>
-    <h3>About Us</h3>
-    <p>
-      We are a team comprised of 8 grade 9 and 10 students at Renert School. Learn more about us here!
-    </p>
-    <h3>Our Robots!</h3>
-    <h5>Soimon</h5>
-    <p>Our first robot is soimon, a beautiful shooter bot</p>
-    <a href="index.html" class="back-link">⬅ Back to Home</a>
-  </div>
-</body>
+      </div>
+      
+      <button class="navbar__toggle" 
+              id="navbarToggle" 
+              aria-label="Toggle navigation" 
+              aria-controls="navbarMenu" 
+              aria-expanded="false">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+      </button>
+      
+      <nav id="navbarMenu" class="navbar__menu" role="navigation" aria-labelledby="navbarToggle">
+        <ul class="navbar__list">
+          <li class="navbar__item"><a href="index.html" class="navbar__link navbar__link--active">Home</a></li>
+          <li class="navbar__item"><a href="cuttlefish.html" class="navbar__link">31663 Cuttlefish Robotics</a></li>
+          <li class="navbar__item"><a href="#" class="navbar__link">27361 Octopi Robotics (Renert School)</a></li>
+          <li class="navbar__item"><a href="#" class="navbar__link">Sponsor us!</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  
+  <body>
+    <div class="content">
+      <h1>31663 Cuttlefish Robotics</h1>
+      <p>
+        Welcome to the official page for <strong>Team 31663 Cuttlefish Robotics</strong>!  
+      </p>
+      <h3>About Us</h3>
+      <p>
+        We are a team comprised of 8 grade 9 and 10 students at Renert School. Learn more about us here!
+      </p>
+      <h3>Our Robots!</h3>
+      <h5>Soimon</h5>
+      <p>Our first robot is soimon, a beautiful shooter bot</p>
+      <a href="index.html" class="back-link">⬅ Back to Home</a>
+    </div>
+  </body>
 </html>
