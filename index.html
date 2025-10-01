@@ -61,6 +61,14 @@
             flex-direction: column;
             justify-content: left;
         }
+        .content1 {
+            padding-top: 10px;
+            padding-bottom: 2rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+        }
         
         .content-container {
             display: flex;
@@ -162,7 +170,7 @@
             width: 200px;  /* Smaller fixed width */
             height: 50px;  /* Fixed height to maintain navbar height */
             overflow: hidden; /* Ensures image doesn't overflow */
-            margin-left: -20px; /* 10px spacing after the brand text */
+            margin-left: -50px; /* 10px spacing after the brand text */
         }        
         .banner-image img {
             width: 100%;
@@ -341,6 +349,15 @@
         <div class="content-container">
             <div class="content-text">
                 <h1>Renert Robotics!</h1>
+            </div>
+        <div class="content-image">
+            <img src="Screenshot 2025-10-01 153501.png" alt="Cuttlefish Robotics">
+        </div>
+        </div>
+    </main>
+    <main class="content1">
+        <div class="content-container">
+            <div class="content-text">
                 <p>This is the official 31663 and 27361 Renert Robotics FTC Website</p>
             </div>
         <div class="content-image">
@@ -348,7 +365,6 @@
         </div>
         </div>
     </main>
-    
     <script>
         // A self-contained, accessible script to toggle the mobile menu.
         document.addEventListener('DOMContentLoaded', function () {
