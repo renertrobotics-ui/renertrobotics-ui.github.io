@@ -6,12 +6,11 @@
     <title>Renert Robotics</title>
     <style>
         :root {
-            /* RGBA is used for transparency. The alpha value (e.g., 0.2) is key. */
             --color-glass-bg: rgba(255, 255, 255, 0.2);
             --color-glass-border: rgba(255, 255, 255, 0.3);
             --color-link-highlight: rgba(255, 255, 255, 0.25);
             
-            --color-text: #ffffff; /* Fully opaque white for max contrast */
+            --color-text: #ffffff;
             --color-focus-outline: #5ab1ff;
             
             --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -26,17 +25,10 @@
         }
 
         h1 {
-          font-size: 60px; /* 2.5 * 16 = 40px */
+          font-size: 60px;
         }
 
-        /*
-        ========================================
-        Global Resets & Showcase Background
-        ========================================
-        */
-        *,
-        *::before,
-        *::after {
+        * {
             box-sizing: border-box;
         }
 
@@ -46,21 +38,16 @@
             font-size: 1rem;
             line-height: 1.5;
             color: var(--color-text);
-            
-            /* A vibrant background is essential to see the glassmorphism effect. */
             background-image: linear-gradient(90deg, #32bdd3, #89258d);
-            background-attachment: fixed; /* Ensures the gradient doesn't scroll with content */
+            background-attachment: fixed;
         }
         
-        /* Placeholder content to demonstrate scrolling */
         .content {
             padding-top: 40px;
-            padding-bottom: rem;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: left;
-
         }
         
         .content-container {
@@ -70,14 +57,19 @@
         }
         
         .content-text {
-            flex: 0 0 auto; /* Don't grow, don't shrink, auto width */
+            flex: 0 0 auto;
             text-align: left;
-            margin-left: 50px; /* 50px from the left edge */
+            margin-left: 50px;
             padding-right: 2rem;
+        }
+
+        /* Move the paragraph up by 40px */
+        .content-text p {
+            margin-top: -40px;
         }
         
         .content-image {
-            flex: 1; /* Take up the remaining space */
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -94,13 +86,7 @@
         ul { list-style: none; margin: 0; padding: 0; }
         a { text-decoration: none; color: inherit; }
 
-        /*
-        ========================================
-        Main Navbar Structure
-        ========================================
-        */
         .navbar {
-            /* Positioned fixed to stay at the top and show the effect while scrolling */
             position: fixed;
             top: 0;
             left: 0;
@@ -109,18 +95,11 @@
             display: flex;
             align-items: center;
             z-index: 1000;
-            
-            /* The Core Glassmorphism Properties */
             background: var(--color-glass-bg);
             border-bottom: 1px solid var(--color-glass-border);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            
-            /*
-             The `backdrop-filter` property creates the "frosted glass" blur effect.
-             Older browsers that do not support this will simply see a semi-transparent navbar.
-            */
             backdrop-filter: blur(var(--blur-value));
-            -webkit-backdrop-filter: blur(var(--blur-value)); /* For Safari compatibility */
+            -webkit-backdrop-filter: blur(var(--blur-value));
         }
 
         .navbar__container {
@@ -138,44 +117,28 @@
             font-weight: var(--font-weight-bold);
         }
         
-        /* Make text readable against any background with a subtle shadow */
         .navbar__brand,
         .navbar__link {
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
-        /*
-        ========================================
-        Brand Section with Logo
-        ========================================
-        */
         .navbar__brand-section {
             display: flex;
             align-items: center;
         }
 
-        /*
-        ========================================
-        Banner Image Styles
-        ========================================
-        */
         .banner-image {
-            width: 200px;  /* Smaller fixed width */
-            height: 50px;  /* Fixed height to maintain navbar height */
-            overflow: hidden; /* Ensures image doesn't overflow */
-            margin-left: -50px; /* 10px spacing after the brand text */
+            width: 200px;
+            height: 50px;
+            overflow: hidden;
+            margin-left: -50px;
         }        
         .banner-image img {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Ensures image scales properly within container */
+            object-fit: contain;
         }
 
-        /*
-        ========================================
-        Mobile Menu & Hamburger Toggle
-        ========================================
-        */
         .navbar__toggle {
             display: block;
             padding: 0.5rem;
@@ -206,8 +169,7 @@
             position: absolute;
             top: var(--navbar-height);
             left: 0;
-            z-index: -1; /* Place behind the main navbar */
-
+            z-index: -1;
             background: var(--color-glass-bg);
             backdrop-filter: blur(var(--blur-value));
             -webkit-backdrop-filter: blur(var(--blur-value));
@@ -229,23 +191,16 @@
             transition: background-color var(--transition-speed) ease;
         }
         
-        /* Add a subtle highlight for interaction on mobile */
         .navbar__link:hover, .navbar__link:focus {
             background-color: var(--color-link-highlight);
         }
 
-        /* Highly visible focus outline for accessibility */
         :is(.navbar__toggle, .navbar__link):focus-visible {
             outline: 2px solid var(--color-focus-outline);
             outline-offset: 2px;
             border-radius: var(--border-radius-soft);
         }
 
-        /*
-        ========================================
-        Desktop Navbar Styles (Responsive)
-        ========================================
-        */
         @media (min-width: 768px) {
             .navbar__toggle { display: none; }
 
@@ -283,11 +238,6 @@
             }
         }
         
-        /*
-        ========================================
-        Responsive Content Layout
-        ========================================
-        */
         @media (max-width: 768px) {
             .content-container {
                 flex-direction: column;
@@ -296,7 +246,7 @@
             
             .content-text {
                 text-align: center;
-                margin-left: 0; /* Reset margin for mobile */
+                margin-left: 0;
                 padding: 0 0 2rem 0;
             }
             
@@ -343,15 +293,13 @@
             <div class="content-text">
                 <h1>Renert Robotics!</h1>
                 <p>This is not the official 31663 and 27361 Renert Robotics FTC Website</p>
-
             </div>
-        <div class="content-image">
-            <img src="Screenshot 2025-10-01 153501.png" alt="Cuttlefish Robotics">
-        </div>
+            <div class="content-image">
+                <img src="Screenshot 2025-10-01 153501.png" alt="Cuttlefish Robotics">
+            </div>
         </div>
     </main>
     <script>
-        // A self-contained, accessible script to toggle the mobile menu.
         document.addEventListener('DOMContentLoaded', function () {
             const navbarToggle = document.getElementById('navbarToggle');
             const navbarMenu = document.getElementById('navbarMenu');
@@ -360,8 +308,6 @@
                 navbarToggle.addEventListener('click', function () {
                     navbarToggle.classList.toggle('is-active');
                     navbarMenu.classList.toggle('is-active');
-
-                    // Update the aria-expanded attribute for screen readers
                     const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
                     navbarToggle.setAttribute('aria-expanded', !isExpanded);
                 });
