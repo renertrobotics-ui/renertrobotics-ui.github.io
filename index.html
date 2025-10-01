@@ -44,7 +44,7 @@
             color: var(--color-text);
             
             /* A vibrant background is essential to see the glassmorphism effect. */
-            background-image: linear-gradient(45deg, #ff005c, #5200ff);
+            background-image: linear-gradient(90deg, #32bdd3, #89258d);
             background-attachment: fixed; /* Ensures the gradient doesn't scroll with content */
         }
         
@@ -219,6 +219,22 @@
             .navbar__link--active {
                 background-color: var(--color-link-highlight);
             }
+            #image-area {
+              width: 300px;
+              height: 200px;
+              border: 2px solid black;
+              position: relative; /* to position the image inside */
+              overflow: hidden;   /* if you want to hide overflow */
+            }
+        
+            /* Style the image */
+            #image-area img {
+              position: absolute;
+              top: 60px;  /* distance from top of container */
+              left: 50px; /* distance from left of container */
+              width: 200px; /* adjust size */
+              height: auto;
+            }
         }
     </style>
 </head>
@@ -273,4 +289,7 @@
         });
     </script>
 </body>
+<div id="image-area">
+  <img src="Screenshot 2025-06-07 192336.png" alt="Example Image">
+</div>
 </html>
