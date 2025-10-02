@@ -299,28 +299,24 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 400px; /* match image height */
+            height: 200px; /* half of the image height */
             flex: 1;
         }
         
         .center-content {
             text-align: center;
-            height: 50%; /* half the image height */
             display: flex;
             flex-direction: column;
-            justify-content: center; /* vertical centering inside the 50% block */
-            align-items: center;     /* horizontal centering for all children, including button */
-            gap: 1rem;               /* optional: space between text and button */
+            justify-content: center; /* vertical centering inside .center-wrapper */
+            align-items: center;     /* horizontal centering */
+            gap: 1rem;               /* space between elements */
+            height: 100%;            /* fill the 200px height */
         }
-        .center-content h2{
-            text-align: center;
-            height: 50%; /* half the image height */
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* vertical centering inside the 50% block */
-            align-items: center;     /* horizontal centering for all children, including button */
-            gap: 1rem;
-            padding-top: -20px;/* optional: space between text and button */
+
+        .center-content h2 {
+            margin: 0;
+        }
+
         }
         .center-content button {
             display: inline-block;
