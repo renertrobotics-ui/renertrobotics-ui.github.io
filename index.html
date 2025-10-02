@@ -194,7 +194,35 @@
         .navbar__dropdown {
           position: relative;
         }
+        .right-justified {
+            text-align: right;
+            padding-left: 2rem;
+            padding-right: 50px;
+        }
         
+        button {
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            background-color: #ffffff;
+            color: #333;
+            border: none;
+            border-radius: var(--border-radius-soft);
+            font-weight: var(--font-weight-bold);
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+            background-color: var(--color-link-highlight);
+            color: white;
+        }
+        
+        /* Reuse the existing image styles */
+        .ftc-section, .fll-section {
+            margin-top: 4rem;
+            align-items: center;
+        }
+
         .dropdown-menu {
           display: none;
           position: absolute;
@@ -378,6 +406,38 @@
                 <img src="Screenshot 2025-10-01 153501.png" alt="Cuttlefish Robotics">
             </div>
         </div>
+        <!-- FTC Section -->
+        <div class="content-container ftc-section">
+            <div class="content-image">
+                <img src="ftc-image.png" alt="FTC Robots">
+            </div>
+            <div class="content-text right-justified">
+                <h3>Learn About FTC</h3>
+                <p>
+                    FIRST Tech Challenge (FTC) is a high school robotics program where students design, build, and code robots to compete in global engineering challenges. Our FTC teams thrive on collaboration and innovation.
+                </p>
+                <a href="ftc.html">
+                    <button>Visit FTC Page</button>
+                </a>
+            </div>
+        </div>
+        
+        <!-- FLL Section -->
+        <div class="content-container fll-section">
+            <div class="content-text">
+                <h3>Learn About FLL</h3>
+                <p>
+                    FIRST LEGO League (FLL) introduces younger students to STEM through hands-on challenges using LEGO robots. It fosters critical thinking, teamwork, and creativity in a fun and engaging environment.
+                </p>
+                <a href="fll.html">
+                    <button>Visit FLL Page</button>
+                </a>
+            </div>
+            <div class="content-image">
+                <img src="fll-image.png" alt="FLL Robots">
+            </div>
+        </div>
+
     </main>
 
     <script>
