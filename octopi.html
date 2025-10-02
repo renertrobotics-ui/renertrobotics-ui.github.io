@@ -1,445 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>27361 Octopi Robotics</title>
-  <link rel="stylesheet" href="style.css"> <!-- optional if you want to reuse same CSS -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ourOctopi Robotics (Team 27361)</title>
   <style>
-    :root {
-      --color-glass-bg: rgba(255, 255, 255, 0.2);
-      --color-glass-border: rgba(255, 255, 255, 0.3);
-      --color-link-highlight: rgba(255, 255, 255, 0.25);
-      
-      --color-text: #ffffff;
-      --color-focus-outline: #5ab1ff;
-      
-      --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      --font-weight-bold: 600;
-      
-      --blur-value: 10px;
-      --border-radius-soft: 8px;
-      --navbar-height: 70px;
-      --navbar-padding: 1.5rem;
-      --container-width: 1140px;
-      --transition-speed: 0.3s;
-    }
-
-    h1 {
-      font-size: 60px;
-    }
-   * {
-      box-sizing: border-box;
-    }
-
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
-      font-family: var(--font-family-sans-serif);
-      font-size: 1rem;
-      line-height: 1.5;
-      color: var(--color-text);
-      background-color: #0e1c44;
-      background-attachment: fixed;
+      padding: 0;
+      background: #f9f9f9;
+      color: #222;
     }
-    
-    .content {
-      padding-top: 40px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: left;
-    }
-    
-    .content-container {
-      display: flex;
-      align-items: left;
-      width: 100%;
-    }
-    
-    .content-text {
-      flex: 0 0 auto;
-      text-align: left;
-      margin-left: 50px;
-      padding-right: 2rem;
-      max-width: 800px;
-    }
-
-    /* Move the paragraph up by 40px */
-    .content-text .intro {
-      margin-top: -40px;
-    }
-    .content-text .nentro {
-      margin-top: -20px;
-    }
-    
-    .content-image {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding-right: var(--navbar-padding);
-      padding-top: 10px;
-    }
-    
-    .content-image img {
-      height: 300px;
-      width: auto;
-      object-fit: contain;
-    }
-    
-    ul { list-style: none; margin: 0; padding: 0; }
-    a { text-decoration: none; color: inherit; }
-
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--navbar-height);
-      display: flex;
-      align-items: center;
-      z-index: 1000;
-      background: var(--color-glass-bg);
-      border-bottom: 1px solid var(--color-glass-border);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(var(--blur-value));
-      -webkit-backdrop-filter: blur(var(--blur-value));
-    }
-
-    .navbar__container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      max-width: var(--container-width);
-      margin: 0 auto;
-      padding: 0 var(--navbar-padding);
-    }
-    
-    .navbar__brand {
-      font-size: 1.5rem;
-      font-weight: var(--font-weight-bold);
-    }
-    
-    .navbar__brand,
-    .navbar__link {
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    }
-
-    .navbar__brand-section {
-      display: flex;
-      align-items: center;
-    }
-
-    .banner-image {
-      width: 200px;
-      height: 50px;
-      overflow: hidden;
-      margin-left: -50px;
-    }        
-    .banner-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-    }
-
-    .navbar__toggle {
-      display: block;
-      padding: 0.5rem;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      z-index: 1001;
-    }
-    
-    .navbar__toggle .bar {
-      display: block;
-      width: 25px;
-      height: 3px;
-      margin: 5px auto;
-      background-color: var(--color-text);
-      transition: all var(--transition-speed) ease-in-out;
-      border-radius: 2px;
-    }
-
-    .navbar__toggle.is-active .bar:nth-child(2) { opacity: 0; }
-    .navbar__toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .navbar__toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-    
-    .navbar__menu {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      position: absolute;
-      top: var(--navbar-height);
-      left: 0;
-      z-index: -1;
-      background: var(--color-glass-bg);
-      backdrop-filter: blur(var(--blur-value));
-      -webkit-backdrop-filter: blur(var(--blur-value));
-      border-top: 1px solid var(--color-glass-border);
-      padding-bottom: 1rem;
-    }
-    
-    .navbar__menu.is-active { 
-      display: flex; 
-      background-image: linear-gradient(90deg, #32bdd3, #89258d);
-    }
-
-    .navbar__item { text-align: center; }
-
-    .navbar__link {
-      display: block;
-      padding: 1.25rem;
-      font-weight: var(--font-weight-bold);
-      transition: background-color var(--transition-speed) ease;
-    }
-    
-    .navbar__link:hover, .navbar__link:focus {
-      background-color: var(--color-link-highlight);
-    }
-
-    :is(.navbar__toggle, .navbar__link):focus-visible {
-      outline: 2px solid var(--color-focus-outline);
-      outline-offset: 2px;
-      border-radius: var(--border-radius-soft);
-    }
-    .gallery {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      justify-content: center;
-    }
-
-    .gallery-item {
-      position: relative;
-      overflow: hidden;
-      border-radius: 10px;
-      flex: 1 1 180px;
-      max-width: 250px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    .gallery-item img {
-      width: 100%;
-      height: auto;
-      transition: transform 0.4s ease;
-      display: block;
-    }
-
-    .gallery-item:hover {
-      flex: 1 1 300px;
-      max-width: 400px;
-      z-index: 2;
-    }
-
-    .gallery-item:hover img {
-      transform: scale(1.05);
-    }
-    .gallery-wrapper {
-      margin-top: -50px;
-      margin-left: 50px;
-      margin-right: 50px;
-    }
-    
-    /* Optional: Caption styling */
-    .caption {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: rgba(0, 0, 0, 0.5);
+    header {
+      background: #0b6e4f;
       color: #fff;
-      padding: 0.5rem;
+      padding: 1.5rem;
       text-align: center;
+    }
+    main {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h1, h2 {
+      color: #0b6e4f;
+    }
+    section {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #eee;
+      margin-top: 2rem;
       font-size: 0.9rem;
-    }
-    .info-section {
-      display: flex;
-      align-items: center;
-      justify-content: space-between; /* Push image left, text right */
-      margin: 50px;
-      gap: 2rem;
-      flex-wrap: wrap;
-    }
-    
-    .info-image {
-      flex-shrink: 0;
-    }
-    
-    .info-image img {
-      max-width: 300px;
-      width: 100%;
-      height: auto;
-      border-radius: 10px;
-      display: block;
-    }
-    
-    .info-text {
-      max-width: 600px;
-      flex: 1;
-      text-align: right; /* Right-align the text */
-      color: var(--color-text);
-    }
-    .info-text .intro{
-      max-width: 600px;
-      flex: 1;
-      text-align: right; /* Right-align the text */
-      color: var(--color-text);
-    }
-    
-    
-    .info-text h3 {
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-    }
-    
-    .info-text p {
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-    
-    /* Mobile responsiveness */
-    @media (max-width: 768px) {
-      .info-section {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
-    
-      .info-text {
-        text-align: center;
-      }
-    
-      .info-image img {
-        margin-bottom: 1rem;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .gallery {
-        flex-direction: column;
-        align-items: center;
-      }
-      .gallery-item {
-        max-width: 90%;
-      }
-    }
-
-    @media (min-width: 768px) {
-      .navbar__toggle { display: none; }
-
-      .navbar__menu {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        position: static;
-        width: auto;
-        background-color: transparent !important;
-        background-image: none !important;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        border: none;
-        z-index: 1;
-        padding: 0;
-      }
-      
-      .navbar__list {
-        display: flex;
-        align-items: center;
-      }
-
-      .navbar__item { margin-left: 0.5rem; }
-
-      .navbar__link {
-        padding: 0.6rem 1.1rem;
-        border-radius: var(--border-radius-soft);
-      }
-      
-      .navbar__link:hover,
-      .navbar__link:focus,
-      .navbar__link--active {
-        background-color: var(--color-link-highlight);
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .content-container {
-        flex-direction: column;
-        padding: 0 var(--navbar-padding);
-      }
-      
-      .content-text {
-        text-align: center;
-        margin-left: 0;
-        padding: 0 0 2rem 0;
-        margin-bottom: 0;
-        padding-bottom: 0;
-      }
-      
-      .content-image img {
-        max-width: 100%;
-        height: auto;
-      }
+      color: #555;
     }
   </style>
 </head>
 <body>
-
-  <header class="navbar" role="banner">
-    <div class="navbar__container">
-      <div class="navbar__brand-section">
-        <div class="banner-image">
-          <img src="Screenshot_2025-04-22_130549-removebg-preview.png" alt="Renert Robotics Logo">
-        </div>
-      </div>
-      
-      <button class="navbar__toggle" 
-              id="navbarToggle" 
-              aria-label="Toggle navigation" 
-              aria-controls="navbarMenu" 
-              aria-expanded="false">
-          <span class="bar"></span>
-          <span class="bar"></span>
-          <span class="bar"></span>
-      </button>
-      
-      <nav id="navbarMenu" class="navbar__menu" role="navigation" aria-labelledby="navbarToggle">
-        <ul class="navbar__list">
-          <li class="navbar__item"><a href="index.html" class="navbar__link">Home</a></li>
-          <li class="navbar__item"><a href="cuttlefish.html" class="navbar__link navbar__link--active">31663 Cuttlefish Robotics</a></li>
-          <li class="navbar__item"><a href="#" class="navbar__link">27361 Octopi Robotics</a></li>
-          <li class="navbar__item"><a href="#" class="navbar__link">Sponsor us!</a></li>
-        </ul>
-      </nav>
-    </div>
+  <header>
+    <h1>ourOctopi Robotics</h1>
+    <p>FTC Team 27361</p>
   </header>
-<main class="content">
-  <div class="content-container">
-    <div class="content-text">
-      <h1>27361 OCtopi Robotics</h1>
-      <h3 class="intro"> About Us</h3>
-      <p class="nentro">
-        We are a team comprised of 8 grade 9 and 10 students at Renert School that are passionate about robotics. In 2025, we formed 31663 Cuttlefish Robotics at Renert School, with the intention of becoming a world-class team! We are greatly indebted to our mentors, Mr. Christian, and Mr. Wilcox! Go Renert!
-      </p>
-    </div>
-    <div class="content-image">
-      <img src="cuttlefish_10-removebg-preview (1).png" alt="Octopi Robotics">
-    </div>
-  </div>
-  <!-- 👇 Info Section Below Gallery -->
-<div class="info-section">
-  <div class="info-image">
-    <img src="gradient.png" alt="Team Image">
-  </div>
-  <div class="info-text">
-    <h3 class="intro">What We’re Building Next</h3>
-    <p>We’re currently designing our second-generation robot, the Cuddler UWU. The Cuddler UWU focuses on speed, agility, and intelligent automation. Stay tuned for competition updates and behind-the-scenes insights from our engineering process!</p>
-  </div>
-</div>
-<!-- 👆 Info Section Ends -->
-</main>
 
+  <main>
+    <section>
+      <h2>About Us</h2>
+      <p>We are ourOctopi Robotics, FTC Team 27361. Our team is passionate about building robots, coding, and sharing STEM with our community. We compete in the FIRST Tech Challenge while learning skills in engineering, programming, and teamwork.</p>
+    </section>
 
+    <section>
+      <h2>Our Team</h2>
+      <p>Our team is made up of students who collaborate to design, build, and program robots for competition. Each member contributes their unique skills to help us grow and succeed.</p>
+    </section>
+
+    <section>
+      <h2>Current Season</h2>
+      <p>This season we are working on new designs, refining our code, and preparing for competitions. Stay tuned for updates on our progress!</p>
+    </section>
+
+    <section>
+      <h2>Contact Us</h2>
+      <p>If you would like to reach out, email us at <strong>info@ouroctopi.org</strong>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 ourOctopi Robotics Team 27361</p>
+  </footer>
+</body>
 </html>
