@@ -65,17 +65,14 @@
         }
         
         .content-image {
-            flex: 1;
+            flex: 0 0 auto;
+            margin-right: 60px; /* fixed right margin */
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-right: var(--navbar-padding);
-            padding-left: 50px
-            padding-top: 60px;
+            justify-content: flex-end;
         }
         
         .content-image img {
-            height: 500px;
+            max-height: calc(100vh - 40px); /* fit viewport height minus navbar padding */
             width: auto;
             object-fit: contain;
         }
