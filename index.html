@@ -10,19 +10,29 @@
             --color-glass-bg: rgba(255, 255, 255, 0.2);
             --color-glass-border: rgba(255, 255, 255, 0.3);
             --color-link-highlight: rgba(255, 255, 255, 0.25);
-            
+        
             --color-text: #ffffff;
             --color-focus-outline: #5ab1ff;
-            
+        
             --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             --font-weight-bold: 600;
-            
+        
             --blur-value: 10px;
             --border-radius-soft: 8px;
             --navbar-height: 70px;
             --navbar-padding: 1.5rem;
             --container-width: 1140px;
             --transition-speed: 0.3s;
+        }
+        
+        /* Background image section */
+        .image-section {
+            width: 100%;
+            height: 500px;
+            background-image: url('your-image.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         h1 { font-size: 60px; }
@@ -59,7 +69,7 @@
             text-align: left;
             margin-left: 50px;
             padding-right: 2rem;
-            max-width: 600
+            max-width: 600px;
         }
 
         /* Only move the first line up */
@@ -403,7 +413,7 @@
             </nav>
         </div>
     </header>
-    
+    <div class="image-section"></div>
     <main class="content">
         <div class="content-container">
             <div class="content-text">
