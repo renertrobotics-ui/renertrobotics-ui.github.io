@@ -120,6 +120,7 @@
             align-items: center;
             padding-right: var(--navbar-padding);
             padding-top: 20px;
+            left-margin: 50px;
         }
         
         .content-image img {
@@ -278,14 +279,18 @@
         
         .ftc-section .content-image {
             margin-left: 40px;
-            padding-right: 50px; /* This creates space between image and text */
+            padding-right: 50px;
+            margin-top: -20px;/* This creates space between image and text */
         }
         .fll-section .content-text {
             max-width: 400px;
             margin-left: 50px;
 
         }
-        
+        .content-container.ftc-section {
+            display: flex;
+            align-items: center; /* Vertically center image and text */
+        }
         .fll-section .content-image {
             margin-right: 50px;
             padding-left: 50px; /* This creates space between image and text */
