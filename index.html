@@ -26,13 +26,35 @@
         }
         
         /* Background image section */
-        .image-section {
-            width: 100%;
-            height: 500px;
-            background-image: url('your-image.jpg'); /* Replace with your image path */
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        image-section {
+          position: relative;
+          width: 100%;
+          height: 500px;
+          background-image: url('your-image.jpg'); /* Replace with your image path */
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
+        
+          display: flex;
+          align-items: center;        /* Vertically center text */
+          justify-content: flex-start; /* Align text to the left */
+          padding-left: 50px;         /* Left padding to give space */
+          color: white;
+          text-shadow: 0 2px 6px rgba(0, 0, 0, 0.7); /* Text shadow for readability */
+        }
+        
+        .overlay-text {
+          max-width: 600px;
+        }
+        
+        .image-section h1 {
+          font-size: 60px;
+          margin-bottom: 0.5rem;
+        }
+        
+        .image-section .introp {
+          font-size: 1.1rem;
+          line-height: 1.4;
         }
 
         h1 { font-size: 60px; }
@@ -413,7 +435,14 @@
             </nav>
         </div>
     </header>
-    <div class="image-section"></div>
+    <div class="image-section">
+      <div class="overlay-text">
+        <h1>Renert Robotics</h1>
+        <p class="introp">
+          Renert’s cutting-edge robotics program is home to two competitive FTC teams: Octopi Robotics (Team 27361) and Cuttlefish Robotics (Team 31663). These student-driven teams design, build, and program robots to take on real-world engineering challenges in the global First Tech Challenge Competition. With a focus on creativity, collaboration, and technical excellence, Renert Robotics empowers future innovators to think big, solve problems, and lead with purpose.
+        </p>
+      </div>
+    </div>
     <main class="content">
         <div class="content-container">
             <div class="content-text">
