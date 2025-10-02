@@ -200,6 +200,62 @@
       outline-offset: 2px;
       border-radius: var(--border-radius-soft);
     }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      flex: 1 1 180px;
+      max-width: 250px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .gallery-item:hover {
+      flex: 1 1 300px;
+      max-width: 400px;
+      z-index: 2;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Optional: Caption styling */
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        flex-direction: column;
+        align-items: center;
+      }
+      .gallery-item {
+        max-width: 90%;
+      }
+    }
 
     @media (min-width: 768px) {
       .navbar__toggle { display: none; }
@@ -315,5 +371,33 @@
             </div>
         </div>
     </main>
+  <body>
+
+  <h2>Our Robot Gallery</h2>
+
+  <div class="gallery">
+    <div class="gallery-item">
+      <img src="image1.jpg" alt="Robot 1">
+      <div class="caption">Robot 1</div>
+    </div>
+    <div class="gallery-item">
+      <img src="image2.jpg" alt="Robot 2">
+      <div class="caption">Robot 2</div>
+    </div>
+    <div class="gallery-item">
+      <img src="image3.jpg" alt="Robot 3">
+      <div class="caption">Robot 3</div>
+    </div>
+    <div class="gallery-item">
+      <img src="image4.jpg" alt="Robot 4">
+      <div class="caption">Robot 4</div>
+    </div>
+    <div class="gallery-item">
+      <img src="image5.jpg" alt="Robot 5">
+      <div class="caption">Robot 5</div>
+    </div>
+  </div>
+
+</body>
 
 </html>
