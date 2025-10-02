@@ -63,18 +63,20 @@
         .content-text .intro {
             margin-top: -40px;
         }
-        
         .content-image {
-            flex: 0 0 auto;
-            margin-right: 60px; /* fixed right margin */
-            display: flex;
-            justify-content: flex-end;
+            justify-content: center;
+            align-items: center;
+            padding-right: var(--navbar-padding);
+            padding-left: 50px
+            padding-top: 60px;
         }
-        
+
         .content-image img {
-            max-height: calc(100vh - 40px); /* fit viewport height minus navbar padding */
+            height: 400px;
+            height: auto;
             width: auto;
             object-fit: contain;
+        };
         }
         
         ul { list-style: none; margin: 0; padding: 0; }
