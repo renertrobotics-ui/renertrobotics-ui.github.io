@@ -1,184 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Sponsor Us | Renert Robotics</title>
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>31663 Cuttlessfish Robotics</title>
+  <link rel="stylesheet" href="style.css"> <!-- optional if you want to reuse same CSS -->
   <style>
-    body {
-      font-family: system-ui, sans-serif;
-      margin: 0;
-      color: white;
-      background: linear-gradient(90deg, #32bdd3, #89258d);
-      background-attachment: fixed;
+    :root {
+      --color-glass-bg: rgba(255, 255, 255, 0.2);
+      --color-glass-border: rgba(255, 255, 255, 0.3);
+      --color-link-highlight: rgba(255, 255, 255, 0.25);
+      
+      --color-text: #ffffff;
+      --color-focus-outline: #5ab1ff;
+      
+      --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-weight-bold: 600;
+      
+      --blur-value: 10px;
+      --border-radius-soft: 8px;
+      --navbar-height: 70px;
+      --navbar-padding: 1.5rem;
+      --container-width: 1140px;
+      --transition-speed: 0.3s;
     }
 
     h1 {
-      font-size: 48px;
-      margin-bottom: 0.5rem;
+      font-size: 60px;
+    }
+   * {
+      box-sizing: border-box;
     }
 
+    body {
+      margin: 0;
+      font-family: var(--font-family-sans-serif);
+      font-size: 1rem;
+      line-height: 1.5;
+      color: var(--color-text);
+      background-color: #0e1c44;
+      background-attachment: fixed;
+    }
+    
     .content {
-      padding-top: 100px;
-      max-width: 800px;
-      margin: 0 auto;
-      padding-left: 2rem;
-      padding-right: 2rem;
-    }
-
-    .glass-box {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    form {
+      padding-top: 40px;
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      margin-top: 2rem;
-    }
-
-    label {
-      font-weight: bold;
-      margin-bottom: 0.2rem;
-    }
-
-    input, textarea {
-      padding: 0.8rem;
-      border: none;
-      border-radius: 6px;
-      font-size: 1rem;
-      font-family: inherit;
-    }
-
-    button {
-      padding: 0.75rem 1.5rem;
-      background-color: white;
-      color: #333;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-      margin-top: 1rem;
-    }
-
-    button:hover {
-      background-color: rgba(255,255,255,0.25);
-      color: white;
-    }
-
-    /* Responsive tweaks */
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 36px;
-      }
-    
-    }
-    /* Dropdown styles */
-    .navbar__dropdown {
-      position: relative;
+      justify-content: left;
     }
     
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: var(--color-glass-bg);
-      border: 1px solid var(--color-glass-border);
-      backdrop-filter: blur(var(--blur-value));
-      border-radius: var(--border-radius-soft);
-      min-width: 220px;
-      z-index: 999;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      padding: 0.5rem 0;
+    .content-container {
+      display: flex;
+      align-items: left;
+      width: 100%;
+    }
+    
+    .content-text {
+      flex: 0 0 auto;
       text-align: left;
-    }
-    
-    .dropdown-menu .dropdown-link {
-      display: block;
-      padding: 0.75rem 1rem;
-      color: var(--color-text);
-      font-weight: var(--font-weight-bold);
-      text-decoration: none;
-      transition: background 0.2s ease-in-out;
-    }
-    
-    .dropdown-menu .dropdown-link:hover {
-      background-color: var(--color-link-highlight);
-    }
-    
-    /* Show dropdown on hover (desktop) */
-    @media (min-width: 768px) {
-      .navbar__dropdown:hover .dropdown-menu {
-        display: block;
-      }
-    }
-    
-    /* Mobile-friendly: allow dropdown to open on click */
-    @media (max-width: 767px) {
-      .navbar__dropdown .dropdown-menu {
-        display: none;
-        padding-left: 1rem;
-      }
-    
-      .navbar__dropdown.is-open .dropdown-menu {
-        display: block;
-      }
+      margin-left: 50px;
+      padding-right: 2rem;
+      max-width: 800px;
     }
 
-    @media (max-width: 768px) {
-      .gallery {
-        flex-direction: column;
-        align-items: center;
-      }
-      .gallery-item {
-        max-width: 90%;
-      }
+    /* Move the paragraph up by 40px */
+    .content-text .intro {
+      margin-top: -40px;
     }
-
-    @media (min-width: 768px) {
-      .navbar__toggle { display: none; }
-
-      .navbar__menu {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        position: static;
-        width: auto;
-        background-color: transparent !important;
-        background-image: none !important;
-        backdrop-filter: none;
-        -webkit-backdrop-filter: none;
-        border: none;
-        z-index: 1;
-        padding: 0;
-      }
-      
-      .navbar__list {
-        display: flex;
-        align-items: center;
-      }
-
-      .navbar__item { margin-left: 0.5rem; }
-
-      .navbar__link {
-        padding: 0.6rem 1.1rem;
-        border-radius: var(--border-radius-soft);
-      }
-      
-      .navbar__link:hover,
-      .navbar__link:focus,
-      .navbar__link--active {
-        background-color: var(--color-link-highlight);
-      }
+    .content-text .nentro {
+      margin-top: -20px;
+    }
+    
+    .content-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-right: var(--navbar-padding);
+      padding-top: 10px;
+    }
+    
+    .content-image img {
+      max-height: 200px;
+      height: 100%;
+      width: auto;
+      object-fit: contain;
     }
     
     ul { list-style: none; margin: 0; padding: 0; }
@@ -297,13 +204,243 @@
       outline: 2px solid var(--color-focus-outline);
       outline-offset: 2px;
       border-radius: var(--border-radius-soft);
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      flex: 1 1 180px;
+      max-width: 250px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.4s ease;
+      display: block;
+    }
+
+    .gallery-item:hover {
+      flex: 1 1 300px;
+      max-width: 400px;
+      z-index: 2;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-wrapper {
+      margin-top: -20px;
+      margin-left: 50px;
+      margin-right: 50px;
+    }
+    
+    /* Optional: Caption styling */
+    .caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.5);
+      color: #fff;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+    .info-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between; /* Push image left, text right */
+      margin: 50px;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    
+    .info-image {
+      flex-shrink: 0;
+    }
+    
+    .info-image img {
+      max-height: 160px;
+      width: auto;
+      height: 100%;
+      border-radius: 10px;
+      display: block;
+    }
+    
+    .info-text {
+      max-width: 600px;
+      flex: 1;
+      text-align: right; /* Right-align the text */
+      color: var(--color-text);
+    }
+    .info-text .intro{
+      max-width: 600px;
+      flex: 1;
+      text-align: right; /* Right-align the text */
+      color: var(--color-text);
+    }
     
     
+    .info-text h3 {
+      margin-top: -40px;
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+    }
+    
+    .info-text p {
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+    
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .info-section {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    
+      .info-text {
+        text-align: center;
+      }
+    
+      .info-image img {
+        margin-bottom: 1rem;
+      }
+    }
+    /* Dropdown styles */
+    .navbar__dropdown {
+      position: relative;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--color-glass-bg);
+      border: 1px solid var(--color-glass-border);
+      backdrop-filter: blur(var(--blur-value));
+      border-radius: var(--border-radius-soft);
+      min-width: 220px;
+      z-index: 999;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      padding: 0.5rem 0;
+      text-align: left;
+    }
+    
+    .dropdown-menu .dropdown-link {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: var(--color-text);
+      font-weight: var(--font-weight-bold);
+      text-decoration: none;
+      transition: background 0.2s ease-in-out;
+    }
+    
+    .dropdown-menu .dropdown-link:hover {
+      background-color: var(--color-link-highlight);
+    }
+    
+    /* Show dropdown on hover (desktop) */
+    @media (min-width: 768px) {
+      .navbar__dropdown:hover .dropdown-menu {
+        display: block;
+      }
+    }
+    
+    /* Mobile-friendly: allow dropdown to open on click */
+    @media (max-width: 767px) {
+      .navbar__dropdown .dropdown-menu {
+        display: none;
+        padding-left: 1rem;
+      }
+    
+      .navbar__dropdown.is-open .dropdown-menu {
+        display: block;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .gallery {
+        flex-direction: column;
+        align-items: center;
+      }
+      .gallery-item {
+        max-width: 90%;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .navbar__toggle { display: none; }
+
+      .navbar__menu {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        position: static;
+        width: auto;
+        background-color: transparent !important;
+        background-image: none !important;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        border: none;
+        z-index: 1;
+        padding: 0;
+      }
+      
+      .navbar__list {
+        display: flex;
+        align-items: center;
+      }
+
+      .navbar__item { margin-left: 0.5rem; }
+
+      .navbar__link {
+        padding: 0.6rem 1.1rem;
+        border-radius: var(--border-radius-soft);
+      }
+      
+      .navbar__link:hover,
+      .navbar__link:focus,
+      .navbar__link--active {
+        background-color: var(--color-link-highlight);
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .content-container {
+        flex-direction: column;
+        padding: 0 var(--navbar-padding);
+      }
+      
+      .content-text {
+        text-align: center;
+        margin-left: 0;
+        padding: 0 0 2rem 0;
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+      
+      .content-image img {
+        max-width: 100%;
+        height: auto;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR (same as before) -->
   <header class="navbar" role="banner">
     <div class="navbar__container">
       <div class="navbar__brand-section">
@@ -349,52 +486,22 @@
       </nav>
     </div>
   </header>
-
-  <!-- MAIN CONTENT -->
-  <main class="content">
-    <div class="glass-box">
-      <h1>Sponsor Us</h1>
-      <p>
-        Supporting Renert Robotics means investing in the next generation of innovators, engineers, and problem-solvers. Sponsorship helps us access better tools, attend competitions, and grow as a team. We'd love to hear from you!
+<main class="content">
+  <div class="content-container">
+    <div class="content-text">
+      <h1>31663 Cuttlefish Robotics</h1>
+      <h3 class="intro"> About Us</h3>
+      <p class="nentro">
+        We are a team comprised of 8 grade 9 and 10 students at Renert School that are passionate about robotics. In 2025, we formed 31663 Cuttlefish Robotics at Renert School, with the intention of becoming a world-class team! We are greatly indebted to our mentors, Mr. Christian, and Mr. Wilcox! Go Renert!
       </p>
-
-      <form action="mailto:robotics@renertschool.ca" method="POST" enctype="text/plain">
-        <div>
-          <label for="name">Name</label>
-          <input type="text" id="name" name="name" required />
-        </div>
-
-        <div>
-          <label for="email">Your Email</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-
-        <div>
-          <label for="message">Message</label>
-          <textarea id="message" name="message" rows="6" required></textarea>
-        </div>
-
-        <button type="submit">Send Message</button>
-      </form>
     </div>
-  </main>
+    <div class="content-image">
+      <img src="cuttlefish_10-removebg-preview (1).png" alt="Cuttlefish Robotics">
+    </div>
+  </div>
 
-  <!-- JS for navbar toggle -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const navbarToggle = document.getElementById('navbarToggle');
-      const navbarMenu = document.getElementById('navbarMenu');
+  
+</main>
 
-      if (navbarToggle && navbarMenu) {
-        navbarToggle.addEventListener('click', function () {
-          navbarToggle.classList.toggle('is-active');
-          navbarMenu.classList.toggle('is-active');
-          const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
-          navbarToggle.setAttribute('aria-expanded', !isExpanded);
-        });
-      }
-    });
-  </script>
-</body>
+
 </html>
-
