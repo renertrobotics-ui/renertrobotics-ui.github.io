@@ -305,11 +305,17 @@
         
         .center-content {
             text-align: center;
-            height: 50%; /* half of image height */
+            height: 50%; /* half the image height */
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            justify-content: center; /* vertical centering inside the 50% block */
+            align-items: center;     /* horizontal centering for all children, including button */
+            gap: 1rem;               /* optional: space between text and button */
+        }
+        
+        .center-content button {
+            display: inline-block;
+            margin: 0;
         }
 
 
