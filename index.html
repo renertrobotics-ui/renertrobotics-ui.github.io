@@ -293,7 +293,7 @@
         }
         .fll-section .content-image {
             margin-right: 50px;
-            padding-left: 50px; /* This creates space between image and text */
+            padding-left: 00px; /* This creates space between image and text */
         }
         .ftc-section .content-text.center-wrapper {
             display: flex;
@@ -312,6 +312,11 @@
             gap: 1rem;               /* space between elements */
             height: 100%;            /* fill the 200px height */
         }
+        .fll-section .center-content {
+          display: flex;
+          align-items: center;
+        }
+
 
         .center-content h2 {
             margin: 0;
@@ -503,18 +508,20 @@
         
         <!-- FLL Section -->
         <div class="content-container fll-section">
-            <div class="content-text">
-                <h2>Learn About FLL</h2>
-                <p>
-                    FIRST LEGO League (FLL) introduces younger students to STEM through hands-on challenges using LEGO robots. It fosters critical thinking, teamwork, and creativity in a fun and engaging environment.
-                </p>
-                <a href="fll.html">
-                    <button>Learn more about FLL here</button>
-                </a>
+          <div class="content-text center-wrapper">
+            <div class="center-content" style="align-items: flex-start; text-align: left;">
+              <h2>Learn About FLL</h2>
+              <p>
+                FIRST LEGO League (FLL) introduces younger students to STEM through hands-on challenges using LEGO robots. It fosters critical thinking, teamwork, and creativity in a fun and engaging environment.
+              </p>
+              <a href="https://www.firstinspires.org/programs/fll/" target="_blank" rel="noopener noreferrer">
+                <button>Learn more about FLL here</button>
+              </a>
             </div>
-            <div class="content-image">
-                <img src="fll-image.png" alt="FLL Robots">
-            </div>
+          </div>
+          <div class="content-image">
+            <img src="fll-image.png" alt="FLL Robots">
+          </div>
         </div>
 
     </main>
