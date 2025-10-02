@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Renert Robotisscs</title>
+    <title>Renert Robotics</title>
     <style>
         :root {
             --color-glass-bg: rgba(255, 255, 255, 0.2);
@@ -295,6 +295,23 @@
             margin-right: 50px;
             padding-left: 50px; /* This creates space between image and text */
         }
+        .ftc-section .content-text.center-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 400px; /* match image height */
+            flex: 1;
+        }
+        
+        .center-content {
+            text-align: center;
+            height: 50%; /* half of image height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
 
         .dropdown-menu {
           display: none;
@@ -460,15 +477,16 @@
             <div class="content-image">
                 <img src="Screenshot 2025-10-01 153501.png" alt="FTC Robots">
             </div>
-            <div class="content-text right-justified">
-                <h2>Learn About FTC</h2>
-                <p>
-                    FIRST Tech Challenge (FTC) is a high school robotics program where students design, build, and code robots to compete in global engineering challenges. Our FTC teams thrive on collaboration and innovation.
-                </p>
-                <a href="https://www.firstinspires.org/programs/ftc/" target="_blank" rel="noopener noreferrer">
-                    <button>Learn more about FTC here</button>
-                </a>
-
+            <div class="content-text center-wrapper">
+                <div class="center-content">
+                    <h2>Learn About FTC</h2>
+                    <p>
+                        FIRST Tech Challenge (FTC) is a high school robotics program where students design, build, and code robots to compete in global engineering challenges. Our FTC teams thrive on collaboration and innovation.
+                    </p>
+                    <a href="https://www.firstinspires.org/programs/ftc/" target="_blank" rel="noopener noreferrer">
+                        <button>Learn more about FTC here</button>
+                    </a>
+                </div>
             </div>
         </div>
         
