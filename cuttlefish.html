@@ -504,6 +504,41 @@
           max-width: 9%;
           min-width: 80px;
         }
+                /* Base gallery styling (you already have many of these) */
+        .sibling-gallery {
+          display: flex;
+          justify-content: center;
+          gap: 1rem;
+          width: 100%;
+        }
+        
+        .sibling-gallery .gallery-item {
+          flex: 1;
+          transition: flex 0.3s ease, opacity 0.3s ease;
+          overflow: hidden;
+        }
+        
+        .sibling-gallery .gallery-item img {
+          width: 100%;
+          height: auto;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+        
+        /* Hover effect: when hovering over gallery, adjust children */
+        .sibling-gallery:hover .gallery-item {
+          flex: 1;               /* reset baseline */
+          opacity: 0.4;          /* dim all by default */
+        }
+        
+        .sibling-gallery:hover .gallery-item:hover {
+          flex: 3;               /* make hovered one larger */
+          opacity: 1;            /* full opacity */
+        }
+        
+        .sibling-gallery:hover .gallery-item:hover img {
+          transform: scale(1.05);
+        }
 
         
 
@@ -567,29 +602,11 @@
     </div>
 <main class="content">
   <!-- 👇 Gallery Section Starts Here -->
-  <div class="gallery-wrapper" style="margin-top: 20px;">
-    <div class="gallery">
-      <div class="gallery-item">
-        <img src="Screenshot 2025-09-26 121607.png" alt="Robot 1">
-        <div class="caption">Robot 1</div>
-      </div>
-      <div class="gallery-item">
-        <img src="Screenshot 2025-09-26 150632.png" alt="Robot 2">
-        <div class="caption">Robot 2</div>
-      </div>
-      <div class="gallery-item">
-        <img src="Screenshot 2025-09-26 151029.png" alt="Robot 3">
-        <div class="caption">Robot 3</div>
-      </div>
-      <div class="gallery-item">
-        <img src="Screenshot 2025-09-28 155118.png" alt="Robot 4">
-        <div class="caption">Robot 4</div>
-      </div>
-      <div class="gallery-item">
-        <img src="Screenshot 2025-09-28 141836.png" alt="Robot 5">
-        <div class="caption">Robot 5</div>
-      </div>
-    </div>
+  <div class="gallery sibling-gallery">
+    <div class="gallery-item"><img src="Robot1.png" alt="Robot1"></div>
+    <div class="gallery-item"><img src="Robot2.png" alt="Robot2"></div>
+    <div class="gallery-item"><img src="Robot3.png" alt="Robot3"></div>
+    <div class="gallery-item"><img src="Robot4.png" alt="Robot4"></div>
   </div>
   <!-- 👆 Gallery Section Ends Here -->
   <!-- 👇 Info Section Below Gallery -->
