@@ -749,6 +749,13 @@ document.addEventListener('DOMContentLoaded', function () {
     index--;
     updatePosition(true);
   }
+  function disableTransitionAndJump() {
+    // Wait until next animation frame to safely disable transition
+    requestAnimationFrame(() => {
+      track.style.transition = 'none';
+      updatePosition(false);
+    });
+  }
 
   track.addEventListener('transitionend', () => {
     // If on clone of first real item (at end), jump to real first
@@ -766,13 +773,7 @@ document.addEventListener('DOMContentLoaded', function () {
     isTransitioning = false;
   });
 
-  function disableTransitionAndJump() {
-    // Wait until next animation frame to safely disable transition
-    requestAnimationFrame(() => {
-      track.style.transition = 'none';
-      updatePosition(false);
-    });
-  }
+
 
   rightBtn.addEventListener('click', moveRight);
   leftBtn.addEventListener('click', moveLeft);
