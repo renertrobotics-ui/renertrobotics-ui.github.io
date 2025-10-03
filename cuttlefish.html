@@ -560,6 +560,18 @@
         .sibling-gallery:hover .gallery-item:hover img {
           transform: scale(1.05);
         }
+        .red-box-container {
+          background-color: #ff4d4d; /* Red */
+          border-radius: 15px;
+          padding: 30px;
+          margin: 0 50px;
+          box-sizing: border-box;
+        }
+        
+        .red-box-container .info-image img {
+          border-radius: 10px;
+        }
+
 
         
 
@@ -623,15 +635,19 @@
     </div>
 <main class="content">
 <!-- 👇 Info Section Below Gallery -->
-<div class="info-section">
-  <div class="info-image">
-    <img src="sonic_v2_render.png" alt="Team Image">
-  </div>
-  <div class="info-text">
-    <h3><strong>What We're Building Now</strong></h3>
-    <p>We’re currently designing our second-generation robot, the Cuddler UWU. The Cuddler UWU focuses on speed, agility, and intelligent automation. Stay tuned for competition updates and behind-the-scenes insights from our engineering process!</p>
+<!-- 👇 Info Section Wrapped in Red Box -->
+<div class="red-box-container">
+  <div class="info-section">
+    <div class="info-image">
+      <img src="sonic_v2_render.png" alt="Team Image">
+    </div>
+    <div class="info-text">
+      <h3><strong>What We're Building Now</strong></h3>
+      <p>We’re currently designing our second-generation robot, the Cuddler UWU. The Cuddler UWU focuses on speed, agility, and intelligent automation. Stay tuned for competition updates and behind-the-scenes insights from our engineering process!</p>
+    </div>
   </div>
 </div>
+
 <!-- 👇 Meet the Team Section Starts Here -->
 <section class="meet-team-section">
   <h3>Meet the Team</h3>
