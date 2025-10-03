@@ -718,9 +718,9 @@
   const leftBtn = document.querySelector('.carousel-arrow.left');
   const rightBtn = document.querySelector('.carousel-arrow.right');
 
-  const itemWidth = 200;  // same as CSS width
-  const transitionDuration = 600; // in ms (match CSS)
-  let index = 3;  // start at first real item
+  const itemWidth = 200; // same as CSS width
+  const transitionDuration = 600; // in ms
+  let index = 4; // first real slide
 
   function updatePosition(animate = true) {
     if (animate) {
@@ -731,43 +731,44 @@
     const offset = index * -itemWidth + (track.offsetWidth - itemWidth) / 2;
     track.style.transform = `translateX(${offset}px)`;
 
-    // update “active” class
+    // update active class
     Array.from(items).forEach(i => i.classList.remove('active'));
     items[index].classList.add('active');
   }
 
   function moveRight() {
-    index++;
-    updatePosition(true);
-
-    // If we moved into the clone at the end, jump to real first
-    if (index === items.length - 3) {
-      setTimeout(() => {
-        index = 4;
-        updatePosition(false);
-      }, transitionDuration);
+    if (index < items.length - 1) {
+      index++;
+      updatePosition(true);
     }
   }
 
   function moveLeft() {
-    index--;
-    updatePosition(true);
-
-    // If we moved into clone at start, jump to real last
-    if (index === 3) {
-      setTimeout(() => {
-        index = 13;
-        updatePosition(false);
-      }, transitionDuration);
+    if (index > 0) {
+      index--;
+      updatePosition(true);
     }
   }
+
+  // Smooth infinite scroll logic using transitionend
+  track.addEventListener('transitionend', () => {
+    if (items[index].getAttribute('alt') === 'Team Member 1' && index >= items.length - 3) {
+      // reached clone of first
+      index = 4;
+      updatePosition(false);
+    } else if (items[index].getAttribute('alt') === 'Team Member 10' && index <= 3) {
+      // reached clone of last
+      index = 13;
+      updatePosition(false);
+    }
+  });
 
   rightBtn.addEventListener('click', moveRight);
   leftBtn.addEventListener('click', moveLeft);
 
-  // initial layout
   updatePosition(false);
 });
+
 </script>
     <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
       <div style="margin-bottom: 5px;">
