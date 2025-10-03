@@ -778,6 +778,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     // Check if we're moving to a clone
     const isMovingToClone = index < realItemsStart;
+    const isAlsoMovingToClone = index > 0
     
     // Always use normal speed for the transition
     updatePosition(true, '0.6s');
@@ -796,7 +797,22 @@ document.addEventListener('DOMContentLoaded', function () {
           isTransitioning = false;
         }, 10); // Very brief delay to ensure the jump is applied
       }, 600); // Wait for normal transition to complete
-    } else {
+    }
+    else if (isAlsoMovingToClone) {
+      // Wait for the normal transition to complete
+      setTimeout(() => {
+        // Disable transition for instant jump
+        track.style.transition = 'none';
+        // Jump to the corresponding real item instantly
+        index = 2;
+        updatePosition(false);
+        // Re-enable normal transition
+        setTimeout(() => {
+          track.style.transition = 'transform 0.6s ease-in-out';
+          isTransitioning = false;
+        }, 10); // Very brief delay to ensure the jump is applied
+      }, 600); // Wait for normal transition to complete
+    }else {
       // Normal movement - wait for transition to complete, then add pause
       setTimeout(() => { 
         isTransitioning = false;
