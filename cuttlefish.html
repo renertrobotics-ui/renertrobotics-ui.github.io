@@ -754,11 +754,11 @@
   track.addEventListener('transitionend', () => {
     if (items[index].getAttribute('alt') === 'Team Member 1' && index >= items.length - 3) {
       // reached clone of first
-      index = 4;
+      index = 13;
       updatePosition(false);
     } else if (items[index].getAttribute('alt') === 'Team Member 10' && index <= 3) {
       // reached clone of last
-      index = 13;
+      index = 4;
       updatePosition(false);
     }
   });
