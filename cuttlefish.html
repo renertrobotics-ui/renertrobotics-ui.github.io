@@ -493,43 +493,85 @@
           line-height: 1.5;
         }
         
-        .team-gallery {
-          overflow-x: auto;
-          white-space: nowrap;
-          padding-bottom: 10px;
+        /* Scrollable Gallery Wrapper with Arrows */
+        .team-gallery-wrapper {
+          position: relative;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
         }
         
-        .team-gallery-inner {
+        .team-gallery {
           display: flex;
           gap: 1rem;
+          overflow-x: auto;
+          scroll-behavior: smooth;
+          padding: 1rem 2rem;
+          scrollbar-width: none; /* Firefox */
+          -ms-overflow-style: none;  /* IE 10+ */
+        }
+        
+        .team-gallery::-webkit-scrollbar {
+          display: none; /* Chrome, Safari */
+        }
+        
+        /* Arrows */
+        .scroll-arrow {
+          background: rgba(0,0,0,0.5);
+          border: none;
+          color: white;
+          font-size: 1.5rem;
+          padding: 0.75rem;
+          border-radius: 50%;
+          cursor: pointer;
+          position: absolute;
+          z-index: 1;
+          top: 50%;
+          transform: translateY(-50%);
+          transition: background 0.2s ease;
+        }
+        
+        .scroll-arrow:hover {
+          background: rgba(0,0,0,0.7);
+        }
+        
+        .scroll-arrow.left {
+          left: 10px;
+        }
+        
+        .scroll-arrow.right {
+          right: 10px;
         }
         
         .team-member {
-          display: inline-block;
           flex: 0 0 auto;
           width: 180px;
           border-radius: 10px;
           overflow: hidden;
           box-shadow: 0 4px 12px rgba(0,0,0,0.2);
           background: #444;
+          transition: transform 0.3s ease;
         }
         
         .team-member img {
           width: 100%;
           height: auto;
-          display: block;
           object-fit: cover;
-          transition: transform 0.3s ease;
+          display: block;
         }
         
         .team-member:hover img {
           transform: scale(1.05);
         }
         
-        /* Responsive adjustments */
         @media (max-width: 768px) {
           .team-member {
             width: 140px;
+          }
+        
+          .scroll-arrow {
+            font-size: 1.2rem;
+            padding: 0.6rem;
           }
         }
 
@@ -630,11 +672,16 @@
   </div>
 </div>
 <!-- 👇 Meet the Team Section Starts Here -->
+<!-- 👇 Meet the Team Section Starts Here -->
 <section class="meet-team-section">
   <h3>Meet the Team</h3>
   <p>Get to know the brilliant minds behind Cuttlefish Robotics! Here's a glimpse of our amazing team members who make the magic happen.</p>
-  <div class="team-gallery">
-    <div class="team-gallery-inner">
+  <div class="team-gallery-wrapper">
+    <button class="scroll-arrow left" aria-label="Scroll Left">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <div class="team-gallery" id="teamGallery">
       <div class="team-member"><img src="team1.jpg" alt="Team Member 1"></div>
       <div class="team-member"><img src="team2.jpg" alt="Team Member 2"></div>
       <div class="team-member"><img src="team3.jpg" alt="Team Member 3"></div>
@@ -646,8 +693,13 @@
       <div class="team-member"><img src="team9.jpg" alt="Team Member 9"></div>
       <div class="team-member"><img src="team10.jpg" alt="Team Member 10"></div>
     </div>
+
+    <button class="scroll-arrow right" aria-label="Scroll Right">
+      <i class="fas fa-chevron-right"></i>
+    </button>
   </div>
 </section>
+<!-- 👆 Meet the Team Section Ends Here -->
 <!-- 👆 Meet the Team Section Ends Here -->
   
 <!-- 👆 Info Section Ends -->
@@ -667,6 +719,24 @@
             }
         });
     </script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const gallery = document.getElementById('teamGallery');
+      const leftArrow = document.querySelector('.scroll-arrow.left');
+      const rightArrow = document.querySelector('.scroll-arrow.right');
+  
+      const scrollAmount = 300;
+  
+      leftArrow.addEventListener('click', () => {
+        gallery.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+  
+      rightArrow.addEventListener('click', () => {
+        gallery.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+    });
+  </script>
+
     <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
       <div style="margin-bottom: 5px;">
         <a href="https://www.instagram.com/renertrobotics/" target="_blank" style="color: #ccc; margin: 0 10px; text-decoration: none;">
