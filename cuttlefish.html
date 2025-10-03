@@ -759,14 +759,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   track.addEventListener('transitionend', () => {
     // If on clone of first real item (at end), jump to real first
-    if (index === totalItems - 1) {
+    if (index === 11) {
       index = 1;
       disableTransitionAndJump();
     }
 
     // If on clone of last real item (at start), jump to real last
     if (index === 0) {
-      index = totalItems - 2;
+      index = 10;
       disableTransitionAndJump();
     }
 
