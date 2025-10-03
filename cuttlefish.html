@@ -714,18 +714,12 @@ document.addEventListener('DOMContentLoaded', function () {
   const rightBtn = document.querySelector('.carousel-arrow.right');
 
   const itemWidth = 200;
-  let index = 1; // Start from real first item
+  let index = 1; // Start at the first real item
   const totalItems = items.length;
-
   let isTransitioning = false;
 
   function updatePosition(animate = true) {
-    if (animate) {
-      track.style.transition = 'transform 0.6s ease-in-out';
-    } else {
-      track.style.transition = 'none';
-    }
-
+    track.style.transition = animate ? 'transform 0.6s ease-in-out' : 'none';
     const offset = index * -itemWidth + (track.offsetWidth - itemWidth) / 2;
     track.style.transform = `translateX(${offset}px)`;
 
@@ -749,31 +743,38 @@ document.addEventListener('DOMContentLoaded', function () {
     index--;
     updatePosition(true);
   }
-  function disableTransitionAndJump() {
-    // Wait until next animation frame to safely disable transition
-    requestAnimationFrame(() => {
-      track.style.transition = 'none';
-      updatePosition(false);
+
+  function jumpWithoutTransition(newIndex) {
+    track.addEventListener('transitionend', function handler() {
+      // Remove the transition temporarily and jump
+      track.removeEventListener('transitionend', handler);
+
+      // Force browser to flush styles before continuing
+      requestAnimationFrame(() => {
+        track.style.transition = 'none';
+        index = newIndex;
+        updatePosition(false);
+
+        // Allow layout to update, then re-enable transitions
+        requestAnimationFrame(() => {
+          track.style.transition = 'transform 0.6s ease-in-out';
+        });
+
+        isTransitioning = false;
+      });
     });
   }
 
   track.addEventListener('transitionend', () => {
-    // If on clone of first real item (at end), jump to real first
-    if (index === 11) {
-      index = 1;
-      disableTransitionAndJump();
+    // Handle looping
+    if (index === totalItems - 1) {
+      jumpWithoutTransition(1); // Jump from clone of first → real first
+    } else if (index === 0) {
+      jumpWithoutTransition(totalItems - 2); // Jump from clone of last → real last
+    } else {
+      isTransitioning = false;
     }
-
-    // If on clone of last real item (at start), jump to real last
-    if (index === 0) {
-      index = 10;
-      disableTransitionAndJump();
-    }
-
-    isTransitioning = false;
   });
-
-
 
   rightBtn.addEventListener('click', moveRight);
   leftBtn.addEventListener('click', moveLeft);
@@ -781,6 +782,7 @@ document.addEventListener('DOMContentLoaded', function () {
   updatePosition(false); // Initialize position
 });
 </script>
+
   <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
       <div style="margin-bottom: 5px;">
         <a href="https://www.instagram.com/renertrobotics/" target="_blank" style="color: #ccc; margin: 0 10px; text-decoration: none;">
