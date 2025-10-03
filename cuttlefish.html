@@ -707,60 +707,79 @@
         });
     </script>
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const track = document.getElementById('carouselTrack');
-        const items = track.children;
-        const leftBtn = document.querySelector('.carousel-arrow.left');
-        const rightBtn = document.querySelector('.carousel-arrow.right');
-      
-        const itemWidth = 200; // same as CSS
-        let index = 1; // Start from the first real item (after clone at start)
-        const totalItems = items.length;
-      
-        function updatePosition(animate = true) {
-          track.style.transition = animate ? 'transform 0.6s ease-in-out' : 'none';
-          const offset = index * -itemWidth + (track.offsetWidth - itemWidth) / 2;
-          track.style.transform = `translateX(${offset}px)`;
-      
-          Array.from(items).forEach(i => i.classList.remove('active'));
-          if (items[index]) {
-            items[index].classList.add('active');
-          }
+    document.addEventListener('DOMContentLoaded', function () {
+      const track = document.getElementById('carouselTrack');
+      const items = track.children;
+      const leftBtn = document.querySelector('.carousel-arrow.left');
+      const rightBtn = document.querySelector('.carousel-arrow.right');
+    
+      const itemWidth = 200;
+      let index = 1; // Start from real first item
+      const totalItems = items.length;
+    
+      let isTransitioning = false;
+    
+      function updatePosition(animate = true) {
+        if (animate) {
+          track.style.transition = 'transform 0.6s ease-in-out';
+        } else {
+          track.style.transition = 'none';
         }
-      
-        function moveRight() {
-          if (index >= totalItems - 1) return;
-          index++;
-          updatePosition(true);
+    
+        const offset = index * -itemWidth + (track.offsetWidth - itemWidth) / 2;
+        track.style.transform = `translateX(${offset}px)`;
+    
+        // Update active class
+        Array.from(items).forEach(i => i.classList.remove('active'));
+        if (items[index]) {
+          items[index].classList.add('active');
         }
-      
-        function moveLeft() {
-          if (index <= 0) return;
-          index--;
-          updatePosition(true);
+      }
+    
+      function moveRight() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        index++;
+        updatePosition(true);
+      }
+    
+      function moveLeft() {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        index--;
+        updatePosition(true);
+      }
+    
+      track.addEventListener('transitionend', () => {
+        // If on clone of first real item (at end), jump to real first
+        if (index === totalItems - 1) {
+          index = 1;
+          disableTransitionAndJump();
         }
-      
-        // Handle infinite loop logic
-        track.addEventListener('transitionend', () => {
-          // If we're at the cloned first item (at end), jump to real first
-          if (index === totalItems - 1) {
-            index = 1;
-            updatePosition(false);
-          }
-      
-          // If we're at the cloned last item (at start), jump to real last
-          if (index === 0) {
-            index = totalItems - 2;
-            updatePosition(false);
-          }
-        });
-      
-        rightBtn.addEventListener('click', moveRight);
-        leftBtn.addEventListener('click', moveLeft);
-      
-        updatePosition(false);
+    
+        // If on clone of last real item (at start), jump to real last
+        if (index === 0) {
+          index = totalItems - 2;
+          disableTransitionAndJump();
+        }
+    
+        isTransitioning = false;
       });
-      </script>
+    
+      function disableTransitionAndJump() {
+        // Wait until next animation frame to safely disable transition
+        requestAnimationFrame(() => {
+          track.style.transition = 'none';
+          updatePosition(false);
+        });
+      }
+    
+      rightBtn.addEventListener('click', moveRight);
+      leftBtn.addEventListener('click', moveLeft);
+    
+      updatePosition(false); // Initialize position
+    });
+    </script>
 
     <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
       <div style="margin-bottom: 5px;">
