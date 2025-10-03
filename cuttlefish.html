@@ -706,62 +706,81 @@
             }
         });
     </script>
-    
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const track = document.getElementById('track');
-    const items = track.children;
-    const leftBtn = document.querySelector('.carousel-arrow.left');
-    const rightBtn = document.querySelector('.carousel-arrow.right');
+  <script>
+document.addEventListener('DOMContentLoaded', function () {
+  const track = document.getElementById('carouselTrack');
+  const items = track.children;
+  const leftBtn = document.querySelector('.carousel-arrow.left');
+  const rightBtn = document.querySelector('.carousel-arrow.right');
 
-    const itemWidth = 220; // image width + margin (200 + 2*10)
-    let index = 1;
-    const total = items.length;
+  const itemWidth = 200;
+  let index = 1; // Start from real first item
+  const totalItems = items.length;
 
-    let isTransitioning = false;
+  let isTransitioning = false;
 
-    function update(animate = true) {
-      track.style.transition = animate ? 'transform 0.6s ease-in-out' : 'none';
-      const offset = index * -itemWidth + (track.offsetWidth - itemWidth) / 2;
-      track.style.transform = `translateX(${offset}px)`;
-      for (const el of items) el.classList.remove('active');
-      if (items[index]) items[index].classList.add('active');
+  function updatePosition(animate = true) {
+    if (animate) {
+      track.style.transition = 'transform 0.6s ease-in-out';
+    } else {
+      track.style.transition = 'none';
     }
 
-    function moveNext() {
-      if (isTransitioning) return;
-      isTransitioning = true;
-      index++;
-      update(true);
+    const offset = index * -itemWidth + (track.offsetWidth - itemWidth) / 2;
+    track.style.transform = `translateX(${offset}px)`;
+
+    // Update active class
+    Array.from(items).forEach(i => i.classList.remove('active'));
+    if (items[index]) {
+      items[index].classList.add('active');
     }
-    function movePrev() {
-      if (isTransitioning) return;
-      isTransitioning = true;
-      index--;
-      update(true);
+  }
+
+  function moveRight() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    index++;
+    updatePosition(true);
+  }
+
+  function moveLeft() {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    index--;
+    updatePosition(true);
+  }
+
+  track.addEventListener('transitionend', () => {
+    // If on clone of first real item (at end), jump to real first
+    if (index === totalItems - 1) {
+      index = 1;
+      disableTransitionAndJump();
     }
 
-    track.addEventListener('transitionend', () => {
-      // If on clone-of-first (end)
-      if (index === total - 1) {
-        index = 1;
-        update(false);
-      }
-      // If on clone-of-last (start)
-      if (index === 0) {
-        index = total - 2;
-        update(false);
-      }
-      isTransitioning = false;
-    });
+    // If on clone of last real item (at start), jump to real last
+    if (index === 0) {
+      index = totalItems - 2;
+      disableTransitionAndJump();
+    }
 
-    rightBtn.addEventListener('click', moveNext);
-    leftBtn.addEventListener('click', movePrev);
-
-    update(false);
+    isTransitioning = false;
   });
+
+  function disableTransitionAndJump() {
+    // Wait until next animation frame to safely disable transition
+    requestAnimationFrame(() => {
+      track.style.transition = 'none';
+      updatePosition(false);
+    });
+  }
+
+  rightBtn.addEventListener('click', moveRight);
+  leftBtn.addEventListener('click', moveLeft);
+
+  updatePosition(false); // Initialize position
+});
 </script>
-    <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
+  <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
       <div style="margin-bottom: 5px;">
         <a href="https://www.instagram.com/renertrobotics/" target="_blank" style="color: #ccc; margin: 0 10px; text-decoration: none;">
           <i class="fab fa-instagram"></i>
