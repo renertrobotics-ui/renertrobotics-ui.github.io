@@ -503,31 +503,28 @@
         
         .carousel-track {
           display: flex;
-          transition: transform 0.5s ease-in-out;
+          transition: transform 0.6s ease-in-out;
           will-change: transform;
         }
         
         .carousel-item {
           flex: 0 0 200px;
-          transition: transform 0.5s ease;
-          transform: scale(0.8);
+          transition: transform 0.6s ease, opacity 0.5s ease;
           opacity: 0.6;
-          pointer-events: none;
         }
         
         .carousel-item img {
           width: 100%;
-          height: auto;
           border-radius: 10px;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+          object-fit: cover;
         }
         
         .carousel-item.active {
-          transform: scale(1.15);
+          transform: scale(1.2);
           opacity: 1;
-          pointer-events: auto;
         }
         
+        /* Arrows */
         .carousel-arrow {
           position: absolute;
           top: 50%;
@@ -540,20 +537,9 @@
           border-radius: 50%;
           cursor: pointer;
           z-index: 2;
-          transition: background 0.3s ease;
         }
-        
-        .carousel-arrow:hover {
-          background: rgba(0,0,0,0.8);
-        }
-        
-        .carousel-arrow.left {
-          left: 0;
-        }
-        
-        .carousel-arrow.right {
-          right: 0;
-        }
+        .carousel-arrow.left { left: 0; }
+        .carousel-arrow.right { right: 0; }
         
         /* Responsive adjustments */
         @media (max-width: 768px) {
@@ -677,8 +663,9 @@
     <button class="carousel-arrow left" aria-label="Scroll Left"><i class="fas fa-chevron-left"></i></button>
 
     <div class="carousel-track" id="carouselTrack">
-      <!-- Duplicate first and last images for smooth looping -->
+      <!-- Clone last item at the start -->
       <div class="carousel-item"><img src="team10.jpg" alt="Team Member 10"></div>
+      <!-- Real items -->
       <div class="carousel-item"><img src="team1.jpg" alt="Team Member 1"></div>
       <div class="carousel-item"><img src="team2.jpg" alt="Team Member 2"></div>
       <div class="carousel-item"><img src="team3.jpg" alt="Team Member 3"></div>
@@ -689,6 +676,7 @@
       <div class="carousel-item"><img src="team8.jpg" alt="Team Member 8"></div>
       <div class="carousel-item"><img src="team9.jpg" alt="Team Member 9"></div>
       <div class="carousel-item"><img src="team10.jpg" alt="Team Member 10"></div>
+      <!-- Clone first item at the end -->
       <div class="carousel-item"><img src="team1.jpg" alt="Team Member 1"></div>
     </div>
 
@@ -718,64 +706,62 @@
     </script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
-        const track = document.getElementById('carouselTrack');
-        const items = track.children;
-        const leftBtn = document.querySelector('.carousel-arrow.left');
-        const rightBtn = document.querySelector('.carousel-arrow.right');
-      
-        const itemWidth = 200;
-        let index = 1; // start on the real first item
-        const transitionSpeed = 500;
-      
-        // Set up starting state
-        const updateCarousel = (animate = true) => {
-          if (animate) {
-            track.style.transition = `transform ${transitionSpeed}ms ease-in-out`;
-          } else {
-            track.style.transition = 'none';
-          }
-      
-          // remove previous active
-          [...items].forEach(item => item.classList.remove('active'));
-      
-          // center the current item
-          const offset = index * -itemWidth + (track.offsetWidth - itemWidth) / 2;
-          track.style.transform = `translateX(${offset}px)`;
-      
-          // apply active class
-          items[index].classList.add('active');
-        };
-      
-        const moveRight = () => {
-          index++;
-          updateCarousel();
-      
-          if (index >= items.length - 1) {
-            setTimeout(() => {
-              index = 1;
-              updateCarousel(false);
-            }, transitionSpeed);
-          }
-        };
-      
-        const moveLeft = () => {
-          index--;
-          updateCarousel();
-      
-          if (index <= 0) {
-            setTimeout(() => {
-              index = items.length - 2;
-              updateCarousel(false);
-            }, transitionSpeed);
-          }
-        };
-      
-        rightBtn.addEventListener('click', moveRight);
-        leftBtn.addEventListener('click', moveLeft);
-      
-        updateCarousel();
-      });
-      </script>
+  const track = document.getElementById('carouselTrack');
+  const items = track.children;
+  const leftBtn = document.querySelector('.carousel-arrow.left');
+  const rightBtn = document.querySelector('.carousel-arrow.right');
+
+  const itemWidth = 200;  // same as CSS width
+  const transitionDuration = 600; // in ms (match CSS)
+  let index = 1;  // start at first real item
+
+  function updatePosition(animate = true) {
+    if (animate) {
+      track.style.transition = `transform ${transitionDuration}ms ease-in-out`;
+    } else {
+      track.style.transition = 'none';
+    }
+    const offset = index * -itemWidth + (track.offsetWidth - itemWidth) / 2;
+    track.style.transform = `translateX(${offset}px)`;
+
+    // update “active” class
+    Array.from(items).forEach(i => i.classList.remove('active'));
+    items[index].classList.add('active');
+  }
+
+  function moveRight() {
+    index++;
+    updatePosition(true);
+
+    // If we moved into the clone at the end, jump to real first
+    if (index === items.length - 1) {
+      setTimeout(() => {
+        index = 1;
+        updatePosition(false);
+      }, transitionDuration);
+    }
+  }
+
+  function moveLeft() {
+    index--;
+    updatePosition(true);
+
+    // If we moved into clone at start, jump to real last
+    if (index === 0) {
+      setTimeout(() => {
+        index = items.length - 2;
+        updatePosition(false);
+      }, transitionDuration);
+    }
+  }
+
+  rightBtn.addEventListener('click', moveRight);
+  leftBtn.addEventListener('click', moveLeft);
+
+  // initial layout
+  updatePosition(false);
+});
+</script>
     <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
       <div style="margin-bottom: 5px;">
         <a href="https://www.instagram.com/renertrobotics/" target="_blank" style="color: #ccc; margin: 0 10px; text-decoration: none;">
