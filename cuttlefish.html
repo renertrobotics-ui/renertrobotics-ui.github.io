@@ -742,7 +742,7 @@
     // If we moved into the clone at the end, jump to real first
     if (index === items.length - 3) {
       setTimeout(() => {
-        index = 1;
+        index = 3;
         updatePosition(false);
       }, transitionDuration);
     }
@@ -753,9 +753,9 @@
     updatePosition(true);
 
     // If we moved into clone at start, jump to real last
-    if (index === 0) {
+    if (index === 2) {
       setTimeout(() => {
-        index = items.length - 2;
+        index = 12;
         updatePosition(false);
       }, transitionDuration);
     }
