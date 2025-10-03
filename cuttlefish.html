@@ -100,12 +100,11 @@
       display: flex;
       align-items: center;
       z-index: 1000;
-      background: var(--color-glass-bg);
-      border-bottom: 1px solid var(--color-glass-border);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(var(--blur-value));
-      -webkit-backdrop-filter: blur(var(--blur-value));
+      background-color: #ffffff; /* White banner */
+      color: #222222; /* Default text color inside navbar */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Small subtle shadow */
     }
+
 
     .navbar__container {
       display: flex;
@@ -121,10 +120,12 @@
       font-size: 1.5rem;
       font-weight: var(--font-weight-bold);
     }
-    
     .navbar__brand,
     .navbar__link {
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+      color: #222222 !important; /* Force text color to dark grey */
+      text-shadow: none; /* Remove the white text glow */
+    }
+
     }
 
     .navbar__brand-section {
@@ -329,8 +330,8 @@
       position: absolute;
       top: 100%;
       left: 0;
-      background: var(--color-glass-bg);
-      border: 1px solid var(--color-glass-border);
+      background: #ffffff;
+      border: 1px solid #ddd;
       backdrop-filter: blur(var(--blur-value));
       border-radius: var(--border-radius-soft);
       min-width: 220px;
@@ -343,7 +344,7 @@
     .dropdown-menu .dropdown-link {
       display: block;
       padding: 0.75rem 1rem;
-      color: var(--color-text);
+      color: #333333;
       font-weight: var(--font-weight-bold);
       text-decoration: none;
       transition: background 0.2s ease-in-out;
