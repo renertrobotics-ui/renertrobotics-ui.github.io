@@ -555,18 +555,47 @@
         .sibling-gallery:hover .gallery-item:hover img {
           transform: scale(1.05);
         }
+        /* Make the red box only wrap the image */
         .red-box-container {
           background-color: #a62024; /* Red */
           border-radius: 15px;
-          padding: 0px;
-          margin: 0 50px;
-          margin-top: 30px;
+          padding: 10px;
           box-sizing: border-box;
+          display: inline-block;
         }
         
         .red-box-container .info-image img {
           border-radius: 10px;
+          display: block;
+          max-height: 280px;
+          width: auto;
+          height: 100%;
         }
+        
+        /* Info text styling */
+        .info-text {
+          flex: 1;
+          color: #333333; /* grey text */
+          text-align: left;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 0 1rem;
+        }
+        
+        /* Optional tweak: better spacing on smaller screens */
+        @media (max-width: 768px) {
+          .info-section {
+            flex-direction: column;
+            align-items: center;
+          }
+        
+          .info-text {
+            text-align: center;
+            padding-top: 1rem;
+          }
+        }
+
 
 
         
@@ -632,18 +661,17 @@
 <main class="content">
 <!-- 👇 Info Section Below Gallery -->
 <!-- 👇 Info Section Wrapped in Red Box -->
-<div class="red-box-container">
-  <div class="info-section">
+<div class="info-section">
+  <div class="red-box-container">
     <div class="info-image">
       <img src="sonic_v2_render.png" alt="Team Image">
     </div>
-    <div class="info-text">
-      <h3><strong>What We're Building Now</strong></h3>
-      <p>We’re currently designing our second-generation robot, the Cuddler UWU. The Cuddler UWU focuses on speed, agility, and intelligent automation. Stay tuned for competition updates and behind-the-scenes insights from our engineering process!</p>
-    </div>
+  </div>
+  <div class="info-text">
+    <h3><strong>What We're Building Now</strong></h3>
+    <p>We’re currently designing our second-generation robot, the Cuddler UWU...</p>
   </div>
 </div>
-
 <!-- 👇 Meet the Team Section Starts Here -->
 <section class="meet-team-section">
   <h3>Meet the Team</h3>
