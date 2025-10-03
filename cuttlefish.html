@@ -451,7 +451,18 @@
           padding-left: 50px; /* text padding */
           box-sizing: border-box;
         }
-        
+        .image-background-section::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 150%;
+          height: 150%;
+          background: linear-gradient(75deg, rgba(51, 51, 51, 0.5) 0%, rgba(51, 51, 51, 0.5) 100%);
+          pointer-events: none; /* Allows clicks to go through */
+          z-index: 1;
+        }
+
         .bg-image {
           position: absolute;
           top: 0; left: 0;
@@ -463,7 +474,7 @@
         .overlay-text p{
           padding-top: -30px;  
           position: relative;
-          z-index: 1;
+          z-index: 2;
           max-width: 450px;
           text-shadow: 0 2px 6px rgba(0,0,0,0.7);
         }
@@ -472,7 +483,7 @@
         .overlay-text h1{
           padding-top: -30px;  
           position: relative;
-          z-index: 1;
+          z-index: 2;
           max-width: 600px;
           text-shadow: 0 2px 6px rgba(0,0,0,0.7);
         }
