@@ -475,6 +475,64 @@
           max-width: 600px;
           text-shadow: 0 2px 6px rgba(0,0,0,0.7);
         }
+        .meet-team-section {
+          margin: 60px 50px 0 50px;
+          color: var(--color-text);
+          text-align: center;
+        }
+        
+        .meet-team-section h3 {
+          font-size: 1.8rem;
+          margin-bottom: 1rem;
+        }
+        
+        .meet-team-section p {
+          font-size: 1rem;
+          max-width: 800px;
+          margin: 0 auto 2rem;
+          line-height: 1.5;
+        }
+        
+        .team-gallery {
+          overflow-x: auto;
+          white-space: nowrap;
+          padding-bottom: 10px;
+        }
+        
+        .team-gallery-inner {
+          display: flex;
+          gap: 1rem;
+        }
+        
+        .team-member {
+          display: inline-block;
+          flex: 0 0 auto;
+          width: 180px;
+          border-radius: 10px;
+          overflow: hidden;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+          background: #444;
+        }
+        
+        .team-member img {
+          width: 100%;
+          height: auto;
+          display: block;
+          object-fit: cover;
+          transition: transform 0.3s ease;
+        }
+        
+        .team-member:hover img {
+          transform: scale(1.05);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+          .team-member {
+            width: 140px;
+          }
+        }
+
 
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -571,6 +629,27 @@
     <p>We’re currently designing our second-generation robot, the Cuddler UWU. The Cuddler UWU focuses on speed, agility, and intelligent automation. Stay tuned for competition updates and behind-the-scenes insights from our engineering process!</p>
   </div>
 </div>
+<!-- 👇 Meet the Team Section Starts Here -->
+<section class="meet-team-section">
+  <h3>Meet the Team</h3>
+  <p>Get to know the brilliant minds behind Cuttlefish Robotics! Here's a glimpse of our amazing team members who make the magic happen.</p>
+  <div class="team-gallery">
+    <div class="team-gallery-inner">
+      <div class="team-member"><img src="team1.jpg" alt="Team Member 1"></div>
+      <div class="team-member"><img src="team2.jpg" alt="Team Member 2"></div>
+      <div class="team-member"><img src="team3.jpg" alt="Team Member 3"></div>
+      <div class="team-member"><img src="team4.jpg" alt="Team Member 4"></div>
+      <div class="team-member"><img src="team5.jpg" alt="Team Member 5"></div>
+      <div class="team-member"><img src="team6.jpg" alt="Team Member 6"></div>
+      <div class="team-member"><img src="team7.jpg" alt="Team Member 7"></div>
+      <div class="team-member"><img src="team8.jpg" alt="Team Member 8"></div>
+      <div class="team-member"><img src="team9.jpg" alt="Team Member 9"></div>
+      <div class="team-member"><img src="team10.jpg" alt="Team Member 10"></div>
+    </div>
+  </div>
+</section>
+<!-- 👆 Meet the Team Section Ends Here -->
+  
 <!-- 👆 Info Section Ends -->
 </main>
 <script>
