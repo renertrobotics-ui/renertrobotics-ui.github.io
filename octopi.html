@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Octopi Robotics (Team 27361)</title>
   <style>
     :root {
-      --color-glass-bg: rgba(255, 255, 255, 0.2);
-      --color-glass-border: rgba(255, 255, 255, 0.3);
-      --color-link-highlight: rgba(255, 255, 255, 0.25);
+      --color-glass-bg: rgba(255, 255, 255, 0.14);
+      --color-glass-border: rgba(255, 255, 255, 0.22);
+      --color-link-highlight: rgba(255, 255, 255, 0.18);
       --color-text: #ffffff;
       --color-focus-outline: #5ab1ff;
       --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -18,187 +18,86 @@
       --navbar-height: 70px;
       --navbar-padding: 1.5rem;
       --container-width: 1140px;
-      --transition-speed: 0.3s;
+      --transition-speed: 0.28s;
     }
 
-    h1 { font-size: 50px; margin-top: 0; }
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      font-family: var(--font-family-sans-serif);
-      font-size: 1rem;
-      line-height: 1.5;
-      color: var(--color-text);
-      background-image: linear-gradient(90deg, #0072ff, #ff0000);
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:var(--font-family-sans-serif);
+      color:var(--color-text);
+      background-image: linear-gradient(90deg, #0072ff, #ff0044);
       background-attachment: fixed;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
     }
 
-    .content {
-      padding-top: 100px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
+    .navbar{
+      position:fixed;top:0;left:0;width:100%;height:var(--navbar-height);display:flex;align-items:center;z-index:1000;
+      background:var(--color-glass-bg);border-bottom:1px solid var(--color-glass-border);
+      box-shadow:0 4px 30px rgba(0,0,0,0.12);backdrop-filter:blur(var(--blur-value));-webkit-backdrop-filter:blur(var(--blur-value));
     }
 
-    .content-container {
-      display: flex;
-      align-items: center;
-      width: 100%;
-      max-width: var(--container-width);
-      margin: 0 auto;
-      padding: 0 var(--navbar-padding);
+    .navbar__container{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:var(--container-width);margin:0 auto;padding:0 var(--navbar-padding)}
+    .navbar__brand-section{display:flex;align-items:center;gap:12px}
+    .banner-image{width:180px;height:44px;overflow:hidden}
+    .banner-image img{width:100%;height:100%;object-fit:contain}
+
+    .navbar__toggle{display:block;padding:0.5rem;border:none;background:transparent;cursor:pointer;z-index:1001}
+    .navbar__toggle .bar{display:block;width:26px;height:3px;margin:5px auto;background-color:var(--color-text);transition:all var(--transition-speed) ease;border-radius:2px}
+    .navbar__toggle.is-active .bar:nth-child(2){opacity:0}
+    .navbar__toggle.is-active .bar:nth-child(1){transform:translateY(8px) rotate(45deg)}
+    .navbar__toggle.is-active .bar:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+    .navbar__menu{display:none;flex-direction:column;width:100%;position:absolute;top:var(--navbar-height);left:0;z-index:999;background:var(--color-glass-bg);backdrop-filter:blur(var(--blur-value));-webkit-backdrop-filter:blur(var(--blur-value));border-top:1px solid var(--color-glass-border);padding-bottom:1rem}
+    .navbar__menu.is-active{display:flex;background-image:linear-gradient(90deg,#0072ff,#ff0044)}
+
+    .navbar__list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+    .navbar__item{text-align:center}
+    .navbar__link{display:block;padding:1rem 1.25rem;font-weight:var(--font-weight-bold);color:var(--color-text);text-decoration:none}
+    .navbar__link:hover,.navbar__link:focus{background:var(--color-link-highlight)}
+
+    /* Dropdown */
+    .navbar__dropdown{position:relative}
+    .dropdown-menu{display:none;position:absolute;top:100%;left:0;background:var(--color-glass-bg);border:1px solid var(--color-glass-border);backdrop-filter:blur(var(--blur-value));border-radius:var(--border-radius-soft);min-width:220px;z-index:999;box-shadow:0 6px 18px rgba(0,0,0,0.2);padding:0.4rem 0;text-align:left}
+    .dropdown-menu .dropdown-link{display:block;padding:0.6rem 1rem;color:var(--color-text);font-weight:var(--font-weight-bold);text-decoration:none}
+    .dropdown-menu .dropdown-link:hover{background:var(--color-link-highlight)}
+    /* Desktop hover open */
+    @media(min-width:768px){.navbar__dropdown:hover .dropdown-menu{display:block}}
+
+    /* Desktop layout */
+    @media(min-width:768px){
+      .navbar__toggle{display:none}
+      .navbar__menu{display:flex;flex-direction:row;position:static;width:auto;background:none;border:none;padding:0}
+      .navbar__list{flex-direction:row;align-items:center}
+      .navbar__item{margin-left:0.5rem}
+      .navbar__link{padding:0.5rem 1rem;border-radius:var(--border-radius-soft)}
+      .navbar__link:hover,.navbar__link--active{background:var(--color-link-highlight)}
     }
 
-    .content-text {
-      flex: 1;
-      text-align: left;
-      padding-right: 2rem;
-    }
+    /* Page layout */
+    main.content{padding-top:96px;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-start}
+    .content-container{display:flex;gap:32px;align-items:center;width:100%;max-width:var(--container-width);margin:0 auto;padding:2rem var(--navbar-padding)}
+    .content-text{flex:1 1 480px}
+    .content-text h1{font-size:48px;margin:0 0 12px}
+    .content-text p{margin:0 0 12px;color:rgba(255,255,255,0.95)}
+    .content-image{flex:1 1 360px;display:flex;align-items:center;justify-content:center}
+    .content-image img{max-width:100%;height:auto;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,0.25)}
 
-    .content-image {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+    footer{margin-top:40px;text-align:center;padding:1.5rem;background:var(--color-glass-bg);border-top:1px solid var(--color-glass-border);backdrop-filter:blur(var(--blur-value));color:#fff}
 
-    .content-image img {
-      height: 350px;
-      width: auto;
-      object-fit: contain;
-    }
-
-    ul { list-style: none; margin: 0; padding: 0; }
-    a { text-decoration: none; color: inherit; }
-
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--navbar-height);
-      display: flex;
-      align-items: center;
-      z-index: 1000;
-      background: var(--color-glass-bg);
-      border-bottom: 1px solid var(--color-glass-border);
-      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(var(--blur-value));
-      -webkit-backdrop-filter: blur(var(--blur-value));
-    }
-
-    .navbar__container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-      max-width: var(--container-width);
-      margin: 0 auto;
-      padding: 0 var(--navbar-padding);
-    }
-
-    .navbar__brand-section { display: flex; align-items: center; }
-    .banner-image {
-      width: 200px; height: 50px;
-      overflow: hidden; margin-left: -70px;
-    }
-    .banner-image img { width: 100%; height: 100%; object-fit: contain; }
-
-    .navbar__brand, .navbar__link {
-      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
-      font-weight: var(--font-weight-bold);
-    }
-
-    .navbar__toggle {
-      display: block;
-      padding: 0.5rem;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      z-index: 1001;
-    }
-    .navbar__toggle .bar {
-      display: block;
-      width: 25px; height: 3px;
-      margin: 5px auto;
-      background-color: var(--color-text);
-      transition: all var(--transition-speed) ease-in-out;
-      border-radius: 2px;
-    }
-    .navbar__toggle.is-active .bar:nth-child(2) { opacity: 0; }
-    .navbar__toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .navbar__toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-
-    .navbar__menu {
-      display: none;
-      flex-direction: column;
-      width: 100%;
-      position: absolute;
-      top: var(--navbar-height);
-      left: 0;
-      z-index: -1;
-      background: var(--color-glass-bg);
-      backdrop-filter: blur(var(--blur-value));
-      border-top: 1px solid var(--color-glass-border);
-      padding-bottom: 1rem;
-    }
-    .navbar__menu.is-active { display: flex; background-image: linear-gradient(90deg, #0072ff, #ff0000); }
-
-    .navbar__link { padding: 1.25rem; display: block; }
-    .navbar__link:hover, .navbar__link:focus { background-color: var(--color-link-highlight); }
-
-    @media (min-width: 768px) {
-      .navbar__toggle { display: none; }
-      .navbar__menu {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        position: static;
-        width: auto;
-        background: none;
-        border: none;
-      }
-      .navbar__list { display: flex; align-items: center; }
-      .navbar__item { margin-left: 0.5rem; }
-      .navbar__link {
-        padding: 0.6rem 1.1rem;
-        border-radius: var(--border-radius-soft);
-      }
-      .navbar__link:hover,
-      .navbar__link:focus,
-      .navbar__link--active { background-color: var(--color-link-highlight); }
-      .content-container { flex-direction: row; }
-    }
-
-    @media (max-width: 768px) {
-      .content-container { flex-direction: column; }
-      .content-text { text-align: center; padding: 0 0 2rem; }
-      .content-image img { max-width: 100%; height: auto; }
-    }
-
-    footer {
-      margin-top: 60px;
-      text-align: center;
-      padding: 1.5rem;
-      background: var(--color-glass-bg);
-      border-top: 1px solid var(--color-glass-border);
-      backdrop-filter: blur(var(--blur-value));
-      color: #fff;
-      font-size: 0.9rem;
+    /* Mobile tweaks */
+    @media(max-width:767px){
+      .content-container{flex-direction:column;padding:1rem}
+      .content-text{text-align:center}
     }
   </style>
 </head>
 <body>
-
-  <!-- NAVBAR -->
   <header class="navbar" role="banner">
     <div class="navbar__container">
       <div class="navbar__brand-section">
-        <div class="banner-image">
-          <img src="Screenshot_2025-04-22_130549-removebg-preview.png" alt="Renert Robotics Logo">
-        </div>
+        <div class="banner-image"><a href="index.html"><img src="Screenshot_2025-04-22_130549-removebg-preview.png" alt="Site logo"></a></div>
       </div>
 
       <button class="navbar__toggle" id="navbarToggle" aria-label="Toggle navigation" aria-controls="navbarMenu" aria-expanded="false">
@@ -207,36 +106,53 @@
         <span class="bar"></span>
       </button>
 
-      <nav id="navbarMenu" class="navbar__menu" role="navigation">
+      <nav id="navbarMenu" class="navbar__menu" role="navigation" aria-labelledby="navbarToggle">
         <ul class="navbar__list">
           <li class="navbar__item"><a href="index.html" class="navbar__link">Home</a></li>
-          <li class="navbar__item"><a href="#" class="navbar__link">About Us</a></li>
+          <li class="navbar__item"><a href="about.html" class="navbar__link">About Us</a></li>
+
           <li class="navbar__item navbar__dropdown">
             <a href="#" class="navbar__link">FTC ▾</a>
             <ul class="dropdown-menu">
               <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotics</a></li>
-              <li><a href="octopi.html" class="dropdown-link navbar__link--active">27361 Octopi Robotics</a></li>
+              <li><a href="octopi.html" class="dropdown-link">27361 Octopi Robotics</a></li>
             </ul>
           </li>
-          <li class="navbar__item"><a href="#" class="navbar__link">Sponsor Us!</a></li>
+
+          <li class="navbar__item navbar__dropdown">
+            <a href="#" class="navbar__link">FLL ▾</a>
+            <ul class="dropdown-menu">
+              <li><a href="fll-team1.html" class="dropdown-link">FLL Team 1</a></li>
+              <li><a href="fll-team2.html" class="dropdown-link">FLL Team 2</a></li>
+            </ul>
+          </li>
+
+          <li class="navbar__item"><a href="sponsor.html" class="navbar__link">Sponsor us!</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <!-- PAGE CONTENT -->
   <main class="content">
     <div class="content-container">
       <div class="content-text">
         <h1>Octopi Robotics (Team 27361)</h1>
-        <p class="intro">Octopi Robotics is a student-driven FTC team based at Renert. Our members collaborate to design, build, and program innovative robots that tackle real engineering challenges.</p>
+        <p class="intro">Octopi Robotics is a student-driven FTC team based at Renert. Our members collaborate to design, build, and program robots that tackle real engineering challenges.</p>
         <p>Through the FIRST Tech Challenge, our team learns problem-solving, coding, engineering design, and teamwork — preparing us to be the next generation of innovators.</p>
-        <p>We are proud to represent our school and community in competitions and outreach, sharing our passion for STEM with others.</p>
+        <p>We're proud to represent our school and community in competitions and outreach events.</p>
       </div>
       <div class="content-image">
-        <img src="octopi_robot.png" alt="Octopi Robotics Robot">
+        <img src="octopi_robot.png" alt="Octopi Robotics robot image">
       </div>
     </div>
+
+    <section style="max-width:var(--container-width);margin:0 auto;padding:0 var(--navbar-padding) 3rem">
+      <div style="background:rgba(255,255,255,0.06);padding:1.25rem;border-radius:10px;border:1px solid rgba(255,255,255,0.04)">
+        <h2 style="margin-top:0">Season notes</h2>
+        <p style="color:rgba(255,255,255,0.9)">This season we're focusing on drivetrain reliability, camera-based localization, and autonomous routines. Add your robot photos and match reports below.</p>
+      </div>
+    </section>
+
   </main>
 
   <footer>
@@ -247,12 +163,48 @@
     document.addEventListener('DOMContentLoaded', function () {
       const navbarToggle = document.getElementById('navbarToggle');
       const navbarMenu = document.getElementById('navbarMenu');
+      const dropdownParents = document.querySelectorAll('.navbar__dropdown');
+
       if (navbarToggle && navbarMenu) {
         navbarToggle.addEventListener('click', function () {
           navbarToggle.classList.toggle('is-active');
           navbarMenu.classList.toggle('is-active');
           const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
-          navbarToggle.setAttribute('aria-expanded', !isExpanded);
+          navbarToggle.setAttribute('aria-expanded', String(!isExpanded));
+        });
+
+        // Close mobile menu when any link is clicked (so navigation works cleanly)
+        navbarMenu.querySelectorAll('a').forEach(function (link) {
+          link.addEventListener('click', function () {
+            if (navbarMenu.classList.contains('is-active')) {
+              navbarMenu.classList.remove('is-active');
+              navbarToggle.classList.remove('is-active');
+              navbarToggle.setAttribute('aria-expanded', 'false');
+            }
+          });
+        });
+
+        // Allow dropdown parents to toggle on mobile
+        dropdownParents.forEach(function (parent) {
+          const trigger = parent.querySelector('.navbar__link');
+          if (!trigger) return;
+          trigger.addEventListener('click', function (ev) {
+            // On small screens, toggle the dropdown instead of navigating
+            if (window.innerWidth < 768) {
+              ev.preventDefault();
+              parent.classList.toggle('is-open');
+              const menu = parent.querySelector('.dropdown-menu');
+              if (menu) menu.style.display = parent.classList.contains('is-open') ? 'block' : 'none';
+            }
+          });
+        });
+
+        // Ensure dropdowns reset when resizing to desktop
+        window.addEventListener('resize', function () {
+          if (window.innerWidth >= 768) {
+            document.querySelectorAll('.dropdown-menu').forEach(function (m) { m.style.display = ''; });
+            document.querySelectorAll('.navbar__dropdown').forEach(function (p) { p.classList.remove('is-open'); });
+          }
         });
       }
     });
