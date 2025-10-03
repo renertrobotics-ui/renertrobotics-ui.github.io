@@ -300,13 +300,23 @@
       line-height: 1.6;
       margin-top: -20px;
     }
-    
+
+    .info-text .introp {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-top: -20px;
+    }
     /* Mobile responsiveness */
     @media (max-width: 768px) {
       .info-section {
         flex-direction: column;
         align-items: center;
         text-align: center;
+      }
+      .info-text .introp {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-top: -60px;
       }
     
       .info-text {
@@ -623,7 +633,7 @@
           }
         
           .info-image img {
-            max-width: 90%;
+            max-width: 100%;
             height: auto;
           }
         }
@@ -701,7 +711,7 @@
     </div>
   </div>
   <div class="info-text">
-    <div style="color: #a62024; font-weight: bold; font-size: 1rem; margin-bottom: 0.5rem;">Our Robots</div>
+    <div class="introp" style="color: #a62024; font-weight: bold; font-size: 1rem; margin-bottom: 0.5rem;">Our Robots</div>
     <h1><strong>What We're Building Now</strong></h1>
     <p>We're building our second-gen robot, the Cuddler UWU, designed for speed, agility, and smart automation. With the Limelight 3A for precise targeting and Pedropathing for smoother autonomous movement, it's faster and smarter than ever. Stay tuned for updates!</p>
   </div>
