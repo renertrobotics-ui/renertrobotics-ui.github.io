@@ -290,7 +290,6 @@
             text-align: left;
             margin-left: 50px;  /* space between image and text */
             margin-right: 50px; /* right margin for breathing room */
-            max-width: 600px;   /* optional: control text width */
         }
 
         
@@ -300,11 +299,6 @@
             margin-top: -50px; /* keep if needed for vertical adjustment */
         }
 
-        .fll-section .content-text {
-            max-width: 400px;
-            margin-left: 50px;
-
-        }
         .content-container.ftc-section {
             display: flex;
             align-items: center;
@@ -313,14 +307,24 @@
 
         .content-container.fll-section {
             display: flex;
-            align-items: center; /* Vertically center image and text */
+            align-items: center;
+            flex-direction: row; /* Ensure image is on the right */
         }
+
+        .fll-section .content-text {
+            flex: 1;
+            text-align: left;
+            margin-left: 50px;
+            margin-right: 50px;
+        }
+        
         .fll-section .content-image {
-            margin-right: 20px;
-            padding-left: 00px; 
-            margin-top: -20px/* This creates space between image and text */
-            margin-bottom: 40px;
+            flex: 0 0 auto;
+            margin-right: 50px;
+            padding-left: 0;
+            margin-top: -20px;
         }
+
         .ftc-section .content-text.center-wrapper {
             display: flex;
             justify-content: center;
