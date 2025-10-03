@@ -73,7 +73,7 @@
             font-size: 1rem;
             line-height: 1.5;
             color: var(--color-text);
-            background-color: #333333;
+            background-color: #ffffff;
             background-attachment: fixed;
         }
         
@@ -133,19 +133,17 @@
         a { text-decoration: none; color: inherit; }
 
         .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: var(--navbar-height);
-            display: flex;
-            align-items: center;
-            z-index: 1000;
-            background: var(--color-glass-bg);
-            border-bottom: 1px solid var(--color-glass-border);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(var(--blur-value));
-            -webkit-backdrop-filter: blur(var(--blur-value));
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: var(--navbar-height);
+          display: flex;
+          align-items: center;
+          z-index: 1000;
+          background-color: #ffffff; /* White banner */
+          color: #222222; /* Default text color inside navbar */
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Small subtle shadow */
         }
 
         .navbar__container {
@@ -163,9 +161,9 @@
             font-weight: var(--font-weight-bold);
         }
         
-        .navbar__brand,
         .navbar__link {
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+          color: #222222 !important; /* Force text color to dark grey */
+          text-shadow: none; /* Remove the white text glow */
         }
 
         .navbar__brand-section { display: flex; align-items: center; }
