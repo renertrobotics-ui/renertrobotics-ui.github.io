@@ -27,6 +27,8 @@
             --total-width: calc(100vw - 150px);
             --ftc-text-width: calc(0.55 * var(--total-width));
             --ftc-image-box-width: calc(var(--total-width) - var(--ftc-text-width));
+            --fll-text-width: calc(0.55 * var(--total-width));
+            --fll-image-box-width: calc(var(--total-width) - var(--fll-text-width));
         }
         h1, h2, h3, h4, h5, h6, p, a, li, span, div {
           color: #333333 !important;
@@ -343,8 +345,9 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 217px; /* half of the image height */
+            text-align: left;
             flex: 1;
+            padding: 0px;
         }
         
         .center-content {
@@ -360,8 +363,6 @@
           flex-direction: column;
           align-items: flex-start; /* Aligns left */
           text-align: left;
-          min-width: 350px;
-          max-width: 400px;
         }
 
         .ftc-section .center-content {
@@ -501,17 +502,7 @@
         }
         
         /* FTC-specific styling */
-        .ftc-box {
-          background-color: #FFD700; /* Yellow */
-          margin-left: 0;
-          margin-right: 0;
-        }
-        
-        /* FLL-specific styling */
-        .fll-box {
-          background-color: #FF4C4C; /* Red */
-          margin-left: 50px;
-        }
+    
 
         /* FTC section specific sizing */
         .ftc-section .content-text {
@@ -551,6 +542,51 @@
           border-radius: 15px;
         }
         .ftc-section .content-text.center-wrapper {
+            margin-left: 50px !important;
+            margin-right: 50px !important;
+            padding: 0 !important;
+            max-width: none !important;
+            width: auto !important;
+            flex: 1 1 auto !important;
+        }
+        /* FLL section specific sizing */
+        .fll-section .content-text {
+            width: var(--ftc-text-width);
+            max-width: none;
+            flex: 0 0 auto;
+        }
+
+        .fll-section .content-image {
+            width: var(--ftc-image-box-width);
+            max-width: none;
+            flex: 0 0 auto;
+            margin-right: 0;
+        }
+
+        .fll-image-box {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+        }
+
+        .fll-box {
+          background-color: #FF4C4C; /* Red */
+          padding: 10px;
+          border-radius: 20px;
+          box-sizing: border-box;
+          margin-left: 50px;  
+        }
+        
+        .fll-box img {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: 15px;
+        }
+        .fll-section .content-text.center-wrapper {
             margin-left: 50px !important;
             margin-right: 50px !important;
             padding: 0 !important;
