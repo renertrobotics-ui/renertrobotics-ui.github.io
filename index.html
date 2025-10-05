@@ -481,7 +481,34 @@
                 max-width: 100%;
                 height: auto;
             }
+    
         }
+        .image-box {
+          border-radius: 20px;
+          padding: 10px;
+          background-color: #f0f0f0; /* Default fallback */
+          display: inline-block;
+        }
+        
+        .image-box img {
+          width: 100%;
+          height: auto;
+          border-radius: 15px;
+          display: block;
+        }
+        
+        /* FTC-specific styling */
+        .ftc-box {
+          background-color: #FFD700; /* Yellow */
+          margin-right: 50px;
+        }
+        
+        /* FLL-specific styling */
+        .fll-box {
+          background-color: #FF4C4C; /* Red */
+          margin-left: 50px;
+        }
+
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -544,9 +571,12 @@
     <main class="content">
         <!-- FTC Section -->
         <div class="content-container ftc-section">
-            <div class="content-image">
-                <img src="Screenshot 2025-10-01 153501.png" alt="FTC Robots">
+            <div class="content-image ftc-image-box">
+              <div class="image-box ftc-box">
+                <img src="Screenshot 2025-10-01 153501.png" alt="FTC Robots" />
+              </div>
             </div>
+
             <div class="content-text center-wrapper">
                 <div class="center-content">
                     <h2>Learn About FTC</h2>
@@ -573,9 +603,11 @@
               </a>
             </div>
           </div>
-          <div class="content-image">
-            <img src="maxresdefault (1).jpg" alt="FLL Robots">
-          </div>
+          <div class="content-image fll-image-box">
+              <div class="image-box fll-box">
+                <img src="maxresdefault (1).jpg" alt="FLL Robots" />
+              </div>
+            </div>
         </div>
 
     </main>
