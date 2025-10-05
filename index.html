@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,6 +22,11 @@
             --navbar-padding: 1.5rem;
             --container-width: 1140px;
             --transition-speed: 0.3s;
+            
+            /* FTC section calculations */
+            --total-width: calc(100vw - 150px);
+            --ftc-text-width: calc(0.6 * var(--total-width));
+            --ftc-image-box-width: calc(var(--total-width) - var(--ftc-text-width));
         }
         h1, h2, h3, h4, h5, h6, p, a, li, span, div {
           color: #333333 !important;
@@ -288,7 +292,7 @@
             margin-bottom: 40px;
         }
         .ftc-section .content-text {
-            flex: 1;
+            flex: 0 0 auto;
             text-align: left;
             margin-left: 50px;  /* space between image and text */
             margin-right: 50px; /* right margin for breathing room */
@@ -297,7 +301,8 @@
 
         
         .ftc-section .content-image {
-            margin-left: 50px;  /* aligns image with 50px left margin */
+            margin-left: 100px;  /* aligns image with 50px left margin */
+            margin-right: 0px
             padding-right: 0;
             margin-top: -50px; /* keep if needed for vertical adjustment */
         }
@@ -504,13 +509,49 @@
         /* FTC-specific styling */
         .ftc-box {
           background-color: #FFD700; /* Yellow */
-          margin-right: 50px;
         }
         
         /* FLL-specific styling */
         .fll-box {
           background-color: #FF4C4C; /* Red */
           margin-left: 50px;
+        }
+
+        /* FTC section specific sizing */
+        .ftc-section .content-text {
+            width: var(--ftc-text-width);
+            max-width: none;
+            flex: 0 0 auto;
+        }
+
+        .ftc-section .content-image {
+            width: var(--ftc-image-box-width);
+            max-width: none;
+            flex: 0 0 auto;
+            margin-left: 0;
+            margin-right: 50px;
+        }
+
+        .ftc-image-box {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ftc-box {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+
+        .ftc-box img {
+            max-width: calc(100% - 20px);
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
 
     </style>
@@ -628,6 +669,44 @@
                     const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
                     navbarToggle.setAttribute('aria-expanded', !isExpanded);
                 });
+            }
+
+            // Calculate and set the height of the FTC image box based on image aspect ratio
+            const ftcImage = document.querySelector('.ftc-box img');
+            const ftcBox = document.querySelector('.ftc-box');
+            
+            if (ftcImage && ftcBox) {
+                // Function to calculate and set the box height
+                function setBoxHeight() {
+                    // Get the computed width of the box
+                    const boxWidth = ftcBox.offsetWidth;
+                    
+                    // Calculate the max width of the image (box width - 20px)
+                    const maxImageWidth = boxWidth - 20;
+                    
+                    // Get the natural dimensions of the image
+                    const imageWidth = ftcImage.naturalWidth;
+                    const imageHeight = ftcImage.naturalHeight;
+                    
+                    // Calculate the aspect ratio
+                    const aspectRatio = imageHeight / imageWidth;
+                    
+                    // Calculate the height of the image at the max width
+                    const imageHeightAtMaxWidth = maxImageWidth * aspectRatio;
+                    
+                    // Set the box height to (image height at max width) + 20px
+                    ftcBox.style.height = (imageHeightAtMaxWidth + 20) + 'px';
+                }
+                
+                // Set the height when the image loads
+                if (ftcImage.complete) {
+                    setBoxHeight();
+                } else {
+                    ftcImage.onload = setBoxHeight;
+                }
+                
+                // Recalculate on window resize
+                window.addEventListener('resize', setBoxHeight);
             }
         });
     </script>
