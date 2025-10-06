@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bRenert Robotics</title>
+    <title>Renert Robotics</title>
     <style>
         :root {
             --color-glass-bg: rgba(255, 255, 255, 0.2);
@@ -857,6 +857,17 @@
                     navbarToggle.setAttribute('aria-expanded', !isExpanded);
                 });
             }
+            document.querySelectorAll('.navbar__dropdown > .navbar__link').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    // Only trigger on mobile
+                    if (window.innerWidth < 768) {
+                        e.preventDefault();
+                        const parent = this.parentElement;
+                        parent.classList.toggle('is-open');
+                    }
+                });
+            });
+
 
             // Calculate and set the height of the FTC image box based on image aspect ratio
             const ftcImage = document.querySelector('.ftc-box img');
