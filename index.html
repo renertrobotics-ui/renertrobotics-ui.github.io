@@ -591,6 +591,29 @@
             width: auto !important;
             flex: 1 1 auto !important;
         }
+        @media (max-width: 768px) {
+            .content-container.ftc-section,
+            .content-container.fll-section {
+                flex-direction: column;
+            }
+        
+            /* Force FTC text above image */
+            .content-container.ftc-section .content-text {
+                order: 1;
+            }
+            .content-container.ftc-section .content-image {
+                order: 2;
+                margin-bottom: 20px; /* adds spacing below FTC image */
+            }
+        
+            /* Force FLL text above image */
+            .content-container.fll-section .content-text {
+                order: 1;
+            }
+            .content-container.fll-section .content-image {
+                order: 2;
+            }
+        }
 
 
 
