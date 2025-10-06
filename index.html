@@ -412,58 +412,69 @@
           background-color: var(--color-link-highlight);
         }
         
-        /* Show dropdown on hover (desktop) */
+        /* Base: hide toggle on desktop, show menu normally */
         @media (min-width: 768px) {
-          .navbar__dropdown:hover .dropdown-menu {
-            display: block;
-          }
-        }
-        
-        /* Mobile-friendly: allow dropdown to open on click */
-        @media (max-width: 767px) {
-          .navbar__dropdown .dropdown-menu {
+          .navbar__toggle {
             display: none;
-            padding-left: 1rem;
           }
+          .navbar__menu {
+            display: flex !important;
+            position: static;
+            flex-direction: row;
+            width: auto;
+            background: none;
+            backdrop-filter: none;
+            border: none;
+            top: auto;
+            left: auto;
+            z-index: 1;
+            padding: 0;
+          }
+          .navbar__item {
+            margin-left: 0.5rem;
+          }
+        }
         
-          .navbar__dropdown.is-open .dropdown-menu {
+        /* Mobile / small screens */
+        @media (max-width: 767px) {
+          .navbar__toggle {
             display: block;
           }
+        
+          .navbar__menu {
+            display: none; /* hidden by default */
+            flex-direction: column;
+            width: 100%;
+            position: absolute;
+            top: var(--navbar-height);
+            left: 0;
+            background: var(--color-glass-bg);
+            backdrop-filter: blur(var(--blur-value));
+            -webkit-backdrop-filter: blur(var(--blur-value));
+            border-top: 1px solid var(--color-glass-border);
+            padding-bottom: 1rem;
+          }
+        
+          .navbar__menu.is-active {
+            display: flex;
+          }
+        
+          .navbar__link {
+            padding: 1rem;
+            text-align: center;
+          }
+        
+          .navbar__item {
+            width: 100%;
+          }
+        
+          /* Optional: full width for links for easier tapping */
+          .navbar__menu .navbar__link {
+            display: block;
+            width: 100%;
+          }
         }
 
-        @media (min-width: 768px) {
-            .navbar__toggle { display: none; }
-
-            .navbar__menu {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                position: static;
-                width: auto;
-                background-color: transparent !important;
-                background-image: none !important;
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                border: none;
-                z-index: 1;
-                padding: 0;
-            }
-            
-            .navbar__list { display: flex; align-items: center; }
-
-            .navbar__item { margin-left: 0.5rem; }
-
-            .navbar__link {
-                padding: 0.6rem 1.1rem;
-                border-radius: var(--border-radius-soft);
-            }
-            
-            .navbar__link:hover,
-            .navbar__link:focus,
-            .navbar__link--active {
-                background-color: var(--color-link-highlight);
-            }
-        }
         
         @media (max-width: 768px) {
             .content-container {
@@ -846,7 +857,6 @@
     </main>
 
     <script>
-        <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const navbarToggle = document.getElementById('navbarToggle');
                 const navbarMenu = document.getElementById('navbarMenu');
