@@ -657,6 +657,35 @@
                 text-align: center !important;
             }
         }
+        @media (max-width: 768px) {
+          /* 1. FTC image: remove left margin */
+          .ftc-box {
+            margin-left: 0 !important;
+          }
+        
+          /* 2. FTC text: remove right margin */
+          .ftc-section .content-text {
+            margin-right: 0 !important;
+          }
+        
+          /* 3. FLL image: remove right margin */
+          .fll-box {
+            margin-right: 0 !important;
+          }
+        
+          /* 4. Remove side margins from text wrappers (FTC + FLL) */
+          .ftc-section .content-text.center-wrapper,
+          .fll-section .content-text.center-wrapper {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+          }
+        
+          /* 5. Reduce FTC section top margin */
+          .ftc-section {
+            margin-top: 20px !important;
+          }
+        }
+
 
 
 
