@@ -845,10 +845,10 @@
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+       document.addEventListener('DOMContentLoaded', function () {
             const navbarToggle = document.getElementById('navbarToggle');
             const navbarMenu = document.getElementById('navbarMenu');
-
+        
             if (navbarToggle && navbarMenu) {
                 navbarToggle.addEventListener('click', function () {
                     navbarToggle.classList.toggle('is-active');
@@ -857,13 +857,26 @@
                     navbarToggle.setAttribute('aria-expanded', !isExpanded);
                 });
             }
-            document.querySelectorAll('.navbar__dropdown > .navbar__link').forEach(link => {
-                link.addEventListener('click', function (e) {
-                    // Only trigger on mobile
+        
+            // Dropdown toggle for mobile
+            const dropdowns = document.querySelectorAll('.navbar__dropdown');
+        
+            dropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', function (e) {
+                    // Only toggle on mobile
                     if (window.innerWidth < 768) {
-                        e.preventDefault();
-                        const parent = this.parentElement;
-                        parent.classList.toggle('is-open');
+                        e.stopPropagation();
+                        e.preventDefault(); // Prevent default link action
+        
+                        // Close any other open dropdowns
+                        dropdowns.forEach(d => {
+                            if (d !== dropdown) {
+                                d.classList.remove('is-open');
+                            }
+                        });
+        
+                        // Toggle this one
+                        dropdown.classList.toggle('is-open');
                     }
                 });
             });
