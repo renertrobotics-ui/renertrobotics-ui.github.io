@@ -694,47 +694,29 @@
             max-width: 100% !important;
             padding: 10 !important;
           }
-        
-          .ftc-box,
-          .fll-box {
-            width: 100% !important;
-            padding: 0 !important;
-          }
-        
-          .ftc-box img,
-          .fll-box img {
-            width: 100% !important;
-            height: auto !important;
-          }
-          /* Ensure the box has margin 24px all around */
-          .ftc-box,
-          .fll-box {
-            margin: 24px !important;   /* 24px margin around the boxes */
-            padding: 0;                /* Remove default padding if any */
-            box-sizing: calc(100vw-48px) !important;   /* So width + padding behaves correctly */
-            width: auto !important;    /* Let width be automatic */
+        .ftc-image-box {
+            width: calc(100vw - 48px);
+            height: auto;
             display: flex;
-            justify-content: center;   /* center the image inside the box */
-            position: relative;
-            background-color: inherit; /* keep the background color */
-          }
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+        }
+
+        .ftc-box {
+          background-color: #f19122; /* Yellow */
+          padding: 10px;
+          border-radius: 20px;
+          box-sizing: border-box;
+          margin-left: 50px;  
+        }
         
-          /* Image width plus 20px total padding inside box */
-          .ftc-box img,
-          .fll-box img {
-            display: block;
-            width: calc(100% - 20px) !important; /* image shrinks by 20px total */
-            max-width: 100%;
-            height: auto !important;
-            margin: 0 auto;
-          }
-        
-          /* Add padding inside the box so the box is 10px wider than image on each side */
-          .ftc-box,
-          .fll-box {
-            padding-left: 10px !important;
-            padding-right: 10px !important;
-          }
+        .ftc-box img {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: 15px;
+        }
         }
         
 
