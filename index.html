@@ -613,7 +613,51 @@
             .content-container.fll-section .content-image {
                 order: 2;
             }
+            .content-container.ftc-section,
+            .content-container.fll-section {
+                flex-direction: column;
+                align-items: center; /* centers all child items */
+            }
+        
+            /* FTC Section: text above image */
+            .content-container.ftc-section .content-text {
+                order: 1;
+                max-width: calc(100vw - 100px);
+                text-align: center;
+                align-items: center;
+                margin: 0 auto 20px auto; /* center + bottom spacing */
+                padding: 0;
+            }
+        
+            .content-container.ftc-section .content-image {
+                order: 2;
+                max-width: calc(100vw - 100px);
+                margin: 0 auto 20px auto; /* center + spacing to next section */
+            }
+        
+            /* FLL Section: text above image */
+            .content-container.fll-section .content-text {
+                order: 1;
+                max-width: calc(100vw - 100px);
+                text-align: center;
+                align-items: center;
+                margin: 0 auto 20px auto;
+                padding: 0;
+            }
+        
+            .content-container.fll-section .content-image {
+                order: 2;
+                max-width: calc(100vw - 100px);
+                margin: 0 auto;
+            }
+        
+            /* Center buttons and content inside text blocks */
+            .center-content {
+                align-items: center !important;
+                text-align: center !important;
+            }
         }
+
 
 
 
