@@ -126,8 +126,6 @@
       text-shadow: none; /* Remove the white text glow */
     }
 
-    }
-
     .navbar__brand-section {
       display: flex;
       align-items: center;
@@ -159,7 +157,7 @@
       width: 25px;
       height: 3px;
       margin: 5px auto;
-      background-color: var(--color-text);
+      background-color: #222222; /* Dark color for white navbar */
       transition: all var(--transition-speed) ease-in-out;
       border-radius: 2px;
     }
@@ -185,7 +183,8 @@
     
     .navbar__menu.is-active { 
       display: flex; 
-      background-image: linear-gradient(90deg, #32bdd3, #89258d);
+      background-color: #fafafa; /* Very light grey background */
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add shadow for depth */
     }
 
     .navbar__item { text-align: center; }
@@ -338,15 +337,15 @@
       position: absolute;
       top: 100%;
       left: 0;
-      background: #ffffff;
-      border: 1px solid #ddd;
+      background: #fafafa; /* Very light grey background */
+      border: 1px solid #eee;
       backdrop-filter: blur(var(--blur-value));
       border-radius: var(--border-radius-soft);
       min-width: 220px;
       z-index: 999;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       padding: 0.5rem 0;
-      text-align: left;
+      text-align: center; /* Center the dropdown items */
     }
     
     .dropdown-menu .dropdown-link {
@@ -356,10 +355,11 @@
       font-weight: var(--font-weight-bold);
       text-decoration: none;
       transition: background 0.2s ease-in-out;
+      text-align: center; /* Center the text in dropdown items */
     }
     
     .dropdown-menu .dropdown-link:hover {
-      background-color: var(--color-link-highlight);
+      background-color: #f0f0f0; /* Slightly darker grey on hover */
     }
     
     /* Show dropdown on hover (desktop) */
@@ -373,11 +373,27 @@
     @media (max-width: 767px) {
       .navbar__dropdown .dropdown-menu {
         display: none;
+        position: static;
         padding-left: 1rem;
+        background: #f5f5f5; /* Very light grey background for dropdown items */
+        box-shadow: none;
+        border: none;
+        text-align: center; /* Center dropdown items on mobile */
       }
     
       .navbar__dropdown.is-open .dropdown-menu {
         display: block;
+      }
+      
+      /* Ensure mobile menu links have dark text */
+      .navbar__menu.is-active .navbar__link {
+        color: #222222 !important;
+      }
+      
+      /* Ensure dropdown links have dark text on mobile */
+      .navbar__menu.is-active .dropdown-link {
+        color: #222222 !important;
+        text-align: center; /* Center dropdown links on mobile */
       }
     }
 
@@ -639,12 +655,6 @@
             object-fit: cover;
           }
         }
-
-
-
-
-        
-
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -675,14 +685,14 @@
                   <li class="navbar__item"><a href="#" class="navbar__link">About Us</a></li>
                   <!-- Dropdown Menu Start -->
                   <li class="navbar__item navbar__dropdown">
-                    <a href="#" class="navbar__link">FTC ▾</a>
+                    <a href="#" class="navbar__link dropdown-toggle">FTC ▾</a>
                     <ul class="dropdown-menu">
                       <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotics</a></li>
                       <li><a href="octopi.html" class="dropdown-link">27361 Octopi Robotics</a></li>
                     </ul>
                   </li>
                   <li class="navbar__item navbar__dropdown">
-                    <a href="#" class="navbar__link">FLL ▾</a>
+                    <a href="#" class="navbar__link dropdown-toggle">FLL ▾</a>
                     <ul class="dropdown-menu">
                       <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotic</a></li>
                       <li><a href="octopi.html" class="dropdown-link">27361 Octopi Robotics</a></li>
@@ -700,7 +710,7 @@
       <img src="DSC00575-Enhanced-NR.jpg" alt="Background" class="bg-image" />
       <div class="overlay-text">
         <h1>31663 Cuttlefish Robotics</h1>
-        <p>FTC Team 31663 Cuttlefish Robotics from Calgary is a rookie team bringing innovation and teamwork to the 2025 season. Based at Renert School, they’re diving into robotics with creativity and determination!</p>
+        <p>FTC Team 31663 Cuttlefish Robotics from Calgary is a rookie team bringing innovation and teamwork to the 2025 season. Based at Renert School, they're diving into robotics with creativity and determination!</p>
       </div>
     </div>
 <main class="content">
@@ -743,6 +753,32 @@
                     navbarToggle.setAttribute('aria-expanded', !isExpanded);
                 });
             }
+            
+            // Add dropdown toggle functionality for mobile
+            const dropdowns = document.querySelectorAll('.navbar__dropdown');
+        
+            dropdowns.forEach(dropdown => {
+                const link = dropdown.querySelector('.dropdown-toggle');
+        
+                link.addEventListener('click', function (e) {
+                    // Only apply this on mobile view
+                    if (window.innerWidth < 768) {
+                        e.preventDefault();
+                        e.stopPropagation();
+        
+                        // Toggle dropdown menu
+                        const isOpen = dropdown.classList.contains('is-open');
+        
+                        // Close all dropdowns first
+                        dropdowns.forEach(d => d.classList.remove('is-open'));
+        
+                        // Then open the clicked one if it wasn't already open
+                        if (!isOpen) {
+                            dropdown.classList.add('is-open');
+                        }
+                    }
+                });
+            });
         });
     </script>
     <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
