@@ -706,7 +706,37 @@
             width: 100% !important;
             height: auto !important;
           }
+          /* Ensure the box has margin 24px all around */
+          .ftc-box,
+          .fll-box {
+            margin: 24px !important;   /* 24px margin around the boxes */
+            padding: 0;                /* Remove default padding if any */
+            box-sizing: content-box;   /* So width + padding behaves correctly */
+            width: auto !important;    /* Let width be automatic */
+            display: flex;
+            justify-content: center;   /* center the image inside the box */
+            position: relative;
+            background-color: inherit; /* keep the background color */
+          }
+        
+          /* Image width plus 20px total padding inside box */
+          .ftc-box img,
+          .fll-box img {
+            display: block;
+            width: calc(100% - 20px) !important; /* image shrinks by 20px total */
+            max-width: 100%;
+            height: auto !important;
+            margin: 0 auto;
+          }
+        
+          /* Add padding inside the box so the box is 10px wider than image on each side */
+          .ftc-box,
+          .fll-box {
+            padding-left: 10px !important;
+            padding-right: 10px !important;
+          }
         }
+        
 
 
 
