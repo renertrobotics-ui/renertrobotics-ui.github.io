@@ -846,19 +846,43 @@
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const navbarToggle = document.getElementById('navbarToggle');
-            const navbarMenu = document.getElementById('navbarMenu');
-
-            if (navbarToggle && navbarMenu) {
-                navbarToggle.addEventListener('click', function () {
-                    navbarToggle.classList.toggle('is-active');
-                    navbarMenu.classList.toggle('is-active');
-                    const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
-                    navbarToggle.setAttribute('aria-expanded', !isExpanded);
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const navbarToggle = document.getElementById('navbarToggle');
+                const navbarMenu = document.getElementById('navbarMenu');
+        
+                if (navbarToggle && navbarMenu) {
+                    navbarToggle.addEventListener('click', function () {
+                        navbarToggle.classList.toggle('is-active');
+                        navbarMenu.classList.toggle('is-active');
+                        const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
+                        navbarToggle.setAttribute('aria-expanded', !isExpanded);
+                    });
+                }
+        
+                // Handle dropdown menus on mobile
+                const dropdowns = document.querySelectorAll('.navbar__dropdown');
+                
+                dropdowns.forEach(dropdown => {
+                    const dropdownLink = dropdown.querySelector('.navbar__link');
+                    
+                    dropdownLink.addEventListener('click', function(e) {
+                        if (window.innerWidth < 768) {
+                            e.preventDefault();
+                            dropdown.classList.toggle('is-open');
+                        }
+                    });
                 });
-            }
-
+        
+                // Close dropdowns when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!e.target.closest('.navbar__dropdown')) {
+                        dropdowns.forEach(dropdown => {
+                            dropdown.classList.remove('is-open');
+                        });
+                    }
+                });
+            });
             // Calculate and set the height of the FTC image box based on image aspect ratio
             const ftcImage = document.querySelector('.ftc-box img');
             const ftcBox = document.querySelector('.ftc-box');
