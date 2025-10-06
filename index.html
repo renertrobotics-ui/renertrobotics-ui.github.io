@@ -423,7 +423,11 @@
         @media (max-width: 767px) {
           .navbar__dropdown .dropdown-menu {
             display: none;
+            position: static;
             padding-left: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: none;
+            border: none;
           }
         
           .navbar__dropdown.is-open .dropdown-menu {
@@ -734,13 +738,6 @@
           border-radius: 15px;
         }
         }
-        
-
-
-
-
-
-
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -771,14 +768,14 @@
                   <li class="navbar__item"><a href="about_us.html" class="navbar__link">About Us</a></li>
                   <!-- Dropdown Menu Start -->
                   <li class="navbar__item navbar__dropdown">
-                    <a href="#" class="navbar__link">FTC ▾</a>
+                    <a href="#" class="navbar__link dropdown-toggle">FTC ▾</a>
                     <ul class="dropdown-menu">
                       <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotics</a></li>
                       <li><a href="octopi.html" class="dropdown-link">27361 Octopi Robotics</a></li>
                     </ul>
                   </li>
                   <li class="navbar__item navbar__dropdown">
-                    <a href="#" class="navbar__link">FLL ▾</a>
+                    <a href="#" class="navbar__link dropdown-toggle">FLL ▾</a>
                     <ul class="dropdown-menu">
                       <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotic</a></li>
                       <li><a href="octopi.html" class="dropdown-link">27361 Octopi Robotics</a></li>
@@ -845,44 +842,43 @@
     </main>
 
     <script>
-       <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                const navbarToggle = document.getElementById('navbarToggle');
-                const navbarMenu = document.getElementById('navbarMenu');
-            
-                if (navbarToggle && navbarMenu) {
-                    navbarToggle.addEventListener('click', function () {
-                        navbarToggle.classList.toggle('is-active');
-                        navbarMenu.classList.toggle('is-active');
-                        const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
-                        navbarToggle.setAttribute('aria-expanded', !isExpanded);
-                    });
-                }
-            
-                const dropdowns = document.querySelectorAll('.navbar__dropdown');
-            
-                dropdowns.forEach(dropdown => {
-                    const link = dropdown.querySelector('.navbar__link');
-            
-                    link.addEventListener('click', function (e) {
-                        // Only apply this on mobile view
-                        if (window.innerWidth < 768) {
-                            e.preventDefault();
-                            e.stopPropagation();
-            
-                            // Toggle dropdown menu
-                            const isOpen = dropdown.classList.contains('is-open');
-            
-                            // Close all dropdowns first
-                            dropdowns.forEach(d => d.classList.remove('is-open'));
-            
-                            // Then open the clicked one if it wasn’t already open
-                            if (!isOpen) {
-                                dropdown.classList.add('is-open');
-                            }
-                        }
-                    });
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbarToggle = document.getElementById('navbarToggle');
+            const navbarMenu = document.getElementById('navbarMenu');
+        
+            if (navbarToggle && navbarMenu) {
+                navbarToggle.addEventListener('click', function () {
+                    navbarToggle.classList.toggle('is-active');
+                    navbarMenu.classList.toggle('is-active');
+                    const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
+                    navbarToggle.setAttribute('aria-expanded', !isExpanded);
                 });
+            }
+        
+            const dropdowns = document.querySelectorAll('.navbar__dropdown');
+        
+            dropdowns.forEach(dropdown => {
+                const link = dropdown.querySelector('.dropdown-toggle');
+        
+                link.addEventListener('click', function (e) {
+                    // Only apply this on mobile view
+                    if (window.innerWidth < 768) {
+                        e.preventDefault();
+                        e.stopPropagation();
+        
+                        // Toggle dropdown menu
+                        const isOpen = dropdown.classList.contains('is-open');
+        
+                        // Close all dropdowns first
+                        dropdowns.forEach(d => d.classList.remove('is-open'));
+        
+                        // Then open the clicked one if it wasn't already open
+                        if (!isOpen) {
+                            dropdown.classList.add('is-open');
+                        }
+                    }
+                });
+            });
 
             // Calculate and set the height of the FTC image box based on image aspect ratio
             const ftcImage = document.querySelector('.ftc-box img');
@@ -890,7 +886,7 @@
             
             if (ftcImage && ftcBox) {
                 // Function to calculate and set the box height
-                function setBoxHeight() {
+                function setFtcBoxHeight() {
                     // Get the computed width of the box
                     const boxWidth = ftcBox.offsetWidth;
                     
@@ -912,49 +908,52 @@
                 }
                 
                 // Set the height when the image loads
-                if (fllImage.complete) {
-                    setBoxHeight();
+                if (ftcImage.complete) {
+                    setFtcBoxHeight();
                 } else {
-                    fllImage.onload = setBoxHeight;
+                    ftcImage.onload = setFtcBoxHeight;
                 }
-              const ftcImage = document.querySelector('.fll-box img');
-              const ftcBox = document.querySelector('.fll-box');
-              
-              if (flImage && fllBox) {
-                  // Function to calculate and set the box height
-                  function setBoxHeight() {
-                      // Get the computed width of the box
-                      const boxWidth = fllBox.offsetWidth;
-                      
-                      // Calculate the max width of the image (box width - 20px)
-                      const maxImageWidth = boxWidth - 20;
-                      
-                      // Get the natural dimensions of the image
-                      const imageWidth = fllImage.naturalWidth;
-                      const imageHeight = fllImage.naturalHeight;
-                      
-                      // Calculate the aspect ratio
-                      const aspectRatio = imageHeight / imageWidth;
-                      
-                      // Calculate the height of the image at the max width
-                      const imageHeightAtMaxWidth = maxImageWidth * aspectRatio;
-                      
-                      // Set the box height to (image height at max width) + 20px
-                      fllBox.style.height = (imageHeightAtMaxWidth + 20) + 'px';
-                  }
-                  
-                  // Set the height when the image loads
-                  if (fllImage.complete) {
-                      setBoxHeight();
-                  } else {
-                      fllImage.onload = setBoxHeight;
-                  }
                 
                 // Recalculate on window resize
-                window.addEventListener('resize', setBoxHeight);
+                window.addEventListener('resize', setFtcBoxHeight);
+            }
+            
+            // Calculate and set the height of the FLL image box based on image aspect ratio
+            const fllImage = document.querySelector('.fll-box img');
+            const fllBox = document.querySelector('.fll-box');
+            
+            if (fllImage && fllBox) {
+                // Function to calculate and set the box height
+                function setFllBoxHeight() {
+                    // Get the computed width of the box
+                    const boxWidth = fllBox.offsetWidth;
+                    
+                    // Calculate the max width of the image (box width - 20px)
+                    const maxImageWidth = boxWidth - 20;
+                    
+                    // Get the natural dimensions of the image
+                    const imageWidth = fllImage.naturalWidth;
+                    const imageHeight = fllImage.naturalHeight;
+                    
+                    // Calculate the aspect ratio
+                    const aspectRatio = imageHeight / imageWidth;
+                    
+                    // Calculate the height of the image at the max width
+                    const imageHeightAtMaxWidth = maxImageWidth * aspectRatio;
+                    
+                    // Set the box height to (image height at max width) + 20px
+                    fllBox.style.height = (imageHeightAtMaxWidth + 20) + 'px';
+                }
+                
+                // Set the height when the image loads
+                if (fllImage.complete) {
+                    setFllBoxHeight();
+                } else {
+                    fllImage.onload = setFllBoxHeight();
+                }
                 
                 // Recalculate on window resize
-                window.addEventListener('resize', setBoxHeight);
+                window.addEventListener('resize', setFllBoxHeight);
             }
         });
     </script>
