@@ -711,7 +711,7 @@
           .fll-box {
             margin: 24px !important;   /* 24px margin around the boxes */
             padding: 0;                /* Remove default padding if any */
-            box-sizing: content-box;   /* So width + padding behaves correctly */
+            box-sizing: calc(100vw-48px) !important;   /* So width + padding behaves correctly */
             width: auto !important;    /* Let width be automatic */
             display: flex;
             justify-content: center;   /* center the image inside the box */
