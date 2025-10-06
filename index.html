@@ -739,11 +739,46 @@
                 }
                 
                 // Set the height when the image loads
-                if (ftcImage.complete) {
+                if (fllImage.complete) {
                     setBoxHeight();
                 } else {
-                    ftcImage.onload = setBoxHeight;
+                    fllImage.onload = setBoxHeight;
                 }
+              const ftcImage = document.querySelector('.fll-box img');
+              const ftcBox = document.querySelector('.fll-box');
+              
+              if (flImage && fllBox) {
+                  // Function to calculate and set the box height
+                  function setBoxHeight() {
+                      // Get the computed width of the box
+                      const boxWidth = fllBox.offsetWidth;
+                      
+                      // Calculate the max width of the image (box width - 20px)
+                      const maxImageWidth = boxWidth - 20;
+                      
+                      // Get the natural dimensions of the image
+                      const imageWidth = fllImage.naturalWidth;
+                      const imageHeight = fllImage.naturalHeight;
+                      
+                      // Calculate the aspect ratio
+                      const aspectRatio = imageHeight / imageWidth;
+                      
+                      // Calculate the height of the image at the max width
+                      const imageHeightAtMaxWidth = maxImageWidth * aspectRatio;
+                      
+                      // Set the box height to (image height at max width) + 20px
+                      fllBox.style.height = (imageHeightAtMaxWidth + 20) + 'px';
+                  }
+                  
+                  // Set the height when the image loads
+                  if (fllImage.complete) {
+                      setBoxHeight();
+                  } else {
+                      fllImage.onload = setBoxHeight;
+                  }
+                
+                // Recalculate on window resize
+                window.addEventListener('resize', setBoxHeight);
                 
                 // Recalculate on window resize
                 window.addEventListener('resize', setBoxHeight);
