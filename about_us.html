@@ -816,7 +816,7 @@
         <div class="content-container ftc-section">
             <div class="content-image ftc-image-box">
               <div class="image-box ftc-box">
-                <img src="image0 (20).jpeg" alt="FTC Robots" style="width:200px; height:300px; />
+                <img src="image0 (20).jpeg" alt="FTC Robots" />
               </div>
             </div>
 
@@ -846,7 +846,24 @@
               </div>
             </div>
         </div>
-
+        
+        <!tempcode>
+        <style>
+        /* Resize the image */
+        .ftc-image {
+            width: 300px; /* change to whatever size you want */
+            height: auto;
+            display: block; /* ensures container wraps tightly */
+        }
+        
+        /* Make the container shrink to fit the image */
+        .ftc-box {
+            display: inline-block; /* shrink container to fit image */
+            padding: 0; /* remove extra spacing if any */
+        }
+        </style>
+        <!tempcode ends>
+        
     </main>
 
     <script>
