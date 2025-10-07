@@ -6,11 +6,15 @@
     <title>About Us - Renert Robotics</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <!-- Copy the same <style> block from main menu page here -->
-    <link rel="stylesheet" href="main_menu_styles.css">
+    <style>
+        /* Copy the entire CSS from your main menu page here */
+        /* This ensures navbar, content, FTC/FLL sections, responsive styles, and footer all work correctly */
+        /* ... your full CSS from main menu ... */
+    </style>
 </head>
 <body>
 
+    <!-- MAIN MENU NAVBAR START -->
     <header class="navbar" role="banner">
         <div class="navbar__container">
             <div class="navbar__brand-section">
@@ -52,21 +56,61 @@
             </nav>
         </div>
     </header>
+    <!-- MAIN MENU NAVBAR END -->
 
+    <!-- ORIGINAL ABOUT US BODY START -->
     <main class="content">
-        <div class="content-container">
-            <div class="content-text">
-                <h1>About Us</h1>
-                <p>
-                    Renert Robotics includes two FTC teams—31663 Cuttlefish Robotics and 27361 Octopi Robotics—and five FLL teams. 
-                    Our students design, build, and program robots while developing skills in engineering, teamwork, and innovation.
-                </p>
+        <div class="content-container ftc-section">
+            <div class="content-image ftc-image-box">
+                <div class="image-box ftc-box">
+                    <img src="about_us_image1.png" alt="Our Team">
+                </div>
+            </div>
+            <div class="content-text center-wrapper">
+                <div class="center-content">
+                    <h2>Our Mission</h2>
+                    <p>
+                        At Renert Robotics, we inspire students to explore STEM through hands-on robotics programs. Our teams gain experience in engineering, programming, teamwork, and problem-solving.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-container fll-section">
+            <div class="content-text center-wrapper">
+                <div class="center-content">
+                    <h2>Our Teams</h2>
+                    <p>
+                        We host two FTC teams—31663 Cuttlefish Robotics and 27361 Octopi Robotics—and five FLL teams. Each team collaborates to design, build, and program robots for local and global competitions.
+                    </p>
+                </div>
+            </div>
+            <div class="content-image fll-image-box">
+                <div class="image-box fll-box">
+                    <img src="about_us_image2.png" alt="Our Robots">
+                </div>
+            </div>
+        </div>
+
+        <div class="content-container ftc-section">
+            <div class="content-image ftc-image-box">
+                <div class="image-box ftc-box">
+                    <img src="about_us_image3.png" alt="Community Outreach">
+                </div>
+            </div>
+            <div class="content-text center-wrapper">
+                <div class="center-content">
+                    <h2>Community Outreach</h2>
+                    <p>
+                        Our students engage with the community by hosting workshops, mentoring younger teams, and participating in events that promote STEM education.
+                    </p>
+                </div>
             </div>
         </div>
     </main>
+    <!-- ORIGINAL ABOUT US BODY END -->
 
-    <script src="main_menu_script.js"></script>
-
+    <!-- ORIGINAL FOOTER START -->
     <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
       <div style="margin-bottom: 5px;">
         <a href="https://www.instagram.com/renertrobotics/" target="_blank" style="color: #ccc; margin: 0 10px; text-decoration: none;">
@@ -80,6 +124,11 @@
         &copy; 2025 Renert Robotics. All rights reserved.
       </div>
     </footer>
+    <!-- ORIGINAL FOOTER END -->
 
+    <script>
+        /* Copy your navbar JS from main menu here */
+        /* Dropdown and toggle behavior exactly like main menu */
+    </script>
 </body>
 </html>
