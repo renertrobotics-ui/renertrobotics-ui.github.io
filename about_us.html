@@ -3,197 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us – Renert Robotics</title>
-    <style>
-        :root {
-            --color-glass-bg: rgba(255, 255, 255, 0.2);
-            --color-glass-border: rgba(255, 255, 255, 0.3);
-            --color-link-highlight: rgba(255, 255, 255, 0.25);
-            --color-text: #ffffff;
-            --color-focus-outline: #5ab1ff;
-            --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            --font-weight-bold: 600;
-            --blur-value: 10px;
-            --border-radius-soft: 8px;
-            --navbar-height: 70px;
-            --navbar-padding: 1.5rem;
-            --container-width: 1140px;
-            --transition-speed: 0.3s;
-        }
+    <title>About Us - Renert Robotics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        * { box-sizing: border-box; }
-        body {
-            margin: 0;
-            font-family: var(--font-family-sans-serif);
-            color: var(--color-text);
-            background-color: #333333;
-        }
-
-        /* --- Navbar --- */
-        header { background: #fff; }
-        .navbar { display: flex; justify-content: center; background: #fff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .navbar-container { width: 90%; max-width: 1140px; display: flex; align-items: center; justify-content: space-between; }
-        .logo { height: 50px; }
-        .navbar-menu { list-style: none; display: flex; margin: 0; padding: 0; }
-        .navbar-menu li { position: relative; }
-        .navbar-menu li a { display: block; padding: 20px 15px; text-decoration: none; color: #222; font-weight: bold; }
-        .navbar-menu li a:hover, .navbar-menu li a.active { background: #f5f5f5; }
-
-        /* Dropdown */
-        .dropdown:hover .dropdown-menu { display: block; }
-        .dropdown-menu { display: none; position: absolute; top: 100%; left: 0; background: #fff; min-width: 200px; box-shadow: 0 4px 8px rgba(0,0,0,0.15); z-index: 10; }
-        .dropdown-menu li a { padding: 10px 15px; }
-        .dropdown-menu li a:hover { background: #f0f0f0; }
-
-        /* Responsive for mobile */
-        @media (max-width: 768px) {
-            .navbar-container { flex-direction: column; align-items: flex-start; }
-            .navbar-menu { flex-direction: column; width: 100%; display: none; }
-            .navbar-menu li { width: 100%; }
-            .navbar-menu li a { width: 100%; }
-            .navbar-menu.show { display: flex; }
-        }
-
-        /* --- Hero Section --- */
-        .image-background-section { position: relative; width: 100%; height: 500px; overflow: hidden; display: flex; align-items: center; padding-left: 50px; }
-        .bg-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
-        .overlay-text { position: relative; z-index: 1; max-width: 600px; color: white; }
-        .overlay-text h1 { text-shadow: 0 2px 6px rgba(0,0,0,0.7); font-size: 60px; }
-        .overlay-text p { text-shadow: 0 2px 6px rgba(0,0,0,0.7); max-width: 500px; }
-
-        /* --- Content Sections --- */
-        .content { padding-top: 40px; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-start; }
-        .content-container { display: flex; align-items: center; width: 100%; margin-top: 4rem; }
-        .content-text { flex: 0 0 auto; max-width: 400px; margin: 0 50px; }
-        .center-wrapper { display: flex; justify-content: center; align-items: center; height: 217px; flex: 1; }
-        .center-content { text-align: left; display: flex; flex-direction: column; justify-content: center; gap: 1rem; }
-        .content-image { flex: 1; display: flex; justify-content: center; align-items: center; }
-        .content-image img { height: 400px; width: auto; object-fit: contain; }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .content-container { flex-direction: column; padding: 0 1rem; }
-            .content-text { text-align: center; margin: 0; padding-bottom: 2rem; }
-            .content-image img { max-width: 100%; height: auto; }
-        }
-
-        /* --- Footer --- */
-        footer { background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px; }
-        footer a { color: #ccc; margin: 0 10px; text-decoration: none; }
-    </style>
+    <!-- Copy the same <style> block from main menu page here -->
+    <link rel="stylesheet" href="main_menu_styles.css">
 </head>
 <body>
 
-<!-- --- Header/Nav --- -->
-<header>
-  <nav class="navbar">
-    <div class="navbar-container">
-      <a href="index.html" class="navbar-brand">
-        <img src="b642b8ba-3025-4473-9b9f-e072cfd24430.png" alt="Renert Robotics Logo" class="logo">
-      </a>
-
-      <ul class="navbar-menu">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about_us.html" class="active">About Us</a></li>
-
-        <li class="dropdown">
-          <a href="#">FTC ▾</a>
-          <ul class="dropdown-menu">
-            <li><a href="cuttlefish.html">31663 Cuttlefish Robotics</a></li>
-            <li><a href="octopi.html">27361 Octopi Robotics</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a href="#">FLL ▾</a>
-          <ul class="dropdown-menu">
-            <li><a href="fll_team1.html">FLL Team 1</a></li>
-            <li><a href="fll_team2.html">FLL Team 2</a></li>
-          </ul>
-        </li>
-
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-    </div>
-  </nav>
-</header>
-
-<!-- --- Hero Section --- -->
-<div class="image-background-section">
-    <img src="DSC00575-Enhanced-NR.jpg" alt="Background" class="bg-image">
-    <div class="overlay-text">
-        <h1>About Renert Robotics</h1>
-        <p>Renert Robotics includes two FTC teams—31663 Cuttlefish Robotics and 27361 Octopi Robotics—and multiple FLL teams. Our students design, build, and program robots while developing skills in engineering, coding, and teamwork.</p>
-    </div>
-</div>
-
-<!-- --- Main Content --- -->
-<main class="content">
-
-    <div class="content-container ftc-section">
-        <div class="content-image">
-            <img src="octopi_robot.png" alt="Octopi Robotics">
+    <header class="navbar" role="banner">
+        <div class="navbar__container">
+            <div class="navbar__brand-section">
+                <div class="banner-image">
+                    <img src="Screenshot_2025-04-22_130549-removebg-preview.png" alt="Renert Robotics Logo">
+                </div>
+            </div>
+            
+            <button class="navbar__toggle" 
+                    id="navbarToggle" 
+                    aria-label="Toggle navigation" 
+                    aria-controls="navbarMenu" 
+                    aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            
+            <nav id="navbarMenu" class="navbar__menu" role="navigation" aria-labelledby="navbarToggle">
+                <ul class="navbar__list">
+                  <li class="navbar__item"><a href="index.html" class="navbar__link">Home</a></li>
+                  <li class="navbar__item"><a href="about_us.html" class="navbar__link navbar__link--active">About Us</a></li>
+                  <li class="navbar__item navbar__dropdown">
+                    <a href="#" class="navbar__link dropdown-toggle">FTC ▾</a>
+                    <ul class="dropdown-menu">
+                      <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotics</a></li>
+                      <li><a href="octopi.html" class="dropdown-link">27361 Octopi Robotics</a></li>
+                    </ul>
+                  </li>
+                  <li class="navbar__item navbar__dropdown">
+                    <a href="#" class="navbar__link dropdown-toggle">FLL ▾</a>
+                    <ul class="dropdown-menu">
+                      <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotics</a></li>
+                      <li><a href="octopi.html" class="dropdown-link">27361 Octopi Robotics</a></li>
+                    </ul>
+                  </li>
+                  <li class="navbar__item"><a href="contact.html" class="navbar__link">Contact Us</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="content-text center-wrapper">
-            <div class="center-content">
-                <h2>27361 Octopi Robotics</h2>
-                <p>Octopi Robotics is our veteran FTC team, focusing on engineering excellence, autonomous programming, and mentoring new students. They strive to create competitive robots and a supportive learning environment.</p>
+    </header>
+
+    <main class="content">
+        <div class="content-container">
+            <div class="content-text">
+                <h1>About Us</h1>
+                <p>
+                    Renert Robotics includes two FTC teams—31663 Cuttlefish Robotics and 27361 Octopi Robotics—and five FLL teams. 
+                    Our students design, build, and program robots while developing skills in engineering, teamwork, and innovation.
+                </p>
             </div>
         </div>
-    </div>
+    </main>
 
-    <div class="content-container fll-section">
-        <div class="content-text center-wrapper">
-            <div class="center-content">
-                <h2>31663 Cuttlefish Robotics</h2>
-                <p>Cuttlefish Robotics is our rookie FTC team, bringing creativity and fresh ideas. Students focus on teamwork, coding, and innovative robot designs while learning engineering fundamentals.</p>
-            </div>
-        </div>
-        <div class="content-image">
-            <img src="cuttlefish_robot.png" alt="Cuttlefish Robotics">
-        </div>
-    </div>
+    <script src="main_menu_script.js"></script>
 
-    <div class="content-container ftc-section">
-        <div class="content-image">
-            <img src="renert_team.jpg" alt="Renert Robotics Team">
-        </div>
-        <div class="content-text center-wrapper">
-            <div class="center-content">
-                <h2>Renert Robotics Program</h2>
-                <p>Renert Robotics nurtures students from elementary to high school through FTC and FLL programs. We emphasize problem-solving, collaboration, and innovation, giving students hands-on experience in STEM and robotics competitions.</p>
-            </div>
-        </div>
-    </div>
-
-</main>
-
-<footer>
-    <div>
-        <a href="https://www.instagram.com/renertrobotics/" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="https://www.youtube.com/@RenertRobotics" target="_blank"><i class="fab fa-youtube"></i></a>
-    </div>
-    <div>&copy; 2025 Renert Robotics. All rights reserved.</div>
-</footer>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
-<script>
-  // Mobile menu toggle
-  const navbar = document.querySelector('.navbar');
-  const menu = document.querySelector('.navbar-menu');
-
-  const toggleButton = document.createElement('button');
-  toggleButton.textContent = 'Menu';
-  toggleButton.style.marginLeft = 'auto';
-  toggleButton.style.padding = '10px 15px';
-  toggleButton.style.fontWeight = 'bold';
-  toggleButton.style.cursor = 'pointer';
-  navbar.querySelector('.navbar-container').appendChild(toggleButton);
-
-  toggleButton.addEventListener('click', () => {
-    menu.classList.toggle('show');
-  });
-</script>
+    <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
+      <div style="margin-bottom: 5px;">
+        <a href="https://www.instagram.com/renertrobotics/" target="_blank" style="color: #ccc; margin: 0 10px; text-decoration: none;">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.youtube.com/@RenertRobotics" target="_blank" style="color: #ccc; margin: 0 10px; text-decoration: none;">
+          <i class="fab fa-youtube"></i>
+        </a>
+      </div>
+      <div>
+        &copy; 2025 Renert Robotics. All rights reserved.
+      </div>
+    </footer>
 
 </body>
 </html>
