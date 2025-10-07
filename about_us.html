@@ -3,18 +3,761 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - Renert Robotics</title>
+    <title>Renert Robotics</title>
+    <style>
+        :root {
+            --color-glass-bg: rgba(255, 255, 255, 0.2);
+            --color-glass-border: rgba(255, 255, 255, 0.3);
+            --color-link-highlight: rgba(255, 255, 255, 0.25);
+        
+            --color-text: #333333;
+            --color-focus-outline: #5ab1ff;
+        
+            --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            --font-weight-bold: 600;
+        
+            --blur-value: 10px;
+            --border-radius-soft: 8px;
+            --navbar-height: 70px;
+            --navbar-padding: 1.5rem;
+            --container-width: 1140px;
+            --transition-speed: 0.3s;
+            
+            /* FTC section calculations */
+            --total-width: calc(100vw - 150px);
+            --ftc-text-width: calc(0.40 * var(--total-width));
+            --ftc-image-box-width: calc(var(--total-width) - var(--ftc-text-width));
+            --fll-text-width: calc(0.40 * var(--total-width));
+            --fll-image-box-width: calc(var(--total-width) - var(--fll-text-width));
+        }
+        h1, h2, h3, h4, h5, h6, p, a, li, span, div {
+          color: #333333 !important;
+        }
+        .image-background-section .overlay-text h1,
+        .image-background-section .overlay-text p {
+          color: #ffffff !important;
+        }
+
+
+        /* Background image section */
+        .image-background-section {
+          position: relative;
+          width: 100%;
+          height: 500px; /* fixed height or min-height */
+          overflow: hidden;
+          color: white;
+          display: flex;
+          align-items: center;
+          padding-left: 50px; /* text padding */
+          box-sizing: border-box;
+        }
+        
+        .bg-image {
+          position: absolute;
+          top: 0; left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover; /* makes image cover container */
+          z-index: 0;
+        }
+        .overlay-text p{
+          padding-top: -30px;  
+          position: relative;
+          z-index: 1;
+          max-width: 450px;
+          text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+          color: #ffffff;  
+        }
+
+        
+        .overlay-text h1{
+          padding-top: -30px;  
+          position: relative;
+          z-index: 1;
+          max-width: 600px;
+          text-shadow: 0 2px 6px rgba(0,0,0,0.7);
+          color: #ffffff;
+        }
+
+        h1 { font-size: 60px; }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            font-family: var(--font-family-sans-serif);
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--color-text);
+            background-color: #ffffff;
+            background-attachment: fixed;
+        }
+        
+        .content {
+            padding-top: 40px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: left;
+        }
+        
+        
+        .content-container {
+            display: flex;
+            align-items: left;
+            width: 100%;
+        }
+        
+        .content-text {
+            flex: 0 0 auto;
+            text-align: left;
+            margin-left: 50px;
+            max-width: 600px;
+        }
+
+        /* Only move the first line up */
+        .content-text .intro {
+            margin-top: -40px;
+        }
+        .content-text .introp {
+            margin-top: -40px;
+            max-width: 500px;
+        }
+        .content-text p {
+            margin-top: 0;
+        }    
+        
+        .content-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-right: var(--navbar-padding);
+            padding-top: 20px;
+            left-margin: 50px;
+        }
+        
+        .content-image img {
+            height: 400px;
+            width: auto;
+            object-fit: contain;
+        }
+        
+        ul { list-style: none; margin: 0; padding: 0; }
+        a { text-decoration: none; color: inherit; }
+
+        .navbar {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: var(--navbar-height);
+          display: flex;
+          align-items: center;
+          z-index: 1000;
+          background-color: #ffffff; /* White banner */
+          color: #222222; /* Default text color inside navbar */
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Small subtle shadow */
+        }
+
+        .navbar__container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: var(--container-width);
+            margin-right: 50px;
+            margin-left: 50px;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        
+        .navbar__brand {
+            font-size: 1.5rem;
+            font-weight: var(--font-weight-bold);
+        }
+        
+        .navbar__link {
+          color: #222222 !important; /* Force text color to dark grey */
+          text-shadow: none; /* Remove the white text glow */
+        }
+
+        .navbar__brand-section { display: flex; align-items: center; }
+
+        .banner-image {
+            width: 200px;
+            height: 50px;
+            overflow: hidden;
+            margin-left: -20px;
+        }        
+        .banner-image img { width: 100%; height: 100%; object-fit: contain; }
+
+        .navbar__toggle {
+            display: block;
+            padding: 0.5rem;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        
+        .navbar__toggle .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--color-text);
+            transition: all var(--transition-speed) ease-in-out;
+            border-radius: 2px;
+        }
+
+        .navbar__toggle.is-active .bar:nth-child(2) { opacity: 0; }
+        .navbar__toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .navbar__toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+        
+        .navbar__menu {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            position: absolute;
+            top: var(--navbar-height);
+            left: 0;
+            z-index: -1;
+            background: var(--color-glass-bg);
+            backdrop-filter: blur(var(--blur-value));
+            -webkit-backdrop-filter: blur(var(--blur-value));
+            border-top: 1px solid var(--color-glass-border);
+            padding-bottom: 1rem;
+        }
+        
+        .navbar__menu.is-active { 
+            display: flex; 
+            background-color: #fafafa; /* Very light grey background */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Add shadow for depth */
+        }
+
+        .navbar__item { text-align: center; }
+
+        .navbar__link {
+            display: block;
+            padding: 1.25rem;
+            font-weight: var(--font-weight-bold);
+            transition: background-color var(--transition-speed) ease;
+        }
+        
+        .navbar__link:hover, .navbar__link:focus {
+            background-color: var(--color-link-highlight);
+        }
+
+        :is(.navbar__toggle, .navbar__link):focus-visible {
+            outline: 2px solid var(--color-focus-outline);
+            outline-offset: 2px;
+            border-radius: var(--border-radius-soft);
+        }
+        /* Dropdown styles */
+        .navbar__dropdown {
+          position: relative;
+        }
+        .right-justified {
+            text-align: right;
+            padding-left: 2rem;
+            padding-right: 50px;
+        }
+        
+        button {
+          margin-top: 1rem;
+          padding: 0.6rem 1.2rem;
+          background-color: #333333;
+          color: #ffffff;
+          border: none;
+          border-radius: var(--border-radius-soft);
+          font-weight: var(--font-weight-bold);
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+        
+        button:hover {
+          background-color: #222222; /* Slightly lighter grey on hover */
+          color: #ffffff; /* Keep text white */
+        }
+
+        
+        /* Reuse the existing image styles */
+        .ftc-section {
+            margin-top: 4rem;
+            align-items: center;
+        }
+        .fll-section {
+            margin-top: 4rem;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+        .ftc-section .content-text {
+            flex: 0 0 auto;
+            text-align: left;
+            margin-left: 50px;  /* space between image and text */
+            margin-right: 50px; /* right margin for breathing room */
+            max-width: 600px;
+        }
+
+        
+        
+
+        .content-container.ftc-section {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row; /* horizontal layout */
+        }
+
+        .content-container.fll-section {
+            display: flex;
+            align-items: center;
+            flex-direction: row; /* Ensure image is on the right */
+        }
+
+        .fll-section .content-text {
+            flex: 1;
+            text-align: left;
+            margin-left: 50px;
+            margin-right: 50px;
+            max-width: 600px;
+        }
+        
+        .fll-section .content-image {
+            flex: 0 0 auto;
+            margin-right: 50px;
+            padding-left: 0;
+            padding-right: 0;
+            margin-top: -20px;
+            max-width: calc(100vw-550px);
+        }
+
+        .ftc-section .content-text.center-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+            flex: 1;
+            padding: 0px;
+        }
+        .fll-section .content-text.center-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: left;
+            flex: 1;
+            padding: 0px;
+        }
+        
+        .center-content {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* vertical centering inside .center-wrapper */
+            align-items: center;     /* horizontal centering */
+            height: 100%;            /* fill the 200px height */
+        }
+        .fll-section .center-content {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start; /* Aligns left */
+          text-align: left;
+        }
+
+        .ftc-section .center-content {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start; /* aligns items (h2, p, button) to the left */
+          text-align: left;
+        }
+
+
+        .center-content h2 {
+            margin: 0;
+        }
+
+        }
+        .center-content button {
+            display: inline-block;
+            margin: 0;
+        }
+
+
+        .dropdown-menu {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background: #fafafa; /* Very light grey background */
+          border: 1px solid #eee;
+          backdrop-filter: blur(var(--blur-value));
+          border-radius: var(--border-radius-soft);
+          min-width: 220px;
+          z-index: 999;
+          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+          padding: 0.5rem 0;
+          text-align: center; /* Center the dropdown items */
+        }
+        
+        .dropdown-menu .dropdown-link {
+          display: block;
+          padding: 0.75rem 1rem;
+          color: #333333;
+          font-weight: var(--font-weight-bold);
+          text-decoration: none;
+          transition: background 0.2s ease-in-out;
+          text-align: center; /* Center the text in dropdown items */
+        }
+        
+        .dropdown-menu .dropdown-link:hover {
+          background-color: #f0f0f0; /* Slightly darker grey on hover */
+        }
+        
+        /* Show dropdown on hover (desktop) */
+        @media (min-width: 768px) {
+          .navbar__dropdown:hover .dropdown-menu {
+            display: block;
+          }
+        }
+        
+        /* Mobile-friendly: allow dropdown to open on click */
+        @media (max-width: 767px) {
+          .navbar__dropdown .dropdown-menu {
+            display: none;
+            position: static;
+            padding-left: 1rem;
+            background: #f5f5f5; /* Very light grey background for dropdown items */
+            box-shadow: none;
+            border: none;
+            text-align: center; /* Center dropdown items on mobile */
+          }
+        
+          .navbar__dropdown.is-open .dropdown-menu {
+            display: block;
+          }
+          
+          /* Ensure mobile menu links have dark text */
+          .navbar__menu.is-active .navbar__link {
+            color: #222222 !important;
+          }
+          
+          /* Ensure dropdown links have dark text on mobile */
+          .navbar__menu.is-active .dropdown-link {
+            color: #222222 !important;
+            text-align: center; /* Center dropdown links on mobile */
+          }
+        }
+
+        @media (min-width: 768px) {
+            .navbar__toggle { display: none; }
+
+            .navbar__menu {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                position: static;
+                width: auto;
+                background-color: transparent !important;
+                background-image: none !important;
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+                border: none;
+                z-index: 1;
+                padding: 0;
+            }
+            
+            .navbar__list { display: flex; align-items: center; }
+
+            .navbar__item { margin-left: 0.5rem; }
+
+            .navbar__link {
+                padding: 0.6rem 1.1rem;
+                border-radius: var(--border-radius-soft);
+            }
+            
+            .navbar__link:hover,
+            .navbar__link:focus,
+            .navbar__link--active {
+                background-color: var(--color-link-highlight);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content-container {
+                flex-direction: column;
+                padding: 0 var(--navbar-padding);
+            }
+            
+            .content-text {
+                text-align: center;
+                margin-left: 0;
+                margin-right: 0;
+                padding: 0 0 2rem 0;
+                max-length: 700px
+            }
+            
+            .content-image img {
+                max-width: 100%;
+                height: auto;
+            }
+    
+        }
+        .image-box {
+          border-radius: 20px;
+          padding: 10px;
+          background-color: #f0f0f0; /* Default fallback */
+          display: inline-block;
+        }
+        
+        .image-box img {
+          width: 100%;
+          height: auto;
+          border-radius: 15px;
+          display: block;
+        }
+        
+        /* FTC-specific styling */
+    
+
+        /* FTC section specific sizing */
+        .ftc-section .content-text {
+            width: var(--ftc-text-width);
+            max-width: none;
+            flex: 0 0 auto;
+        }
+
+        .ftc-section .content-image {
+            width: var(--ftc-image-box-width);
+            max-width: none;
+            flex: 0 0 auto;
+            margin-right: 0;
+        }
+
+        .ftc-image-box {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+        }
+
+        .ftc-box {
+          background-color: #f19122; /* Yellow */
+          padding: 10px;
+          border-radius: 20px;
+          box-sizing: border-box;
+          margin-left: 50px;  
+        }
+        
+        .ftc-box img {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: 15px;
+        }
+        .ftc-section .content-text.center-wrapper {
+            margin-left: 50px !important;
+            margin-right: 50px !important;
+            padding: 0 !important;
+            max-width: none !important;
+            width: auto !important;
+            flex: 1 1 auto !important;
+        }
+        /* FLL section specific sizing */
+        .fll-section .content-text {
+            width: var(--ftc-text-width);
+            max-width: none;
+            flex: 0 0 auto;
+        }
+
+        .fll-section .content-image {
+            width: var(--ftc-image-box-width);
+            max-width: none;
+            flex: 0 0 auto;
+            margin-right: 0;
+        }
+
+        .fll-image-box {
+            width: 100%;
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+        }
+
+        .fll-box {
+          background-color: #af1f26; /* Red */
+          padding: 10px;
+          border-radius: 20px;
+          box-sizing: border-box;
+          margin-right: 50px;  
+        }
+        
+        .fll-box img {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: 15px;
+        }
+        .fll-section .content-text.center-wrapper {
+            margin-left: 50px !important;
+            padding: 0 !important;
+            max-width: none !important;
+            width: auto !important;
+            flex: 1 1 auto !important;
+        }
+        @media (max-width: 768px) {
+            .content-container.ftc-section,
+            .content-container.fll-section {
+                flex-direction: column;
+            }
+        
+            /* Force FTC text above image */
+            .content-container.ftc-section .content-text {
+                order: 1;
+            }
+            .content-container.ftc-section .content-image {
+                order: 2;
+                margin-bottom: 20px; /* adds spacing below FTC image */
+            }
+        
+            /* Force FLL text above image */
+            .content-container.fll-section .content-text {
+                order: 1;
+            }
+            .content-container.fll-section .content-image {
+                order: 2;
+            }
+            .content-container.ftc-section,
+            .content-container.fll-section {
+                flex-direction: column;
+                align-items: center; /* centers all child items */
+            }
+        
+            /* FTC Section: text above image */
+            .content-container.ftc-section .content-text {
+                order: 1;
+                max-width: calc(100vw - 100px);
+                text-align: center;
+                align-items: center;
+                margin: 0 auto 20px auto; /* center + bottom spacing */
+                padding: 0;
+            }
+        
+            .content-container.ftc-section .content-image {
+                order: 2;
+                max-width: calc(100vw - 100px);
+                margin: 0 auto 20px auto; /* center + spacing to next section */
+            }
+        
+            /* FLL Section: text above image */
+            .content-container.fll-section .content-text {
+                order: 1;
+                max-width: calc(100vw - 100px);
+                text-align: center;
+                align-items: center;
+                margin: 0 auto 20px auto;
+                padding: 0;
+            }
+        
+            .content-container.fll-section .content-image {
+                order: 2;
+                max-width: calc(100vw - 100px);
+                margin: 0 auto;
+            }
+        
+            /* Center buttons and content inside text blocks */
+            .center-content {
+                align-items: center !important;
+                text-align: center !important;
+            }
+        }
+        @media (max-width: 768px) {
+          /* Remove extra margins */
+          .ftc-box {
+            margin-left: 0 !important;
+          }
+        
+          .ftc-section .content-text {
+            margin-right: 0 !important;
+          }
+        
+          .fll-box {
+            margin-right: 0 !important;
+          }
+        
+          .ftc-section .content-text.center-wrapper,
+          .fll-section .content-text.center-wrapper {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+          }
+        
+          .ftc-section {
+            margin-top: 20px !important;
+          }
+        
+          
+          .ftc-section .content-image,
+          .fll-section .content-image {
+            width: calc(100vw - 48px) !important;
+            max-width: 100% !important;
+            padding: 10 !important;
+          }
+        .ftc-image-box {
+            width: calc(100vw - 48px);
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+        }
+
+        .ftc-box {
+          background-color: #f19122; /* Yellow */
+          padding: 10px;
+          border-radius: 20px;
+          box-sizing: border-box;
+          margin-left: 50px;  
+        }
+        
+        .ftc-box img {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: 15px;
+        }
+            .fll-image-box {
+            width: calc(100vw - 48px);
+            height: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0px;
+        }
+
+        .fll-box {
+          background-color: #af1f26; /* Yellow */
+          padding: 10px;
+          border-radius: 20px;
+          box-sizing: border-box;
+        }
+        
+        .fll-box img {
+          width: 100%;
+          height: auto;
+          display: block;
+          border-radius: 15px;
+        }
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <style>
-        /* Copy the entire CSS from your main menu page here */
-        /* This ensures navbar, content, FTC/FLL sections, responsive styles, and footer all work correctly */
-        /* ... your full CSS from main menu ... */
-    </style>
 </head>
 <body>
 
-    <!-- MAIN MENU NAVBAR START -->
     <header class="navbar" role="banner">
         <div class="navbar__container">
             <div class="navbar__brand-section">
@@ -35,8 +778,9 @@
             
             <nav id="navbarMenu" class="navbar__menu" role="navigation" aria-labelledby="navbarToggle">
                 <ul class="navbar__list">
-                  <li class="navbar__item"><a href="index.html" class="navbar__link">Home</a></li>
-                  <li class="navbar__item"><a href="about_us.html" class="navbar__link navbar__link--active">About Us</a></li>
+                  <li class="navbar__item"><a href="index.html" class="navbar__link navbar__link--active">Home</a></li>
+                  <li class="navbar__item"><a href="about_us.html" class="navbar__link">About Us</a></li>
+                  <!-- Dropdown Menu Start -->
                   <li class="navbar__item navbar__dropdown">
                     <a href="#" class="navbar__link dropdown-toggle">FTC ▾</a>
                     <ul class="dropdown-menu">
@@ -47,70 +791,180 @@
                   <li class="navbar__item navbar__dropdown">
                     <a href="#" class="navbar__link dropdown-toggle">FLL ▾</a>
                     <ul class="dropdown-menu">
-                      <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotics</a></li>
+                      <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotic</a></li>
                       <li><a href="octopi.html" class="dropdown-link">27361 Octopi Robotics</a></li>
                     </ul>
                   </li>
+
+                  <!-- Dropdown Menu End -->
+                
                   <li class="navbar__item"><a href="contact.html" class="navbar__link">Contact Us</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-    <!-- MAIN MENU NAVBAR END -->
+    <div class="image-background-section">
+      <img src="DSC00575-Enhanced-NR.jpg" alt="Background" class="bg-image" />
+      <div class="overlay-text">
+        <h1>Renert Robotics</h1>
+        <p>Renert Robotics includes two FTC teams—31663 Cuttlefish Robotics and 27361 Octopi Robotics—and five FLL teams. Our students design, build, and program robots while developing skills in engineering and teamwork.</p>
+      </div>
+    </div>
 
-    <!-- ORIGINAL ABOUT US BODY START -->
     <main class="content">
+        <!-- FTC Section -->
         <div class="content-container ftc-section">
             <div class="content-image ftc-image-box">
-                <div class="image-box ftc-box">
-                    <img src="about_us_image1.png" alt="Our Team">
-                </div>
+              <div class="image-box ftc-box">
+                <img src="Screenshot 2025-10-01 153501.png" alt="FTC Robots" />
+              </div>
             </div>
+
             <div class="content-text center-wrapper">
                 <div class="center-content">
-                    <h2>Our Mission</h2>
+                    <h2>Learn About FTC</h2>
                     <p>
-                        At Renert Robotics, we inspire students to explore STEM through hands-on robotics programs. Our teams gain experience in engineering, programming, teamwork, and problem-solving.
+                        FIRST Tech Challenge (FTC) is a high school robotics program where students design, build, and code robots to compete in global engineering challenges. Our FTC teams thrive on collaboration and innovation.
                     </p>
                 </div>
             </div>
         </div>
-
+        
+        <!-- FLL Section -->
         <div class="content-container fll-section">
-            <div class="content-text center-wrapper">
-                <div class="center-content">
-                    <h2>Our Teams</h2>
-                    <p>
-                        We host two FTC teams—31663 Cuttlefish Robotics and 27361 Octopi Robotics—and five FLL teams. Each team collaborates to design, build, and program robots for local and global competitions.
-                    </p>
-                </div>
+          <div class="content-text center-wrapper">
+            <div class="center-content">
+              <h2>Learn About FLL</h2>
+              <p>
+                FIRST LEGO League (FLL) introduces younger students to STEM through hands-on challenges using LEGO robots. It fosters critical thinking, teamwork, and creativity in a fun and engaging environment.
+              </p>
             </div>
-            <div class="content-image fll-image-box">
-                <div class="image-box fll-box">
-                    <img src="about_us_image2.png" alt="Our Robots">
-                </div>
+          </div>
+          <div class="content-image fll-image-box">
+              <div class="image-box fll-box">
+                <img src="maxresdefault (1).jpg" alt="FLL Robots" />
+              </div>
             </div>
         </div>
 
-        <div class="content-container ftc-section">
-            <div class="content-image ftc-image-box">
-                <div class="image-box ftc-box">
-                    <img src="about_us_image3.png" alt="Community Outreach">
-                </div>
-            </div>
-            <div class="content-text center-wrapper">
-                <div class="center-content">
-                    <h2>Community Outreach</h2>
-                    <p>
-                        Our students engage with the community by hosting workshops, mentoring younger teams, and participating in events that promote STEM education.
-                    </p>
-                </div>
-            </div>
-        </div>
     </main>
-    <!-- ORIGINAL ABOUT US BODY END -->
 
-    <!-- ORIGINAL FOOTER START -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbarToggle = document.getElementById('navbarToggle');
+            const navbarMenu = document.getElementById('navbarMenu');
+        
+            if (navbarToggle && navbarMenu) {
+                navbarToggle.addEventListener('click', function () {
+                    navbarToggle.classList.toggle('is-active');
+                    navbarMenu.classList.toggle('is-active');
+                    const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
+                    navbarToggle.setAttribute('aria-expanded', !isExpanded);
+                });
+            }
+        
+            const dropdowns = document.querySelectorAll('.navbar__dropdown');
+        
+            dropdowns.forEach(dropdown => {
+                const link = dropdown.querySelector('.dropdown-toggle');
+        
+                link.addEventListener('click', function (e) {
+                    // Only apply this on mobile view
+                    if (window.innerWidth < 768) {
+                        e.preventDefault();
+                        e.stopPropagation();
+        
+                        // Toggle dropdown menu
+                        const isOpen = dropdown.classList.contains('is-open');
+        
+                        // Close all dropdowns first
+                        dropdowns.forEach(d => d.classList.remove('is-open'));
+        
+                        // Then open the clicked one if it wasn't already open
+                        if (!isOpen) {
+                            dropdown.classList.add('is-open');
+                        }
+                    }
+                });
+            });
+
+            // Calculate and set the height of the FTC image box based on image aspect ratio
+            const ftcImage = document.querySelector('.ftc-box img');
+            const ftcBox = document.querySelector('.ftc-box');
+            
+            if (ftcImage && ftcBox) {
+                // Function to calculate and set the box height
+                function setFtcBoxHeight() {
+                    // Get the computed width of the box
+                    const boxWidth = ftcBox.offsetWidth;
+                    
+                    // Calculate the max width of the image (box width - 20px)
+                    const maxImageWidth = boxWidth - 20;
+                    
+                    // Get the natural dimensions of the image
+                    const imageWidth = ftcImage.naturalWidth;
+                    const imageHeight = ftcImage.naturalHeight;
+                    
+                    // Calculate the aspect ratio
+                    const aspectRatio = imageHeight / imageWidth;
+                    
+                    // Calculate the height of the image at the max width
+                    const imageHeightAtMaxWidth = maxImageWidth * aspectRatio;
+                    
+                    // Set the box height to (image height at max width) + 20px
+                    ftcBox.style.height = (imageHeightAtMaxWidth + 20) + 'px';
+                }
+                
+                // Set the height when the image loads
+                if (ftcImage.complete) {
+                    setFtcBoxHeight();
+                } else {
+                    ftcImage.onload = setFtcBoxHeight;
+                }
+                
+                // Recalculate on window resize
+                window.addEventListener('resize', setFtcBoxHeight);
+            }
+            
+            // Calculate and set the height of the FLL image box based on image aspect ratio
+            const fllImage = document.querySelector('.fll-box img');
+            const fllBox = document.querySelector('.fll-box');
+            
+            if (fllImage && fllBox) {
+                // Function to calculate and set the box height
+                function setFllBoxHeight() {
+                    // Get the computed width of the box
+                    const boxWidth = fllBox.offsetWidth;
+                    
+                    // Calculate the max width of the image (box width - 20px)
+                    const maxImageWidth = boxWidth - 20;
+                    
+                    // Get the natural dimensions of the image
+                    const imageWidth = fllImage.naturalWidth;
+                    const imageHeight = fllImage.naturalHeight;
+                    
+                    // Calculate the aspect ratio
+                    const aspectRatio = imageHeight / imageWidth;
+                    
+                    // Calculate the height of the image at the max width
+                    const imageHeightAtMaxWidth = maxImageWidth * aspectRatio;
+                    
+                    // Set the box height to (image height at max width) + 20px
+                    fllBox.style.height = (imageHeightAtMaxWidth + 20) + 'px';
+                }
+                
+                // Set the height when the image loads
+                if (fllImage.complete) {
+                    setFllBoxHeight();
+                } else {
+                    fllImage.onload = setFllBoxHeight();
+                }
+                
+                // Recalculate on window resize
+                window.addEventListener('resize', setFllBoxHeight);
+            }
+        });
+    </script>
     <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
       <div style="margin-bottom: 5px;">
         <a href="https://www.instagram.com/renertrobotics/" target="_blank" style="color: #ccc; margin: 0 10px; text-decoration: none;">
@@ -124,11 +978,6 @@
         &copy; 2025 Renert Robotics. All rights reserved.
       </div>
     </footer>
-    <!-- ORIGINAL FOOTER END -->
-
-    <script>
-        /* Copy your navbar JS from main menu here */
-        /* Dropdown and toggle behavior exactly like main menu */
-    </script>
 </body>
+    
 </html>
