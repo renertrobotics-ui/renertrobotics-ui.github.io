@@ -140,16 +140,18 @@
 
 
     .banner-image {
-      width: 100%;
-      overflow: hidden;
-      margin-left: -50px;
-    }        
-    .banner-image img {
-      width: auto;
-      height: auto;
-      max-height: calc(50px * 100vw / 1225px);
-      object-fit: contain;
+      height: var(--navbar-height);
+      display: flex;
+      align-items: center;
     }
+    
+    .banner-image img {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+      display: block;
+    }
+
 
 
     .navbar__toggle {
