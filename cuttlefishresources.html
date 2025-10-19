@@ -1029,8 +1029,8 @@
           white-space: nowrap;
         }
         .row {
-          display: flex; 
-          justify-content: space-between; 
+          display: flex;
+          justify-content: space-between;
           flex-wrap: wrap;
           margin: 2rem 0;
         }
@@ -1038,35 +1038,31 @@
         .left,
         .right {
           width: calc(50vw - 50px);
-          font-size: 1.3rem;
-          margin: 0;
           padding: 0.5rem 0;
           text-align: center;
         }
         
-        /* Specific margins for each */
-        .left {
-          margin-left: 30px;
+        /* Set font size only for h3 inside left and right */
+        .left h3,
+        .right h3 {
+          font-size: 1.3rem;
+          margin: 0; /* optional: to keep consistent spacing */
         }
         
-        .right {
-          margin-right: 30px;
-        }
-        
-        /* Responsive layout: stack vertically on smaller screens */
+        /* Responsive: stack on small screens */
         @media (max-width: 768px) {
           .row {
             flex-direction: column;
-            align-items: flex-start;
+            align-items: center;
           }
         
           .left,
           .right {
-            width: calc(100vw - 100px);
-            margin-left: 30px;
-            margin-right: 30px;
+            width: calc(100vw - 60px);
+            margin: 0 0 1.5rem 0;
           }
         }
+
 
 
 
