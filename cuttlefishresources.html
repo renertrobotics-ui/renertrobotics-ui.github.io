@@ -1028,6 +1028,46 @@
           text-align: center;
           white-space: nowrap;
         }
+        .h3-row {
+          display: flex;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          margin: 2rem 0;
+        }
+        
+        .h3-left,
+        .h3-right {
+          width: calc(50vw - 50px);
+          font-size: 1.3rem;
+          margin: 0;
+          padding: 0.5rem 0;
+          text-align: left;
+        }
+        
+        /* Specific margins for each */
+        .h3-left {
+          margin-left: 50px;
+        }
+        
+        .h3-right {
+          margin-right: 50px;
+        }
+        
+        /* Responsive layout: stack vertically on smaller screens */
+        @media (max-width: 768px) {
+          .h3-row {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        
+          .h3-left,
+          .h3-right {
+            width: calc(100vw - 100px);
+            margin-left: 50px;
+            margin-right: 50px;
+          }
+        }
+
 
 
 
@@ -1108,7 +1148,14 @@
     </script>
     <section class="contact-section">
       <h1 class="contact-heading">Resources</h1>
+       <div class="h3-row">
+      <h3 class="h3-left">Design & Build</h3>
+      <h3 class="h3-right">Programming & Strategy</h3>
+    </div>
+
+
     </section>
+
 
     <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
       <div style="margin-bottom: 5px;">
