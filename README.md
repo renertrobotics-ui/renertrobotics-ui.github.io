@@ -1,8 +1,4 @@
 # renertrobotics-ui.github.io
 
 This is our wonderful renert robotics website:
-
-CHANGELOG:
-
-Version 1.0.0 
- - Basic features
+Built and written by Simon Gidrewicz at Renert School 2025-2026!!!
