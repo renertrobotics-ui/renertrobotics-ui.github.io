@@ -131,16 +131,18 @@
     }
 
     .banner-image {
-      width: 200px;
-      height: 50px;
+      width: 100%;
+      max-height: px;
       overflow: hidden;
       margin-left: -50px;
     }        
     .banner-image img {
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: auto;
+      max-height: calc(50px * 100vw / 1225px);
       object-fit: contain;
     }
+
 
     .navbar__toggle {
       display: block;
