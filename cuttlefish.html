@@ -107,13 +107,13 @@
 
     .navbar__container {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       width: 100%;
-      max-width: var(--container-width);
-      margin: 0 auto;
-      padding: 0 var(--navbar-padding);
+      padding-left: calc(50px * 100vw / 1225);
+      padding-right: calc(50px * 100vw / 1225);
     }
+
     
     .navbar__brand {
       font-size: 1.5rem;
@@ -128,7 +128,16 @@
     .navbar__brand-section {
       display: flex;
       align-items: center;
+      justify-content: flex-start; /* ensures it's aligned left */
+      flex: 0 0 auto;
     }
+    .navbar__center {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+
+
 
     .banner-image {
       width: 100%;
@@ -681,14 +690,16 @@
         <span class="bar"></span>
     </button>
 
-    <nav id="navbarMenu" class="navbar__menu" role="navigation" aria-labelledby="navbarToggle">
-      <ul class="navbar__list">
-        <li class="navbar__item"><a href="index.html" class="navbar__link">Back to Home</a></li>
-        <li class="navbar__item"><a href="cuttlefishabout_us.html" class="navbar__link">About Us</a></li>
-        <li class="navbar__item"><a href="cuttlefishresources.html" class="navbar__link">Resources</a></li>
-        <li class="navbar__item"><a href="cuttlefishcontact.html" class="navbar__link">Contact Us</a></li>
-      </ul>
-    </nav>
+    <div class="navbar__center">
+      <nav id="navbarMenu" class="navbar__menu" role="navigation" aria-labelledby="navbarToggle">
+        <ul class="navbar__list">
+          <li class="navbar__item"><a href="index.html" class="navbar__link">Back to Home</a></li>
+          <li class="navbar__item"><a href="cuttlefishabout_us.html" class="navbar__link">About Us</a></li>
+          <li class="navbar__item"><a href="cuttlefishresources.html" class="navbar__link">Resources</a></li>
+          <li class="navbar__item"><a href="cuttlefishcontact.html" class="navbar__link">Contact Us</a></li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </header>
 
