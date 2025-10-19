@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>31663 Cuttlefish Robotics</title>
+  <title>31663 sCuttlefish Robotics</title>
   <link rel="stylesheet" href="style.css"> <!-- optional if you want to reuse same CSS -->
   <style>
     :root {
@@ -18,8 +18,8 @@
       --font-weight-bold: 600;
       
       --blur-value: 10px;
-      --border-radius-soft: 8px;
-      --navbar-height: 70px;
+      --border-radius-soft: calc(8px * 100vw / 1225px);
+      --navbar-height: calc(70px * 100vw / 1225px);
       --navbar-padding: 1.5rem;
       --container-width: 1140px;
       --transition-speed: 0.3s;
@@ -192,6 +192,7 @@
       display: block;
       padding: 1.25rem;
       font-weight: var(--font-weight-bold);
+      font-size: calc(16px * 100vw / 1225);
       transition: background-color var(--transition-speed) ease;
     }
     
@@ -351,6 +352,7 @@
       padding: 0.75rem 1rem;
       color: #333333;
       font-weight: var(--font-weight-bold);
+      font-size: calc(16px * 100vw / 1225px);
       text-decoration: none;
       transition: background 0.2s ease-in-out;
       text-align: center; /* Center the text in dropdown items */
