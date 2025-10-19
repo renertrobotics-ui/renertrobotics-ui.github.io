@@ -125,6 +125,8 @@
       color: #222222 !important; /* Force text color to dark grey */
       text-shadow: none; /* Remove the white text glow */
     }
+  
+    
 
     .navbar__brand-section {
       display: flex;
@@ -448,7 +450,7 @@
       .navbar__item { margin-left: 0.5rem; }
 
       .navbar__link {
-        padding: 0.6rem 1.1rem;
+        padding: calc(0.6rem * 100vw / 1225px) calc(1.1rem * 100vw / 1225px);
         border-radius: var(--border-radius-soft);
       }
       
