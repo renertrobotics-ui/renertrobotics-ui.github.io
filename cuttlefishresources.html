@@ -622,15 +622,16 @@
         }
         .contact-section {
           background-color: #f9f9f9;
-          padding: 60px 20px;
+          padding: calc(60px * 100vw / 1225px) calc(20px* 100vw / 1225px);
           text-align: left;
         }
         
         .contact-heading {
-          font-size: 48px;
-          margin-bottom: 40px;
+          font-size: calc(48px * 100vw / 1225px);
+          margin-bottom: calc(40px * 100vw /1225px);
+          margin-right: calc(30px * 100vw / 1225px);
           color: #333333;
-          margin-top: 40px;
+          margin-top: calc(40px * 100vw / 1225px);
         }
         
         .contact-container {
@@ -1035,18 +1036,24 @@
           margin: 2rem 0;
         }
         
-        .left,
+        .left {
+            width: calc(50vw - 50px * 100vw / 1225px);
+            margin-left: calc(30px * 100vw / 1225px);
+            padding: 0.5rem 0;
+            text-align: left;
+        }
+    
         .right {
-          width: calc(50vw - 50px);
+          width: calc(50vw - 50px * 100vw / 1225px);
+          margin-right: calc(30px * 100vw / 1225px);
           padding: 0.5rem 0;
           text-align: left;
         }
         
         /* Set font size only for h3 inside left and right */
-        .left h3,
-        .right h3 {
-          font-size: 1.3rem;
-          margin: 0; /* optional: to keep consistent spacing */
+        .left h2,
+        .right h2 {
+          font-size: calc(1.6rem * 100vw / 1225px);
         }
         
         /* Responsive: stack on small screens */
@@ -1146,11 +1153,11 @@
       <h1 class="contact-heading">Resources</h1>
       <div class="row">
         <div class="left">
-          <h3>Engineering & CAD</h3>
+          <h2>Engineering & CAD</h2>
           <p><a href="design_build.pdf" target="_blank">Setting Up Onshape</a></p>
         </div>
         <div class="right">
-          <h3>Programming</h3>
+          <h2>Programming</h2>
           <p><a href="Android Studio Guide Part 1.pdf" target="_blank">Android Studio P1 - Downloading AS</a></p>
           <p><a href="Android Studio Guide Part 1.pdf" target="_blank">Android Studio P2 - Setting up a Basic Opmode</a></p>
         </div>
