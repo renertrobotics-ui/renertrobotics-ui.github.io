@@ -1,3 +1,5 @@
+</html>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +35,7 @@
     }
 
     body {
-      margin: 0;
+      margin: 1;
       font-family: var(--font-family-sans-serif);
       font-size: 1rem;
       line-height: 1.5;
@@ -264,6 +266,7 @@
       margin: 10px;
       gap: 2rem;
       flex-wrap: wrap;
+margin-bottom: 100px;
     }
 
     
@@ -454,7 +457,7 @@
         text-align: center;
         margin-left: 0;
         padding: 0 0 2rem 0;
-        margin-bottom: 0;
+        margin-bottom: 60;
         padding-bottom: 0;
       }
       
@@ -519,24 +522,7 @@
           max-width: 600px;
           text-shadow: 0 2px 6px rgba(0,0,0,0.7);
         }
-        .meet-team-section {
-          margin: 20px 50px -20 50px;
-          color: #333333;
-          text-align: center;
-        }
-        
-        .meet-team-section h1 {
-          font-size: 1.8rem;
-          margin-bottom: 1rem;
-          margin-top: 20px;
-        }
-        
-        .meet-team-section p {
-          font-size: 1rem;
-          max-width: 800px;
-          margin: 0 auto 2rem;
-          line-height: 1.5;
-        }
+
             /* Force team gallery into one row, shrinking each item */
         .team-gallery-row {
           flex-wrap: nowrap;
@@ -655,6 +641,138 @@
             object-fit: cover;
           }
         }
+
+
+.team-section {
+  color: #333333;            /* Text color */
+  padding: 60px 20px;        /* Space inside the section */
+  text-align: center;
+align-items: center;
+Justify-content: center;
+  border-top: 4px solid #333333; /* Optional top border for separation */
+  background-color: #F3A738;
+    /*background-image: linear-gradient(to bottom,#FF0000, #FFFF00,#2BC016,#2416c0,#9b16c0); */
+
+
+}
+
+.team-section h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+}
+
+.team-section h3 {
+  font-size: 1em;
+  margin-bottom: 10px;
+Text-align: center;
+}
+
+.team-members-wrapper {
+  display: flex;
+Align-items: center;
+justify-content: center;
+position: relative;
+Width: 95vw;
+margin-left: 0vw;
+  gap: 0px;
+  Overflow: visible;
+}
+
+
+
+.team-members {
+  display: flex;
+Align-items: center;
+Width: 84vw;
+  gap: 0px;
+  margin-top: 40px;
+  margin-left: 0px;
+position: relative;
+Overflow: hidden;
+}
+
+.team-members2 {
+  display: flex;
+align-items: center;
+
+  gap: 50px;
+  margin-top: 40px;
+Margin-left: 0px;
+Width: 85vw;
+transition: transform 1s ease-in-out;
+
+}
+
+.team-member {
+  background-color: #ffffff;
+
+display: flex;
+flex-direction: row;
+text-align: right;
+  padding: 1vw;
+  border-radius: 10px;
+height: 250px;
+width: 100vw;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* Soft shadow around the cards */
+}
+
+.team-membertxt {
+color: #333333; 
+Display: flex;
+Flex-direction: column;
+Width: 9vw;
+Text-align: center;
+}
+
+.team-member img {
+display: flex;
+flex-direction: left;
+  width: 100px;
+  height: 100px;
+  border-radius: 10%; /* Makes the image a circle */
+  object-fit: cover;
+flex-string: 0;
+  margin-bottom: 10px;
+}
+
+.team-button_right {
+Display: flex;
+Height: 40px;
+position: absolute;
+  right: -10px;             /* 20px from right edge */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+      background-color: #ffffff;
+      color: #333333;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+.team-button_left {
+Display: flex;
+Height: 40px;
+position: absolute;
+  left: 10px;             /* 20px from right edge */
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+      background-color: #ffffff;
+      color: #333333;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+
+
+
+
+
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -728,15 +846,128 @@
     <p>We're building our second-gen robot, the Cuddler UWU, designed for speed, agility, and smart automation. With the Limelight 3A for precise targeting and Pedropathing for smoother autonomous movement, it's faster and smarter than ever. Stay tuned for updates!</p>
   </div>
 </div>
-<!-- 👇 Meet the Team Section Starts Here -->
-<section class="meet-team-section">
-  <h1><strong>Meet the Team</strong></h1>
-  <p>Get to know the brilliant minds behind Cuttlefish Robotics!</p>
-  <div style="display: flex; justify-content: center; margin-top: 20px; margin-bottom: 40px;">
-    <img src="team-photo.jpg" alt="Team Photo" style="max-width: 100%; height: auto; border-radius: 50px;">
-  </div>
+
+
+<section id="team" class="team-section">
+  <h2> Meet the Team</h2>
+  <p>Our passionate team is dedicated to solving world wide problems, philanthropy, and most importantly wealth.</p>
+  <div class="team-members-wrapper">
+<div class="team-members">
+<div id="team-members2" class="team-members2">
+    <div class="team-member">
+  <img src="https://links.renertschool.ca/static/photobook/2025-Kfir-Rousso-gr10-147.jpg" alt="Dr. Marina Blue">
+	<div class="team-membertxt">
+      <h3>KFIR</h3>
+      <p>Sigma Programmer</p>
+    </div>
+    </div>
+    <div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2025-Hayden-Shaigec-gr10-566.jpg" alt="Captain Coral">
+<div class="team-membertxt">
+      <h3>HAYDEN</h3>
+      <p>Team Captain</p>
+    </div>
+</div>
+    <div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2023-gidrewicz-simon.jpg" alt="Sandy Shores">
+      <div class="team-membertxt">
+<h3>SIMON</h3>
+      <p>Sigma Programmer</p>
+    </div>
+</div>
+<div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2025-Eshan-Saini-gr10-600.jpg" alt="Sandy Shores">
+<div class="team-membertxt">
+      <h3>Eshan</h3>
+      <p>Kinda Weird</p>
+    </div>
+</div>
+<div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2023-moroz-landry.jpg" alt="Captain Coral">
+<div class="team-membertxt">
+      <h3>Landry</h3>
+      <p>Assistant TO the Team Captain</p>
+    </div>
+</div>
+<div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2025-Lucas-Wang-gr10-695.jpg" alt="Sandy Shores">
+      <div class="team-membertxt">
+<h3>Lucas W</h3>
+      <p>Cad Designer</p>
+    </div>
+</div>
+<div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2025-Eshan-Saini-gr10-600.jpg" alt="Sandy Shores">
+<div class="team-membertxt">
+      <h3>Lucas C</h3>
+      <p>Cad Designer</p>
+    </div>
+</div>
+<div class="team-member">
+  <img src="https://links.renertschool.ca/static/photobook/2025-Kfir-Rousso-gr10-147.jpg" alt="Dr. Marina Blue">
+	<div class="team-membertxt">
+      <h3>KFIR</h3>
+      <p>Sigma Programmer</p>
+    </div>
+</div>
+<div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2025-Hayden-Shaigec-gr10-566.jpg" alt="Captain Coral">
+<div class="team-membertxt">
+      <h3>HAYDEN</h3>
+      <p>Team Captain</p>
+    </div>
+</div>
+<div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2023-gidrewicz-simon.jpg" alt="Sandy Shores">
+      <div class="team-membertxt">
+<h3>SIMON</h3>
+      <p>Sigma Programmer</p>
+    </div>
+</div>
+<div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2025-Eshan-Saini-gr10-600.jpg" alt="Sandy Shores">
+<div class="team-membertxt">
+      <h3>Eshan</h3>
+      <p>Kinda Weird</p>
+    </div>
+</div>
+<div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2023-moroz-landry.jpg" alt="Captain Coral">
+<div class="team-membertxt">
+      <h3>Landry</h3>
+      <p>Assistant TO the Team Captain</p>
+    </div>
+</div>
+<div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2025-Lucas-Wang-gr10-695.jpg" alt="Sandy Shores">
+      <div class="team-membertxt">
+<h3>Lucas W</h3>
+      <p>Cad Designer</p>
+    </div>
+</div>
+<div class="team-member">
+      <img src="https://links.renertschool.ca/static/photobook/2025-Eshan-Saini-gr10-600.jpg" alt="Sandy Shores">
+<div class="team-membertxt">
+      <h3>Lucas C</h3>
+      <p>Cad Designer</p>
+    </div>
+</div>
+</div>
+</div>
+<button class="team-button_right"
+Onclick="startSliding(1)">
+>
+</button>
+<button class="team-button_left"
+Onclick="startSliding(-1)">
+<
+</button>
+
+</div>
+
 </section>
-<!-- 👆 Meet the Team Section Ends Here -->
+
+
   
 <!-- 👆 Info Section Ends -->
 </main>
@@ -780,7 +1011,45 @@
                 });
             });
         });
-    </script>
+const slides = document.getElementById('team-members2');
+const totalSlides = (slides.children.length)/2 + 2;
+let index = 0;
+let intervalId = null;
+let timemin = 1; // number of cycles before stopping
+let rest_dealy = 100;
+
+function rest_members() {
+    slides.style.transition = "transform 0s ease"; // apply once
+    slides.style.transform = `translateX(-${index * 100/4}%)`;
+}
+
+function startSliding(direction) {  
+  if (intervalId === null) {
+
+    intervalId = setInterval(() => {
+      if (timemin <= 0) {
+        stopSliding();
+        return;
+      }
+      timemin--;
+      index = (index + 1*direction)%totalSlides;
+slides.style.transition = "transform 0.5s ease"; // apply once
+      slides.style.transform = `translateX(-${index * 100/4}%)`;
+    }, 100);
+    if (index === 7) {
+      index = 0
+      rest_members()
+    }
+  }
+}
+
+function stopSliding() {
+  clearInterval(intervalId);
+  intervalId = null;
+  timemin = 1; // reset counter if you want
+}
+</script>
+
     <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
       <div style="margin-bottom: 5px;">
         <a href="https://www.instagram.com/renertrobotics/" target="_blank" style="color: #ccc; margin: 0 10px; text-decoration: none;">
