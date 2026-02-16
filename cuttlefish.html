@@ -145,12 +145,12 @@
       height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center; /* Center content horizontally */
+      justify-content: center;
       padding: 0 5%;
       overflow: hidden;
     }
 
-    /* Updated overlay for centered text readability */
+    /* Gradient Overlay for text readability */
     .image-background-section::after {
       content: '';
       position: absolute;
@@ -174,15 +174,26 @@
       will-change: transform;
     }
 
+    /* Particle Canvas */
+    #particleCanvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+
     .overlay-text {
       position: relative;
-      z-index: 2;
+      z-index: 4; /* Above canvas and overlays */
       width: 100%;
-      max-width: 900px; /* Wider for centered layout */
-      text-align: center; /* Center text */
+      max-width: 1200px; 
+      text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
+      pointer-events: none; /* Allow mouse interaction with particles behind text */
     }
 
     /* Animations */
@@ -197,37 +208,18 @@
       }
     }
 
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
     .overlay-text h1 {
-      font-size: 4rem; /* Increased size */
-      margin-bottom: 1.5rem;
+      font-size: 6rem; 
+      margin-bottom: 0;
       background: var(--gradient-1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
       
-      animation: fadeInDown 1s ease forwards; /* Fade in from top */
-    }
-
-    .overlay-text p {
-      font-size: 1.5rem; /* Increased size */
-      line-height: 1.8;
-      color: #e0f7ff;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-      max-width: 700px; /* Constrain width for readability */
-      
-      opacity: 0; /* Start hidden */
-      animation: fadeInUp 1s ease 0.5s forwards; /* Fade in from bottom with delay */
+      animation: fadeInDown 1s ease forwards;
+      line-height: 1.1;
+      position: relative;
+      pointer-events: auto;
     }
 
     /* Main content area */
@@ -237,7 +229,7 @@
       z-index: 1;
     }
 
-    /* Info Sections - Layout adjusted for specific width and even split */
+    /* Info Sections */
     .info-section {
       display: flex;
       align-items: stretch; 
@@ -618,11 +610,7 @@
       }
 
       .overlay-text h1 {
-        font-size: 2.5rem; /* Adjusted for mobile */
-      }
-
-      .overlay-text p {
-        font-size: 1.1rem; /* Adjusted for mobile */
+        font-size: 3.5rem; 
       }
 
       .info-section {
@@ -679,9 +667,9 @@
 
   <div class="image-background-section">
     <img src="DSC00575-Enhanced-NR.jpg" alt="Background" class="bg-image" />
+    <canvas id="particleCanvas"></canvas>
     <div class="overlay-text">
-      <h1>31663 Cuttlefish Robotics</h1>
-      <p>FTC Team 31663 Cuttlefish Robotics from Calgary is a rookie team bringing innovation and teamwork to the 2025 season. Based at Renert School, they're diving into robotics with creativity and determination!</p>
+      <h1>31663 RSR Cuttlefish</h1>
     </div>
   </div>
 
@@ -792,50 +780,136 @@
   </footer>
 
   <script>
-    // Team member data
-    const teamMembers = [
-      {
-        name: "KFIR",
-        roles: "Programmer\nWebsite Dev\nEngineer",
-        quote: "\"THIS IS VERY GOOFY EVERYONE IS DUMB AND I AM THE BEST\"",
-        image: "https://links.renertschool.ca/static/photobook/2025-Kfir-Rousso-gr10-147.jpg"
-      },
-      {
-        name: "HAYDEN",
-        roles: "Team Captain\nCAD Designer\nEngineer\nDriver Coach",
-        quote: "\"Not true\"",
-        image: "https://links.renertschool.ca/static/photobook/2025-Hayden-Shaigec-gr10-566.jpg"
-      },
-      {
-        name: "SIMON",
-        roles: "Programmer\nOperator\nWebsite Dev",
-        quote: "\"Okay it's prob why my code ain't workin\"",
-        image: "https://links.renertschool.ca/static/photobook/2025-Simon-Gidrewicz-gr10-502.jpg"
-      },
-      {
-        name: "Eshan",
-        roles: "Engineer\nCAD Designer\nOutreach",
-        quote: "\"Cristano Ronaldo Sewey\"",
-        image: "https://links.renertschool.ca/static/photobook/2025-Eshan-Saini-gr10-600.jpg"
-      },
-      {
-        name: "Landry",
-        roles: "Vice Captain\nEngineer\nCAD Designer",
-        quote: "\"DAMn\"",
-        image: "https://links.renertschool.ca/static/photobook/2023-moroz-landry.jpg"
-      },
-      {
-        name: "Lucas W",
-        roles: "Driver\nCAD Designer\nEngineer",
-        quote: "\"thank you goat\"",
-        image: "https://links.renertschool.ca/static/photobook/2025-Lucas-Wang-gr10-695.jpg"
-      },
-      {
-        name: "Lucas C",
-        roles: "Human Player\nCAD Designer\nEngineer",
-        quote: "\"Yo guys what time will u be there at stemia\"",
-        image: "https://links.renertschool.ca/static/photobook/2025-Lucas-Cheung-gr9-129.jpg"
+    // --- Particle System Effect ---
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    
+    let width, height;
+    let particles = [];
+    
+    // Resize handler
+    function resizeCanvas() {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    
+    // Mouse position
+    const mouse = {
+      x: null,
+      y: null,
+      radius: 150 // Interaction radius
+    };
+    
+    window.addEventListener('mousemove', (event) => {
+      mouse.x = event.x;
+      mouse.y = event.y;
+    });
+    
+    // Particle class
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2 + 1;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.density = (Math.random() * 30) + 1;
+        this.color = `rgba(0, ${180 + Math.floor(Math.random() * 75)}, 255, ${Math.random() * 0.5 + 0.5})`;
       }
+  
+      draw() {
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.closePath();
+        ctx.fill();
+      }
+  
+      update() {
+        // Mouse interaction
+        let dx = mouse.x - this.x;
+        let dy = mouse.y - this.y;
+        let distance = Math.sqrt(dx * dx + dy * dy);
+        let forceDirectionX = dx / distance;
+        let forceDirectionY = dy / distance;
+        let maxDistance = mouse.radius;
+        let force = (maxDistance - distance) / maxDistance;
+        let directionX = forceDirectionX * force * this.density;
+        let directionY = forceDirectionY * force * this.density;
+  
+        if (distance < mouse.radius) {
+          this.x -= directionX;
+          this.y -= directionY;
+        } else {
+          // Return to original position slowly
+          if (this.x !== this.baseX) {
+            let dx = this.x - this.baseX;
+            this.x -= dx / 20;
+          }
+          if (this.y !== this.baseY) {
+            let dy = this.y - this.baseY;
+            this.y -= dy / 20;
+          }
+        }
+      }
+    }
+  
+    function initParticles() {
+      particles = [];
+      // Adjust number of particles based on screen size
+      const numberOfParticles = (height * width) / 9000;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particles.push(new Particle());
+      }
+    }
+    initParticles();
+    window.addEventListener('resize', initParticles);
+  
+    function animateParticles() {
+      ctx.clearRect(0, 0, width, height);
+      
+      for (let i = 0; i < particles.length; i++) {
+        particles[i].draw();
+        particles[i].update();
+      }
+      connectParticles();
+      requestAnimationFrame(animateParticles);
+    }
+  
+    function connectParticles() {
+      let opacityValue = 1;
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a; b < particles.length; b++) {
+          let distance = ((particles[a].x - particles[b].x) * (particles[a].x - particles[b].x))
+                       + ((particles[a].y - particles[b].y) * (particles[a].y - particles[b].y));
+          
+          if (distance < 10000) { // Connect if close enough
+            opacityValue = 1 - (distance / 10000);
+            ctx.strokeStyle = `rgba(0, 212, 255, ${opacityValue * 0.5})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+  
+    animateParticles();
+
+    // --- Team Carousel Logic ---
+    const teamMembers = [
+      { name: "KFIR", roles: "Programmer\nWebsite Dev\nEngineer", quote: "\"THIS IS VERY GOOFY EVERYONE IS DUMB AND I AM THE BEST\"", image: "https://links.renertschool.ca/static/photobook/2025-Kfir-Rousso-gr10-147.jpg" },
+      { name: "HAYDEN", roles: "Team Captain\nCAD Designer\nEngineer\nDriver Coach", quote: "\"Not true\"", image: "https://links.renertschool.ca/static/photobook/2025-Hayden-Shaigec-gr10-566.jpg" },
+      { name: "SIMON", roles: "Programmer\nOperator\nWebsite Dev", quote: "\"Okay it's prob why my code ain't workin\"", image: "https://links.renertschool.ca/static/photobook/2025-Simon-Gidrewicz-gr10-502.jpg" },
+      { name: "Eshan", roles: "Engineer\nCAD Designer\nOutreach", quote: "\"Cristano Ronaldo Sewey\"", image: "https://links.renertschool.ca/static/photobook/2025-Eshan-Saini-gr10-600.jpg" },
+      { name: "Landry", roles: "Vice Captain\nEngineer\nCAD Designer", quote: "\"DAMn\"", image: "https://links.renertschool.ca/static/photobook/2023-moroz-landry.jpg" },
+      { name: "Lucas W", roles: "Driver\nCAD Designer\nEngineer", quote: "\"thank you goat\"", image: "https://links.renertschool.ca/static/photobook/2025-Lucas-Wang-gr10-695.jpg" },
+      { name: "Lucas C", roles: "Human Player\nCAD Designer\nEngineer", quote: "\"Yo guys what time will u be there at stemia\"", image: "https://links.renertschool.ca/static/photobook/2025-Lucas-Cheung-gr9-129.jpg" }
     ];
 
     const teamCarousel = document.getElementById('teamCarousel');
@@ -855,7 +929,6 @@
 
     function createCarouselContent() {
       let html = '';
-     
       for (let set = 0; set < sets; set++) {
         teamMembers.forEach((member, index) => {
           html += `
@@ -874,79 +947,49 @@
           `;
         });
       }
-     
       teamCarousel.innerHTML = html;
-      
       teamCarousel.style.transition = 'none';
       teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
-      
       teamCarousel.offsetHeight; 
       teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-      
       updateActiveMembers();
     }
    
     function updateActiveMembers() {
       const allCards = teamCarousel.querySelectorAll('.team-memberdesc');
       const startIndex = Math.floor(currentPosition / cardUnit);
-     
       allCards.forEach((card, index) => {
         const cardIndex = index % totalMembers;
         const relativePosition = (index - startIndex + totalCards) % totalCards;
-       
-        if (relativePosition < visibleMembers) {
-          card.classList.add('active');
-        } else {
-          card.classList.remove('active');
-        }
+        if (relativePosition < visibleMembers) card.classList.add('active');
+        else card.classList.remove('active');
       });
     }
    
     function scrollTeam(direction) {
       if (isTransitioning) return;
       isTransitioning = true;
-     
       currentPosition += direction * cardUnit;
-     
       if (currentPosition < 0) {
         currentPosition += maxPosition;
         teamCarousel.style.transition = 'none';
         teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
-       
-        setTimeout(() => {
-          teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-          isTransitioning = false;
-        }, 50);
+        setTimeout(() => { teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)'; isTransitioning = false; }, 50);
       } else if (currentPosition > maxPosition) {
         currentPosition -= maxPosition;
         teamCarousel.style.transition = 'none';
         teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
-       
-        setTimeout(() => {
-          teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-          isTransitioning = false;
-        }, 50);
+        setTimeout(() => { teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)'; isTransitioning = false; }, 50);
       } else {
         teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
-        setTimeout(() => {
-          isTransitioning = false;
-        }, 600);
+        setTimeout(() => { isTransitioning = false; }, 600);
       }
-     
       updateActiveMembers();
     }
    
     let autoScrollInterval;
-   
-    function startAutoScroll() {
-      autoScrollInterval = setInterval(() => {
-        scrollTeam(1);
-      }, 4000);
-    }
-   
-    function stopAutoScroll() {
-      clearInterval(autoScrollInterval);
-    }
+    function startAutoScroll() { autoScrollInterval = setInterval(() => { scrollTeam(1); }, 4000); }
+    function stopAutoScroll() { clearInterval(autoScrollInterval); }
    
     createCarouselContent();
     startAutoScroll();
@@ -955,71 +998,37 @@
     carouselContainer.addEventListener('mouseenter', stopAutoScroll);
     carouselContainer.addEventListener('mouseleave', startAutoScroll);
    
-    let touchStartX = 0;
-    let touchEndX = 0;
-   
-    carouselContainer.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-      stopAutoScroll();
-    });
-   
-    carouselContainer.addEventListener('touchend', (e) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
-      startAutoScroll();
-    });
+    let touchStartX = 0; let touchEndX = 0;
+    carouselContainer.addEventListener('touchstart', (e) => { touchStartX = e.changedTouches[0].screenX; stopAutoScroll(); });
+    carouselContainer.addEventListener('touchend', (e) => { touchEndX = e.changedTouches[0].screenX; handleSwipe(); startAutoScroll(); });
    
     function handleSwipe() {
       const swipeThreshold = 50;
       const diff = touchStartX - touchEndX;
-     
-      if (Math.abs(diff) > swipeThreshold) {
-        if (diff > 0) {
-          scrollTeam(1); 
-        } else {
-          scrollTeam(-1);
-        }
-      }
+      if (Math.abs(diff) > swipeThreshold) { diff > 0 ? scrollTeam(1) : scrollTeam(-1); }
     }
    
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowLeft') {
-        scrollTeam(-1);
-      } else if (e.key === 'ArrowRight') {
-        scrollTeam(1);
-      }
+      if (e.key === 'ArrowLeft') scrollTeam(-1);
+      else if (e.key === 'ArrowRight') scrollTeam(1);
     });
     
-    // Scroll Event Handler for Navbar and Parallax
+    // Scroll Event Handler
     const navbar = document.querySelector('.navbar');
     const bgImage = document.querySelector('.bg-image');
 
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
+      if (scrolled > 50) navbar.classList.add('is-visible');
+      else navbar.classList.remove('is-visible');
 
-      // Navbar "Pop Down" Logic
-      if (scrolled > 50) {
-        navbar.classList.add('is-visible');
-      } else {
-        navbar.classList.remove('is-visible');
-      }
-
-      // Parallax Logic
       window.requestAnimationFrame(() => {
-        if (bgImage) {
-          if (scrolled < window.innerHeight) {
-             bgImage.style.transform = `translateY(${scrolled * 0.4}px)`;
-          }
-        }
+        if (bgImage && scrolled < window.innerHeight) bgImage.style.transform = `translateY(${scrolled * 0.4}px)`;
       });
     });
    
-    // Intersection Observer for fade-in animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-   
+    // Intersection Observer
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
