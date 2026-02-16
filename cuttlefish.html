@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>bRenert Robotics - FTC Team 31663 Cuttlefish</title>
+  <title>Renert Robotics - FTC Team 31663 Cuttlefish</title>
   <style>
     /* CSS remains the same - keeping all existing styles */
     :root {
@@ -203,9 +203,9 @@
     /* Info Sections - Alternating layout */
     .info-section {
       display: flex;
-      align-items: center;
+      align-items: stretch; /* Changed to stretch for equal height */
       justify-content: center;
-      gap: 4rem;
+      gap: 50px; /* Changed from 4rem to 50px */
       padding: 4rem 5%;
       max-width: 1400px;
       margin: 0 auto;
@@ -233,6 +233,9 @@
       transition: all 0.3s ease;
       flex: 1;
       max-width: 500px;
+      display: flex; /* Added to help content layout if needed */
+      flex-direction: column; /* Added to help content layout if needed */
+      justify-content: center; /* Center text vertically */
     }
 
     .info-card:hover {
@@ -245,6 +248,7 @@
       flex: 1;
       max-width: 500px;
       position: relative;
+      /* Height is now determined by the sibling info-card via align-items: stretch */
     }
 
     .info-image::before {
@@ -263,7 +267,8 @@
 
     .info-image img {
       width: 100%;
-      height: auto;
+      height: 100%; /* Fill the container height */
+      object-fit: cover; /* Ensure image covers the area without distortion */
       border-radius: 25px;
       box-shadow: var(--shadow-medium);
       transition: transform 0.3s ease;
@@ -582,8 +587,14 @@
 
       .info-section {
         flex-direction: column !important;
-        gap: 2rem;
+        gap: 2rem; /* Smaller gap for mobile */
         padding: 2rem;
+        align-items: center; /* Center items in column layout */
+      }
+
+      /* Reset image height for mobile so it doesn't stretch weirdly */
+      .info-image img {
+        height: auto;
       }
 
       .team-memberdesc {
