@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>sRenert Robotics - FTC Team 31663 Cuttlefish</title>
+  <title>Renert Robotics - FTC Team 31663 Cuttlefish</title>
   <style>
     /* CSS remains the same - keeping all existing styles */
     :root {
@@ -784,17 +784,23 @@
       }
     ];
 
-    let currentPosition = 0;
-    let isTransitioning = false;
     const teamCarousel = document.getElementById('teamCarousel');
     const totalMembers = teamMembers.length;
-    const sets = 20; // Number of complete sets
+    const sets = 20; // Number of complete sets for infinite illusion
     const totalCards = totalMembers * sets;
-    const visibleMembers = 4; // Show 4 members at once
-    const cardWidth = 25; // Each card is 25% width
-    const gapWidth = 2; // Gap is 2% width
-    const maxPosition = (totalCards - visibleMembers) * (cardWidth + gapWidth);
-   
+    const visibleMembers = 4; 
+    const cardWidth = 25; // percentage
+    const gapWidth = 2; // percentage
+    const cardUnit = cardWidth + gapWidth;
+    
+    // Calculate starting position in the middle of the sets
+    // This ensures we have items to the left and right for infinite scrolling
+    const startSet = Math.floor(sets / 2);
+    let currentPosition = startSet * totalMembers * cardUnit;
+    
+    let isTransitioning = false;
+    const maxPosition = (totalCards - visibleMembers) * cardUnit;
+
     // Create multiple sets of team members for seamless infinite loop
     function createCarouselContent() {
       let html = '';
@@ -819,13 +825,22 @@
       }
      
       teamCarousel.innerHTML = html;
+      
+      // Initialize position immediately without animation
+      teamCarousel.style.transition = 'none';
+      teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
+      
+      // Force reflow to ensure the style is applied before restoring transition
+      teamCarousel.offsetHeight; 
+      teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      
       updateActiveMembers();
     }
    
     // Update which members are active (in center view)
     function updateActiveMembers() {
       const allCards = teamCarousel.querySelectorAll('.team-memberdesc');
-      const startIndex = Math.floor(currentPosition / (cardWidth + gapWidth));
+      const startIndex = Math.floor(currentPosition / cardUnit);
      
       allCards.forEach((card, index) => {
         const cardIndex = index % totalMembers;
@@ -841,50 +856,43 @@
    
     // Scroll the carousel with improved infinite loop
     function scrollTeam(direction) {
-// Update these calculation variables
-    const totalMembers = teamMembers.length;
-    const singleSetWidth = totalMembers * (cardWidth + gapWidth); // Width of one full rotation
-    
-    // 1. Set the initial position to the middle of our 20 sets 
-    // This gives us plenty of room to scroll left or right before hitting a hard "end"
-    let currentPosition = singleSetWidth * 5; 
-    teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
-
-    function scrollTeam(direction) {
       if (isTransitioning) return;
       isTransitioning = true;
-      
+     
       // Calculate new position
-      currentPosition += direction * (cardWidth + gapWidth);
-      
-      // Normal scroll transition
-      teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-      teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
-
-      // Handle the "Seamless Jump" after the transition finishes
-      setTimeout(() => {
-        let needsJump = false;
-
-        // If we've scrolled too far left (near the start of our 20 sets)
-        if (currentPosition < singleSetWidth) {
-          currentPosition += singleSetWidth;
-          needsJump = true;
-        } 
-        // If we've scrolled too far right (near the end of our 20 sets)
-        else if (currentPosition > (singleSetWidth * (sets - 5))) {
-          currentPosition -= singleSetWidth;
-          needsJump = true;
-        }
-
-        if (needsJump) {
-          // Disable animation, jump to the identical-looking card in the next/prev set
-          teamCarousel.style.transition = 'none';
-          teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
-        }
-        
-        isTransitioning = false;
-        updateActiveMembers();
-      }, 600); // Matches the 0.6s transition time
+      currentPosition += direction * cardUnit;
+     
+      // Handle infinite loop boundaries
+      // Since we start in the middle, these checks are safety nets for extreme scrolling
+      if (currentPosition < 0) {
+        // Jump to the equivalent position at the end
+        currentPosition += maxPosition;
+        teamCarousel.style.transition = 'none';
+        teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
+       
+        setTimeout(() => {
+          teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+          isTransitioning = false;
+        }, 50);
+      } else if (currentPosition > maxPosition) {
+        // Jump to the equivalent position at the start
+        currentPosition -= maxPosition;
+        teamCarousel.style.transition = 'none';
+        teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
+       
+        setTimeout(() => {
+          teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+          isTransitioning = false;
+        }, 50);
+      } else {
+        // Normal scroll
+        teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 600);
+      }
+     
+      updateActiveMembers();
     }
    
     // Auto-scroll functionality
