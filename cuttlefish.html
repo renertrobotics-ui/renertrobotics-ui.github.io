@@ -841,44 +841,50 @@
    
     // Scroll the carousel with improved infinite loop
     function scrollTeam(direction) {
+// Update these calculation variables
+    const totalMembers = teamMembers.length;
+    const singleSetWidth = totalMembers * (cardWidth + gapWidth); // Width of one full rotation
+    
+    // 1. Set the initial position to the middle of our 20 sets 
+    // This gives us plenty of room to scroll left or right before hitting a hard "end"
+    let currentPosition = singleSetWidth * 5; 
+    teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
+
+    function scrollTeam(direction) {
       if (isTransitioning) return;
       isTransitioning = true;
-     
+      
       // Calculate new position
       currentPosition += direction * (cardWidth + gapWidth);
-     
-      // Handle infinite loop boundaries
-      if (currentPosition < 0) {
-        // If we go too far left, jump to the equivalent position at the end
-        currentPosition += maxPosition;
-        teamCarousel.style.transition = 'none';
-        teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
-       
-        // Re-enable transition after the jump
-        setTimeout(() => {
-          teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-          isTransitioning = false;
-        }, 50);
-      } else if (currentPosition > maxPosition) {
-        // If we go too far right, jump to the equivalent position at the start
-        currentPosition -= maxPosition;
-        teamCarousel.style.transition = 'none';
-        teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
-       
-        // Re-enable transition after the jump
-        setTimeout(() => {
-          teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
-          isTransitioning = false;
-        }, 50);
-      } else {
-        // Normal scroll
-        teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
-        setTimeout(() => {
-          isTransitioning = false;
-        }, 600);
-      }
-     
-      updateActiveMembers();
+      
+      // Normal scroll transition
+      teamCarousel.style.transition = 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)';
+      teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
+
+      // Handle the "Seamless Jump" after the transition finishes
+      setTimeout(() => {
+        let needsJump = false;
+
+        // If we've scrolled too far left (near the start of our 20 sets)
+        if (currentPosition < singleSetWidth) {
+          currentPosition += singleSetWidth;
+          needsJump = true;
+        } 
+        // If we've scrolled too far right (near the end of our 20 sets)
+        else if (currentPosition > (singleSetWidth * (sets - 5))) {
+          currentPosition -= singleSetWidth;
+          needsJump = true;
+        }
+
+        if (needsJump) {
+          // Disable animation, jump to the identical-looking card in the next/prev set
+          teamCarousel.style.transition = 'none';
+          teamCarousel.style.transform = `translateX(-${currentPosition}%)`;
+        }
+        
+        isTransitioning = false;
+        updateActiveMembers();
+      }, 600); // Matches the 0.6s transition time
     }
    
     // Auto-scroll functionality
