@@ -739,7 +739,7 @@
   </footer>
 
   <script>
-    // --- Custom Smooth Scroll Function ---
+    // --- Custom Smooth Scroll Function with Navbar Sync ---
     function smoothScrollTo(targetPosition, duration) {
       const startPosition = window.pageYOffset;
       const distance = targetPosition - startPosition;
@@ -753,7 +753,6 @@
         if (timeElapsed < duration) requestAnimationFrame(animation);
       }
 
-      // Easing function for smooth acceleration and deceleration
       function easeInOutCubic(t, b, c, d) {
         t /= d / 2;
         if (t < 1) return c / 2 * t * t * t + b;
@@ -766,12 +765,29 @@
 
     function scrollToContent() {
       const navbar = document.querySelector('.navbar');
-      // Calculate height: Hero Height (viewport) - Navbar Height
+      const scrollDuration = 1200; // 1.2 seconds
+
+      // 1. Calculate Target Scroll Position
       const navbarHeight = navbar.offsetHeight;
       const targetPosition = window.innerHeight - navbarHeight;
       
-      // Duration in milliseconds (1.2 seconds) - adjustable for speed
-      smoothScrollTo(targetPosition, 1200); 
+      // 2. Synchronize Navbar Animation
+      // Override the CSS transition duration to match the scroll duration (1.2s)
+      // Using cubic-bezier(0.4, 0, 0.2, 1) which is close to easeInOutCubic
+      navbar.style.transition = `transform ${scrollDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
+      
+      // Add the class to trigger the slide-down
+      navbar.classList.add('is-visible');
+
+      // 3. Start the Scroll Animation
+      smoothScrollTo(targetPosition, scrollDuration); 
+
+      // 4. Reset Navbar Transition after animation completes
+      // This allows the navbar to hide quickly if the user scrolls back up manually,
+      // rather than taking 1.2s to hide.
+      setTimeout(() => {
+        navbar.style.transition = ''; 
+      }, scrollDuration);
     }
 
     // --- Particle System Effect ---
@@ -991,13 +1007,19 @@
       else if (e.key === 'ArrowRight') scrollTeam(1);
     });
     
-    // Scroll Event Handler for Navbar
+    // Scroll Event Handler for Navbar (Handles manual scrolling)
     const navbar = document.querySelector('.navbar');
 
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
-      if (scrolled > 50) navbar.classList.add('is-visible');
-      else navbar.classList.remove('is-visible');
+      // Only toggle if we are not in the middle of an automated synchronized scroll
+      // We check if the transition is the special 1200ms one. 
+      // If it is, scrollToContent is handling it. 
+      // If it's empty (default), manual scroll is happening.
+      if (!navbar.style.transition.includes('1200ms')) {
+        if (scrolled > 50) navbar.classList.add('is-visible');
+        else navbar.classList.remove('is-visible');
+      }
     });
    
     // Intersection Observer
@@ -1018,5 +1040,4 @@
       observer.observe(section);
     });
   </script>
-</body>
-</html>
+</body
