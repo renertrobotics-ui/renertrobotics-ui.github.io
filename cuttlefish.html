@@ -138,7 +138,7 @@
       transform: translateY(-2px);
     }
 
-    /* Hero Section - Full Screen & Centered */
+    /* Hero Section - Solid Blue Background */
     .image-background-section {
       position: relative;
       width: 100%;
@@ -148,30 +148,8 @@
       justify-content: center;
       padding: 0 5%;
       overflow: hidden;
-    }
-
-    /* Gradient Overlay for text readability */
-    .image-background-section::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at center, rgba(10, 37, 64, 0.85) 0%, rgba(10, 37, 64, 0.4) 60%, transparent 100%);
-      z-index: 1;
-    }
-
-    .bg-image {
-      position: absolute;
-      top: -15%; 
-      left: 0;
-      width: 100%;
-      height: 130%; 
-      object-fit: cover;
-      z-index: 0;
-      filter: brightness(0.8);
-      will-change: transform;
+      /* Solid Blue Background */
+      background-color: #003366; 
     }
 
     /* Particle Canvas */
@@ -181,19 +159,19 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 2;
+      z-index: 1;
     }
 
     .overlay-text {
       position: relative;
-      z-index: 4; /* Above canvas and overlays */
+      z-index: 2; 
       width: 100%;
       max-width: 1200px; 
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
-      pointer-events: none; /* Allow mouse interaction with particles behind text */
+      pointer-events: none; 
     }
 
     /* Animations */
@@ -220,6 +198,40 @@
       line-height: 1.1;
       position: relative;
       pointer-events: auto;
+    }
+
+    /* Scroll Down Button */
+    .scroll-down-btn {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      background: transparent;
+      border: 2px solid var(--primary-cyan);
+      color: var(--primary-cyan);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: bounce 2s infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .scroll-down-btn:hover {
+      background: var(--primary-cyan);
+      color: #003366; /* Darker blue for contrast */
+      box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+      40% { transform: translateX(-50%) translateY(-15px); }
+      60% { transform: translateX(-50%) translateY(-7px); }
     }
 
     /* Main content area */
@@ -666,11 +678,14 @@
   </header>
 
   <div class="image-background-section">
-    <img src="DSC00575-Enhanced-NR.jpg" alt="Background" class="bg-image" />
     <canvas id="particleCanvas"></canvas>
     <div class="overlay-text">
       <h1>31663 RSR Cuttlefish</h1>
     </div>
+    <!-- Scroll Down Button -->
+    <button class="scroll-down-btn" onclick="scrollToContent()" aria-label="Scroll to content">
+      <i class="fas fa-chevron-down"></i>
+    </button>
   </div>
 
   <main class="content">
@@ -780,6 +795,14 @@
   </footer>
 
   <script>
+    // --- Scroll to Content Function ---
+    function scrollToContent() {
+      window.scrollTo({
+        top: window.innerHeight, // Scrolls exactly one viewport height down
+        behavior: 'smooth'
+      });
+    }
+
     // --- Particle System Effect ---
     const canvas = document.getElementById('particleCanvas');
     const ctx = canvas.getContext('2d');
@@ -1013,18 +1036,13 @@
       else if (e.key === 'ArrowRight') scrollTeam(1);
     });
     
-    // Scroll Event Handler
+    // Scroll Event Handler for Navbar only
     const navbar = document.querySelector('.navbar');
-    const bgImage = document.querySelector('.bg-image');
 
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
       if (scrolled > 50) navbar.classList.add('is-visible');
       else navbar.classList.remove('is-visible');
-
-      window.requestAnimationFrame(() => {
-        if (bgImage && scrolled < window.innerHeight) bgImage.style.transform = `translateY(${scrolled * 0.4}px)`;
-      });
     });
    
     // Intersection Observer
