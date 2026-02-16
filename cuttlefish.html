@@ -59,19 +59,16 @@
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 2px solid rgba(0, 212, 255, 0.3);
       padding: 1rem 2rem;
-      position: fixed; /* Changed to fixed */
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
       box-shadow: var(--shadow-soft);
-      
-      /* Hide above viewport initially */
       transform: translateY(-100%);
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
-    /* Class to show navbar */
     .navbar.is-visible {
       transform: translateY(0);
     }
@@ -141,18 +138,19 @@
       transform: translateY(-2px);
     }
 
-    /* Hero Section - Full Screen */
+    /* Hero Section - Full Screen & Centered */
     .image-background-section {
       position: relative;
       width: 100%;
-      height: 100vh; /* Full viewport height */
+      height: 100vh;
       display: flex;
       align-items: center;
+      justify-content: center; /* Center content horizontally */
       padding: 0 5%;
       overflow: hidden;
-      margin-top: 0; /* No margin at top */
     }
 
+    /* Updated overlay for centered text readability */
     .image-background-section::after {
       content: '';
       position: absolute;
@@ -160,7 +158,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: linear-gradient(90deg, rgba(10, 37, 64, 0.9) 0%, rgba(10, 37, 64, 0.6) 50%, transparent 100%);
+      background: radial-gradient(circle at center, rgba(10, 37, 64, 0.85) 0%, rgba(10, 37, 64, 0.4) 60%, transparent 100%);
       z-index: 1;
     }
 
@@ -179,35 +177,57 @@
     .overlay-text {
       position: relative;
       z-index: 2;
-      max-width: 600px;
-      animation: slideInLeft 1s ease;
+      width: 100%;
+      max-width: 900px; /* Wider for centered layout */
+      text-align: center; /* Center text */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    @keyframes slideInLeft {
+    /* Animations */
+    @keyframes fadeInDown {
       from {
         opacity: 0;
-        transform: translateX(-50px);
+        transform: translateY(-30px);
       }
       to {
         opacity: 1;
-        transform: translateX(0);
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
 
     .overlay-text h1 {
-      font-size: 3rem;
+      font-size: 4rem; /* Increased size */
       margin-bottom: 1.5rem;
       background: var(--gradient-1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
+      
+      animation: fadeInDown 1s ease forwards; /* Fade in from top */
     }
 
     .overlay-text p {
-      font-size: 1.2rem;
+      font-size: 1.5rem; /* Increased size */
       line-height: 1.8;
       color: #e0f7ff;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+      max-width: 700px; /* Constrain width for readability */
+      
+      opacity: 0; /* Start hidden */
+      animation: fadeInUp 1s ease 0.5s forwards; /* Fade in from bottom with delay */
     }
 
     /* Main content area */
@@ -598,7 +618,11 @@
       }
 
       .overlay-text h1 {
-        font-size: 2rem;
+        font-size: 2.5rem; /* Adjusted for mobile */
+      }
+
+      .overlay-text p {
+        font-size: 1.1rem; /* Adjusted for mobile */
       }
 
       .info-section {
@@ -974,7 +998,6 @@
       const scrolled = window.pageYOffset;
 
       // Navbar "Pop Down" Logic
-      // Add class when scrolled more than 50px
       if (scrolled > 50) {
         navbar.classList.add('is-visible');
       } else {
@@ -984,7 +1007,6 @@
       // Parallax Logic
       window.requestAnimationFrame(() => {
         if (bgImage) {
-          // Only apply parallax if the image is in view (optimization)
           if (scrolled < window.innerHeight) {
              bgImage.style.transform = `translateY(${scrolled * 0.4}px)`;
           }
