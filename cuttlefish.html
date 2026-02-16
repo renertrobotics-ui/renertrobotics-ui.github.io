@@ -148,7 +148,6 @@
       justify-content: center;
       padding: 0 5%;
       overflow: hidden;
-      /* Solid Blue Background */
       background-color: #003366; 
     }
 
@@ -224,7 +223,7 @@
 
     .scroll-down-btn:hover {
       background: var(--primary-cyan);
-      color: #003366; /* Darker blue for contrast */
+      color: #003366;
       box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
     }
 
@@ -797,8 +796,17 @@
   <script>
     // --- Scroll to Content Function ---
     function scrollToContent() {
+      const navbar = document.querySelector('.navbar');
+      // Get the height of the navbar
+      const navbarHeight = navbar.offsetHeight;
+      
+      // Calculate scroll position: 
+      // Hero height (window.innerHeight) minus Navbar height.
+      // This aligns the bottom of the hero with the bottom of the navbar.
+      const scrollPosition = window.innerHeight - navbarHeight;
+      
       window.scrollTo({
-        top: window.innerHeight, // Scrolls exactly one viewport height down
+        top: scrollPosition,
         behavior: 'smooth'
       });
     }
@@ -856,6 +864,10 @@
         let dx = mouse.x - this.x;
         let dy = mouse.y - this.y;
         let distance = Math.sqrt(dx * dx + dy * dy);
+        
+        // Avoid division by zero
+        if (distance === 0) return;
+
         let forceDirectionX = dx / distance;
         let forceDirectionY = dy / distance;
         let maxDistance = mouse.radius;
@@ -1036,11 +1048,12 @@
       else if (e.key === 'ArrowRight') scrollTeam(1);
     });
     
-    // Scroll Event Handler for Navbar only
+    // Scroll Event Handler for Navbar
     const navbar = document.querySelector('.navbar');
 
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
+      // Show navbar if we've scrolled past the hero section start or just slightly
       if (scrolled > 50) navbar.classList.add('is-visible');
       else navbar.classList.remove('is-visible');
     });
