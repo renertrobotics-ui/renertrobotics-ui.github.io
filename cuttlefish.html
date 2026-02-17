@@ -16,11 +16,7 @@
       --shadow-strong: 0 12px 35px rgba(0, 212, 255, 0.3);
     }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -30,139 +26,64 @@
     }
 
     body::before {
-      content: '';
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
+      content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       background-image:
         radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 80% 20%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
         radial-gradient(circle at 40% 40%, rgba(0, 168, 204, 0.05) 0%, transparent 50%);
-      animation: float 20s ease-in-out infinite;
-      pointer-events: none;
-      z-index: 0;
+      animation: float 20s ease-in-out infinite; pointer-events: none; z-index: 0;
     }
 
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) rotate(0deg); }
-      33% { transform: translate(30px, -30px) rotate(120deg); }
-      66% { transform: translate(-20px, 20px) rotate(240deg); }
-    }
+    @keyframes float { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 33% { transform: translate(30px, -30px) rotate(120deg); } 66% { transform: translate(-20px, 20px) rotate(240deg); } }
 
     .navbar {
-      background: rgba(10, 37, 64, 0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 2px solid rgba(0, 212, 255, 0.3);
-      padding: 1rem 2rem;
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%;
-      z-index: 1000;
-      box-shadow: var(--shadow-soft);
-      transform: translateY(-100%);
+      background: rgba(10, 37, 64, 0.95); backdrop-filter: blur(20px);
+      border-bottom: 2px solid rgba(0, 212, 255, 0.3); padding: 1rem 2rem;
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      box-shadow: var(--shadow-soft); transform: translateY(-100%);
       transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     .navbar.is-visible { transform: translateY(0); }
-
-    .navbar__container {
-      max-width: 1400px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
+    .navbar__container { max-width: 1400px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
     .navbar__brand-section { display: flex; align-items: center; }
-    .banner-image img {
-      height: 50px;
-      filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5));
-      transition: transform 0.3s ease;
-    }
-
+    .banner-image img { height: 50px; filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); transition: transform 0.3s ease; }
     .navbar__menu { display: flex; gap: 1rem; align-items: center; list-style: none; }
     .navbar__list { display: flex; gap: 1rem; align-items: center; list-style: none; }
     .navbar__item { display: inline-block; }
-    .navbar__link {
-      color: #ffffff; text-decoration: none; padding: 0.7rem 1.5rem;
-      border-radius: 25px; transition: all 0.3s ease; display: inline-block; white-space: nowrap;
-    }
-    .navbar__link:hover {
-      background: rgba(0, 212, 255, 0.2); border: 2px solid var(--primary-cyan);
-      box-shadow: 0 0 20px rgba(0, 212, 255, 0.4);
-    }
+    .navbar__link { color: #ffffff; text-decoration: none; padding: 0.7rem 1.5rem; border-radius: 25px; transition: all 0.3s ease; display: inline-block; white-space: nowrap; }
+    .navbar__link:hover { background: rgba(0, 212, 255, 0.2); border: 2px solid var(--primary-cyan); box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
 
-    .image-background-section {
-      position: relative; width: 100%; height: 100vh;
-      display: flex; align-items: center; justify-content: center;
-      padding: 0 5%; overflow: hidden; background-color: #003366;
-    }
-
+    .image-background-section { position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 5%; overflow: hidden; background-color: #003366; }
     #particleCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
     .overlay-text { position: relative; z-index: 2; width: 100%; max-width: 1200px; text-align: center; pointer-events: none; }
-
     @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-    .overlay-text h1 {
-      font-size: 6rem; margin-bottom: 0; background: var(--gradient-1);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      animation: fadeInDown 1s ease forwards; line-height: 1.1;
-    }
+    .overlay-text h1 { font-size: 6rem; margin-bottom: 0; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: fadeInDown 1s ease forwards; line-height: 1.1; }
 
-    .scroll-down-btn {
-      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 10;
-      background: transparent; border: 2px solid var(--primary-cyan); color: var(--primary-cyan);
-      width: 50px; height: 50px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease;
-      animation: bounce 2s infinite; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
-    }
+    .scroll-down-btn { position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); z-index: 10; background: transparent; border: 2px solid var(--primary-cyan); color: var(--primary-cyan); width: 50px; height: 50px; border-radius: 50%; cursor: pointer; transition: all 0.3s ease; animation: bounce 2s infinite; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
     .scroll-down-btn:hover { background: var(--primary-cyan); color: #003366; box-shadow: 0 0 20px rgba(0, 212, 255, 0.6); }
     @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-15px); } 60% { transform: translateX(-50%) translateY(-7px); } }
 
     .content { padding-top: 50px; position: relative; z-index: 1; }
-    .info-section {
-      display: flex; align-items: stretch; justify-content: center;
-      gap: 50px; max-width: calc(100vw - 150px); margin: 0 auto 50px auto; position: relative; z-index: 1;
-    }
+    .info-section { display: flex; align-items: stretch; justify-content: center; gap: 50px; max-width: calc(100vw - 150px); margin: 0 auto 50px auto; position: relative; z-index: 1; }
     .info-section:nth-child(odd) { flex-direction: row-reverse; }
     .info-section.stats-section { flex-direction: row-reverse; }
 
-    .info-card {
-      background: rgba(30, 58, 95, 0.8); backdrop-filter: blur(10px); border-radius: 30px; padding: 2rem;
-      box-shadow: var(--shadow-medium); border: 2px solid rgba(0, 212, 255, 0.2);
-      flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center;
-    }
+    .info-card { background: rgba(30, 58, 95, 0.8); backdrop-filter: blur(10px); border-radius: 30px; padding: 2rem; box-shadow: var(--shadow-medium); border: 2px solid rgba(0, 212, 255, 0.2); flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; }
     .info-image { flex: 1; min-width: 0; position: relative; }
-    .info-image::before {
-      content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px;
-      background: var(--gradient-1); border-radius: 35px; z-index: -1; opacity: 0.7; filter: blur(15px);
-    }
+    .info-image::before { content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px; background: var(--gradient-1); border-radius: 35px; z-index: -1; opacity: 0.7; filter: blur(15px); }
     .info-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 25px; box-shadow: var(--shadow-medium); transition: transform 0.3s ease; }
-
     .info-text h1 { font-size: 2rem; margin-bottom: 1.5rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .info-text p { font-size: 1.1rem; line-height: 1.8; color: #e0f7ff; }
     .info-text a { color: var(--primary-cyan); font-weight: bold; text-decoration: none; }
 
     /* Team Section */
-    .team-section {
-      position: relative; padding: 5rem 2rem; background: rgba(10, 37, 64, 0.8); backdrop-filter: blur(10px);
-      margin-top: 4rem; overflow: hidden;
-    }
-    .team-section::before {
-      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-      background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%); animation: rotate 30s linear infinite;
-    }
+    .team-section { position: relative; padding: 5rem 2rem; background: rgba(10, 37, 64, 0.8); backdrop-filter: blur(10px); margin-top: 4rem; overflow: hidden; }
+    .team-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%); animation: rotate 30s linear infinite; }
     @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .team-section h2 { font-size: 2.5rem; text-align: center; margin-bottom: 1rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; z-index: 1; }
+    .team-section p { text-align: center; font-size: 1.2rem; color: #e0f7ff; margin-bottom: 3rem; position: relative; z-index: 1; }
 
-    .team-section h2 {
-      font-size: 2.5rem; text-align: center; margin-bottom: 1rem; background: var(--gradient-1);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; position: relative; z-index: 1;
-    }
-    .team-section p {
-      text-align: center; font-size: 1.2rem; color: #e0f7ff; margin-bottom: 3rem; position: relative; z-index: 1;
-    }
-
-    .team-members-wrapper {
-      position: relative; max-width: 100%; margin: 0 auto; overflow: hidden; padding: 2rem 0;
-    }
+    .team-members-wrapper { position: relative; max-width: 100%; margin: 0 auto; overflow: hidden; padding: 2rem 0; }
     .team-members { display: flex; gap: 2rem; width: max-content; will-change: transform; }
 
     /* Team Card (Carousel) */
@@ -173,133 +94,179 @@
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       padding: 10px; display: flex; flex-direction: column; box-sizing: border-box;
     }
-    .team-memberdesc:hover {
-      transform: translateY(-5px); box-shadow: var(--shadow-strong); border-color: var(--primary-cyan); z-index: 2;
-    }
+    .team-memberdesc:hover { transform: translateY(-5px); box-shadow: var(--shadow-strong); border-color: var(--primary-cyan); z-index: 2; }
 
-    .team-info-row {
-      display: flex; flex-direction: row; gap: 10px; height: 135px; margin-bottom: 10px;
-    }
-    .team-image-container {
-      width: 135px; height: 135px; flex-shrink: 0; border-radius: 15px; overflow: hidden;
-      border: 2px solid rgba(0, 212, 255, 0.3);
-    }
+    .team-info-row { display: flex; flex-direction: row; gap: 10px; height: 135px; margin-bottom: 10px; }
+    .team-image-container { width: 135px; height: 135px; flex-shrink: 0; border-radius: 15px; overflow: hidden; border: 2px solid rgba(0, 212, 255, 0.3); }
     .team-image-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .team-memberdesc .team-membertxt { /* Scoped to carousel */
-      display: flex; flex-direction: column; justify-content: flex-start; padding-top: 5px; overflow: hidden; flex: 1;
-    }
+    .team-memberdesc .team-membertxt { display: flex; flex-direction: column; justify-content: flex-start; overflow: hidden; flex: 1; }
+    
     .team-memberdesc .team-membertxt h3 {
-      font-size: 1.1rem; color: var(--primary-cyan); margin-bottom: 2px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+      font-size: 1.5rem; 
+      color: var(--primary-cyan);
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .team-memberdesc .team-membertxt pre {
-      color: #e0f7ff; font-family: inherit; font-size: 0.85rem; line-height: 1.1; margin: 0; white-space: pre-wrap;
+      color: #e0f7ff;
+      font-family: inherit;
+      font-size: 1.1rem; 
+      line-height: 1.1;
+      margin: 0;
+      white-space: pre-wrap;
     }
 
-    .team-memberdesc .team-memberdesctxt { /* Scoped to carousel */
-      height: 135px; width: 100%; background: rgba(0, 212, 255, 0.1); border-radius: 15px;
-      border-left: 3px solid var(--primary-cyan); padding: 10px; display: flex;
-      align-items: center; color: #e0f7ff; font-style: italic; font-size: 0.9rem;
-      overflow: hidden; box-sizing: border-box;
-    }
+    .team-memberdesc .team-memberdesctxt { height: 135px; width: 100%; background: rgba(0, 212, 255, 0.1); border-radius: 15px; border-left: 3px solid var(--primary-cyan); padding: 10px; display: flex; align-items: center; color: #e0f7ff; font-style: italic; font-size: 0.9rem; overflow: hidden; box-sizing: border-box; }
 
     /* Mentors Section */
-    .mentors-section {
-      margin-top: 3rem; padding-top: 3rem; border-top: 2px solid rgba(0, 212, 255, 0.3);
+    .mentors-section { margin-top: 3rem; padding-top: 3rem; border-top: 2px solid rgba(0, 212, 255, 0.3); }
+    .mentors-section h2 { font-size: 2rem; text-align: center; margin-bottom: 2rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    
+    /* 
+       Mentor Container Margins:
+       Padding Left/Right: 50px (Outer margins)
+       Gap: 50px (Between mentors)
+    */
+    .team-members2 { 
+      display: flex; 
+      justify-content: center; 
+      flex-wrap: wrap; 
+      padding: 0 50px; 
+      gap: 50px; 
+      box-sizing: border-box;
     }
-    .mentors-section h2 {
-      font-size: 2rem; text-align: center; margin-bottom: 2rem; background: var(--gradient-1);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .team-members2 { display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
 
     /* Mentor Card Styles */
     .mentor-card {
-      background: rgba(74, 144, 226, 0.2); backdrop-filter: blur(10px); border-radius: 30px;
-      padding: 10px; /* Base padding */
-      width: 300px; /* Fixed width to calculate dimensions */
+      background: rgba(74, 144, 226, 0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 25px;
+      padding: 0;
+      /* 
+         Width Calculation:
+         Total Screen: 100vw
+         Left Padding: 50px
+         Right Padding: 50px
+         Gap: 50px
+         Total Margins/Gaps: 150px
+         Remaining Space: 100vw - 150px
+         Each Card: (100vw - 150px) / 2 = 50vw - 75px
+      */
+      width: calc(50vw - 75px); 
+      height: 240px;
       flex-shrink: 0;
       border: 2px solid rgba(0, 212, 255, 0.3);
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-direction: row;
+      overflow: hidden;
       box-sizing: border-box;
       transition: all 0.3s ease;
     }
-    .mentor-card:hover {
-      transform: translateY(-5px); box-shadow: var(--shadow-strong); background: rgba(74, 144, 226, 0.3);
-    }
+    .mentor-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-strong); background: rgba(74, 144, 226, 0.3); }
 
-    /* Layout for content inside Mentor Card */
-    .mentor-card .team-member {
-      display: flex;
-      flex-direction: column; /* Stack Image + Name vertically */
-      align-items: center;
-      width: 100%;
-      margin-bottom: 10px; /* Gap before quote */
-    }
-
-    /* Mentor Image: Width of Box - 15 = 300 - 15 = 285px. 
-       Using calc to be precise relative to the card. */
+    .mentor-card .team-member { display: contents; }
+    
     .mentor-card .team-member img {
-      width: calc(100% - 15px); /* 285px */
-      height: calc(100% - 15px); /* 285px Square */
-      aspect-ratio: 1 / 1;
+      width: 160px;
+      height: calc(100% - 20px);
       object-fit: cover;
       border-radius: 15px;
-      border: 3px solid rgba(0, 212, 255, 0.5);
-      margin: 0 auto; /* Center it */
-      margin-bottom: 10px; /* Gap between image and name */
+      margin: 10px 0 10px 10px;
+      flex-shrink: 0;
+    }
+
+    .mentor-content-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 15px;
+      justify-content: center;
+      gap: 10px; 
+      height: 100%;
+      box-sizing: border-box;
+      text-align: left;
     }
 
     .mentor-card .team-membertxt {
-      text-align: center;
+      text-align: left;
+      flex-shrink: 0;
       width: 100%;
     }
-    .mentor-card .team-membertxt h3 {
-      font-size: 1.1rem;
-      color: var(--primary-cyan);
-      margin-bottom: 2px;
+    
+    .mentor-card .team-membertxt h3 { 
+      font-size: 1.5rem; 
+      color: var(--primary-cyan); 
+      margin: 0; 
+      text-align: left;
     }
-    .mentor-card .team-membertxt p {
-      color: #e0f7ff;
-      font-size: 0.9rem;
-      margin: 0;
+    
+    .mentor-card .team-membertxt p { 
+      color: #e0f7ff; 
+      font-size: 1.1rem; 
+      margin: 0; 
+      text-align: left; 
     }
 
-    /* Mentor Quote: Height = Width of Box - 15 */
+    /* Quote Text */
     .mentor-card .team-memberdesctxt {
-      height: calc(300px - 15px); /* 285px height */
-      width: calc(100% - 15px); /* 285px width */
-      background: rgba(0, 212, 255, 0.1); border-radius: 15px;
-      border-left: 3px solid var(--primary-cyan); padding: 15px; 
-      display: flex; align-items: center; justify-content: center;
-      color: #e0f7ff; font-style: italic; font-size: 0.9rem;
-      overflow: hidden; box-sizing: border-box;
-      text-align: center;
-      margin: 0 auto; /* Center it */
+      height: auto;
+      flex-grow: 1;
+      width: 100%;
+      background: rgba(0, 212, 255, 0.1);
+      border-radius: 10px;
+      border-left: 3px solid var(--primary-cyan);
+      padding: 28px 12px 8px 12px; 
+      display: flex;
+      align-items: center;
+      color: #e0f7ff;
+      font-style: italic;
+      font-size: 0.75rem;
+      overflow: hidden;
+      box-sizing: border-box;
+      text-align: left; 
     }
 
-    footer {
-      background: rgba(10, 37, 64, 0.95); backdrop-filter: blur(20px);
-      border-top: 2px solid rgba(0, 212, 255, 0.3); padding: 2rem; text-align: center; margin-top: 4rem;
-    }
+    footer { background: rgba(10, 37, 64, 0.95); backdrop-filter: blur(20px); border-top: 2px solid rgba(0, 212, 255, 0.3); padding: 2rem; text-align: center; margin-top: 4rem; }
     footer a { color: var(--primary-cyan); font-size: 1.5rem; margin: 0 1rem; }
     footer div { margin-top: 1rem; color: #e0f7ff; }
+
+    @media (max-width: 1100px) {
+      .mentor-card {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        flex-direction: column;
+      }
+      .team-members2 {
+        padding: 0 20px;
+        gap: 2rem;
+      }
+      .mentor-card .team-member img { 
+        width: calc(100% - 20px); 
+        height: 200px; 
+        margin: 10px; 
+      }
+      .mentor-content-right { padding: 15px; }
+      
+      .mentor-card .team-membertxt h3 { font-size: 1.3rem; }
+      .mentor-card .team-membertxt p { font-size: 1rem; }
+    }
 
     @media (max-width: 768px) {
       .navbar__container { flex-direction: column; gap: 1rem; }
       .overlay-text h1 { font-size: 3.5rem; }
       .info-section { flex-direction: column !important; max-width: calc(100vw - 40px); }
+      
       .team-memberdesc { width: 300px; height: 280px; }
       .team-info-row { height: 120px; }
       .team-image-container { width: 120px; height: 120px; }
       .team-memberdesc .team-memberdesctxt { height: 120px; }
       
-      .mentor-card { width: 280px; }
-      .mentor-card .team-member img { width: calc(100% - 15px); height: calc(100% - 15px); }
-      .mentor-card .team-memberdesctxt { height: calc(280px - 15px); width: calc(100% - 15px); }
+      .team-memberdesc .team-membertxt h3 { font-size: 1.3rem; }
+      .team-memberdesc .team-membertxt pre { font-size: 1rem; }
     }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -382,25 +349,30 @@
         <div class="mentor-card">
           <div class="team-member">
             <img src="https://media.licdn.com/dms/image/v2/D4E03AQGAz3HKRpvI4A/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1679517406964?e=2147483647&v=beta&t=JYo07hJsYBKrLDDHe9r0W2_CGtISh6hh_lgkOVatxYc" alt="Christian Hafalla">
+          </div>
+          <div class="mentor-content-right">
             <div class="team-membertxt">
               <h3>Christian Hafalla</h3>
               <p>Lead Mentor</p>
             </div>
-          </div>
-          <div class="team-memberdesctxt">
-            <p>Chris is a dedicated mentor whose passion for robotics inspires every student they meet. They combine technical expertise with patient, hands-on guidance, helping members grow both their skills and confidence.</p>
+            <div class="team-memberdesctxt">
+              <p>Chris is a dedicated mentor whose passion for robotics inspires every student they meet.</p>
+            </div>
           </div>
         </div>
+        
         <div class="mentor-card">
           <div class="team-member">
             <img src="https://links.renertschool.ca/static/photobook/2023-wilcox-jonathan.jpg" alt="Jonathan Wilcox">
+          </div>
+          <div class="mentor-content-right">
             <div class="team-membertxt">
               <h3>Jonathan Wilcox</h3>
               <p>Program Director</p>
             </div>
-          </div>
-          <div class="team-memberdesctxt">
-            <p>Jonathan brings extensive experience in program management and robotics education, ensuring our team has the resources and guidance needed to succeed.</p>
+            <div class="team-memberdesctxt">
+              <p>Jonathan brings extensive experience in program management and robotics education.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -421,7 +393,6 @@
       const startPosition = window.pageYOffset;
       const distance = targetPosition - startPosition;
       let startTime = null;
-
       function animation(currentTime) {
         if (startTime === null) startTime = currentTime;
         const timeElapsed = currentTime - startTime;
@@ -430,48 +401,34 @@
         if (timeElapsed < duration) requestAnimationFrame(animation);
       }
       function easeInOutCubic(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return c / 2 * t * t * t + b;
-        t -= 2;
-        return c / 2 * (t * t * t + 2) + b;
+        t /= d / 2; if (t < 1) return c / 2 * t * t * t + b; t -= 2; return c / 2 * (t * t * t + 2) + b;
       }
       requestAnimationFrame(animation);
     }
 
     function scrollToContent() {
-      const navbar = document.querySelector('.navbar');
-      const scrollDuration = 1200;
-      const navbarHeight = navbar.offsetHeight;
-      const targetPosition = window.innerHeight - navbarHeight;
+      const navbar = document.querySelector('.navbar'); const scrollDuration = 1200;
+      const navbarHeight = navbar.offsetHeight; const targetPosition = window.innerHeight - navbarHeight;
       navbar.style.transition = `transform ${scrollDuration}ms cubic-bezier(0.4, 0, 0.2, 1)`;
-      navbar.classList.add('is-visible');
-      smoothScrollTo(targetPosition, scrollDuration);
+      navbar.classList.add('is-visible'); smoothScrollTo(targetPosition, scrollDuration);
       setTimeout(() => { navbar.style.transition = ''; }, scrollDuration);
     }
 
     // --- Particle System ---
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let width, height;
-    let particles = [];
-    
+    const canvas = document.getElementById('particleCanvas'); const ctx = canvas.getContext('2d');
+    let width, height; let particles = [];
     function resizeCanvas() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-    
+    window.addEventListener('resize', resizeCanvas); resizeCanvas();
     const mouse = { x: null, y: null, radius: 150 };
     window.addEventListener('mousemove', (event) => { mouse.x = event.x; mouse.y = event.y; });
-    
     class Particle {
       constructor() { this.x = Math.random() * width; this.y = Math.random() * height; this.size = Math.random() * 2 + 1; this.baseX = this.x; this.baseY = this.y; this.density = (Math.random() * 30) + 1; this.color = `rgba(0, ${180 + Math.floor(Math.random() * 75)}, 255, ${Math.random() * 0.5 + 0.5})`; }
       draw() { ctx.fillStyle = this.color; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.closePath(); ctx.fill(); }
       update() {
-        let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx * dx + dy * dy);
-        if (distance === 0) return;
+        let dx = mouse.x - this.x; let dy = mouse.y - this.y; let distance = Math.sqrt(dx * dx + dy * dy); if (distance === 0) return;
         let forceDirectionX = dx / distance; let forceDirectionY = dy / distance; let maxDistance = mouse.radius; let force = (maxDistance - distance) / maxDistance;
         let directionX = forceDirectionX * force * this.density; let directionY = forceDirectionY * force * this.density;
-        if (distance < mouse.radius) { this.x -= directionX; this.y -= directionY; }
-        else { if (this.x !== this.baseX) this.x -= (this.x - this.baseX) / 20; if (this.y !== this.baseY) this.y -= (this.y - this.baseY) / 20; }
+        if (distance < mouse.radius) { this.x -= directionX; this.y -= directionY; } else { if (this.x !== this.baseX) this.x -= (this.x - this.baseX) / 20; if (this.y !== this.baseY) this.y -= (this.y - this.baseY) / 20; }
       }
     }
     function initParticles() { particles = []; const numberOfParticles = (height * width) / 9000; for (let i = 0; i < numberOfParticles; i++) particles.push(new Particle()); }
@@ -492,10 +449,7 @@
     ];
 
     const teamCarousel = document.getElementById('teamCarousel');
-    let scrollSpeed = 0.5; 
-    let currentScroll = 0;
-    let scrollWidth = 0;
-    let animationId;
+    let scrollSpeed = 0.5; let currentScroll = 0; let scrollWidth = 0; let animationId;
 
     function createCarouselContent() {
       let html = '';
@@ -504,80 +458,52 @@
           html += `
             <div class="team-memberdesc">
               <div class="team-info-row">
-                <div class="team-image-container">
-                  <img src="${member.image}" alt="${member.name}">
-                </div>
-                <div class="team-membertxt">
-                  <h3>${member.name}</h3>
-                  <pre>${member.roles}</pre>
-                </div>
+                <div class="team-image-container"><img src="${member.image}" alt="${member.name}"></div>
+                <div class="team-membertxt"><h3>${member.name}</h3><pre>${member.roles}</pre></div>
               </div>
-              <div class="team-memberdesctxt">
-                <p>${member.quote}</p>
-              </div>
+              <div class="team-memberdesctxt"><p>${member.quote}</p></div>
             </div>
           `;
         });
       }
       teamCarousel.innerHTML = html;
-      
-      // Calculate precise width based on DOM elements
-      // Width of one set = (Card Width + Gap) * Count
-      // Card width is set in CSS (320px), Gap is 2rem (32px typically) set in .team-members
       const style = window.getComputedStyle(teamCarousel);
-      const gap = parseFloat(style.gap) || 32; 
+      const gap = parseFloat(style.gap) || 32;
       const cardEl = teamCarousel.querySelector('.team-memberdesc');
-      
       if (cardEl) {
-        const cardWidth = cardEl.offsetWidth; // Should be 320
+        const cardWidth = cardEl.offsetWidth;
         scrollWidth = teamMembers.length * (cardWidth + gap);
       }
     }
     
     function animateCarousel() {
       currentScroll += scrollSpeed;
-      
-      // Reset precisely when reaching the scrollWidth of one set
-      if (currentScroll >= scrollWidth) {
-        currentScroll -= scrollWidth;
-      }
-      
+      if (currentScroll >= scrollWidth) currentScroll -= scrollWidth;
       teamCarousel.style.transform = `translateX(-${currentScroll}px)`;
       animationId = requestAnimationFrame(animateCarousel);
     }
 
-    createCarouselContent();
-    animateCarousel();
-
+    createCarouselContent(); animateCarousel();
     const wrapper = document.querySelector('.team-members-wrapper');
     wrapper.addEventListener('mouseenter', () => cancelAnimationFrame(animationId));
     wrapper.addEventListener('mouseleave', animateCarousel);
 
-    // Scroll Event Handler for Navbar
+    // Navbar Scroll
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
       if (!navbar.style.transition.includes('1200ms')) {
-        if (scrolled > 50) navbar.classList.add('is-visible');
-        else navbar.classList.remove('is-visible');
+        if (scrolled > 50) navbar.classList.add('is-visible'); else navbar.classList.remove('is-visible');
       }
     });
 
     // Intersection Observer
     const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = '1'; entry.target.style.transform = 'translateY(0)'; } });
     }, observerOptions);
     document.querySelectorAll('.info-section').forEach(section => {
-      section.style.opacity = '0';
-      section.style.transform = 'translateY(30px)';
-      section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(section);
+      section.style.opacity = '0'; section.style.transform = 'translateY(30px)'; section.style.transition = 'opacity 0.6s ease, transform 0.6s ease'; observer.observe(section);
     });
   </script>
 </body>
