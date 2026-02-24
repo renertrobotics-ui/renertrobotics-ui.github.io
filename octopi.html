@@ -90,6 +90,7 @@ section {
   justify-content: space-between;
   align-items: center;
   gap: 60px;
+  flex-wrap: wrap;
 }
 
 section h2 {
@@ -108,33 +109,11 @@ section p, section li {
   flex-direction: row-reverse;
 }
 
-/* Stats Section */
-.stats-container {
-  display: flex;
-  align-items: center;
-  gap: 60px;
-}
-
-.stats-box {
-  background: rgba(255,255,255,0.05);
-  padding: 40px;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-}
-
-.stats-box h3 {
-  font-size: 40px;
-  margin-bottom: 20px;
-}
-
-.stats-box p {
-  font-size: 1.5rem;
-  margin: 10px 0;
-}
-
+/* Stats Image */
 .stats-image img {
   width: 400px;
   border-radius: 12px;
+  flex-shrink: 0;
 }
 
 /* Team Section */
@@ -154,9 +133,12 @@ footer {
 }
 
 @media(max-width: 900px){
-  section, .stats-container {
+  section {
     flex-direction: column;
     text-align: center;
+  }
+  .reverse {
+    flex-direction: column;
   }
   .hero h1 { font-size: 48px; }
   section h2 { font-size: 36px; }
@@ -173,7 +155,8 @@ footer {
     <div><strong>Octopi Robotics</strong></div>
     <nav class="navbar__menu">
       <a href="#about" class="navbar__link">About</a>
-      <a href="#stats" class="navbar__link">Stats</a>
+      <a href="#ftc" class="navbar__link">FTC</a>
+      <a href="#goals" class="navbar__link">Goals</a>
       <a href="#team" class="navbar__link">Team</a>
     </nav>
   </div>
@@ -186,29 +169,44 @@ footer {
   </div>
 </div>
 
-<section id="about">
-  <div>
-    <h2>Competitive Excellence</h2>
-    <p>Team 27361 is currently one of the top-performing teams in our league and ranked 364th out of 8,559 active teams worldwide. Our robot consistently demonstrates advanced autonomous capability, strategic scoring efficiency, and mechanical reliability at the highest competitive level.</p>
-    <p>We were proudly part of the Winning Alliance at the Nii’miis’stii Interleague Tournament, showcasing elite performance, teamwork, and engineering excellence under pressure.</p>
-  </div>
-</section>
-
-<section id="stats" class="reverse">
-  <div class="stats-container">
-    <div class="stats-box">
-      <h3>Quick Stats</h3>
-      <p><strong>World Rank:</strong> 364 / 8,559 Active Teams</p>
-      <p><strong>League Status:</strong> Top Ranked Team</p>
-      <p><strong>Tournament Achievement:</strong> Winning Alliance – Nii’miis’stii Interleague Tournament</p>
-      <p><strong>Performance Rating:</strong> 95.30th Percentile</p>
+<!-- Competitive Excellence + Stats Image -->
+<section id="about" class="reverse">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:60px; flex-wrap:wrap;">
+    <!-- Text -->
+    <div style="max-width:600px;">
+      <h2>Competitive Excellence</h2>
+      <p>Team 27361 is currently one of the top-performing teams in our league and ranked <strong>364th out of 8,559 active teams worldwide</strong>. Our robot consistently demonstrates advanced autonomous capability, strategic scoring efficiency, and mechanical reliability at the highest competitive level.</p>
+      <p>We were proudly part of the <strong>Winning Alliance at the Nii’miis’stii Interleague Tournament</strong>, showcasing elite performance, teamwork, and engineering excellence under pressure.</p>
     </div>
+    <!-- Image -->
     <div class="stats-image">
-      <img src="ftc.png" alt="Team 27361 Stats">
+      <img src="quickstats.png" alt="Team 27361 Stats">
     </div>
   </div>
 </section>
 
+<!-- FTC Section -->
+<section id="ftc">
+  <div>
+    <h2>FIRST Tech Challenge</h2>
+    <p>We compete in the <strong>:contentReference[oaicite:0]{index=0}</strong>, designing, building, and programming robots to solve complex engineering challenges while fostering STEM education and teamwork.</p>
+  </div>
+</section>
+
+<!-- Goals Section -->
+<section id="goals" class="reverse">
+  <div>
+    <h2>2025 Season Goals</h2>
+    <ul>
+      <li>Build a reliable and competitive robot</li>
+      <li>Improve autonomous performance</li>
+      <li>Expand STEM outreach in Calgary</li>
+      <li>Strengthen engineering documentation</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Team Section -->
 <section id="team" class="team">
   <h2>Meet the Team</h2>
   <p>Our members combine expertise in mechanical engineering, programming, CAD design, and strategy development to create a competitive robot capable of performing at the highest levels of FIRST Tech Challenge competition.</p>
