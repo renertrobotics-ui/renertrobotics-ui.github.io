@@ -1,83 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>27361 Octopi Robotics</title>
-  <style>
-    :root {
-      --color-text: #ffffff;
-      --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      --font-weight-bold: 600;
-      --navbar-height: 70px;
-      --navbar-padding: 1.5rem;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>27361 Octopi Robotics</title>
 
-    body {
-      margin: 0;
-      font-family: var(--font-family-sans-serif);
-      color: var(--color-text);
-      overflow-x: hidden;
-      background: #0a0f1f;
-      position: relative;
-    }
+<style>
+:root {
+  --primary: #00d4ff;
+  --dark: #0a0f1f;
+  --light: #ffffff;
+  --text-dark: #222;
+}
 
-    /* Canvas for animated circuit background */
-    canvas#bgCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      display: block;
-    }
+html { scroll-behavior: smooth; }
 
-    .navbar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: var(--navbar-height);
-      display: flex;
-      align-items: center;
-      z-index: 1000;
-      background-color: #ffffff;
-      color: #222222;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-    .navbar__container { display: flex; justify-content: space-between; align-items: center; width: 100%; margin: 0 auto; padding: 0 var(--navbar-padding); }
-    .navbar__brand { font-size: 1.5rem; font-weight: var(--font-weight-bold); color: #222 !important; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--light);
+  background: var(--dark);
+  overflow-x: hidden;
+}
 
-    .navbar__toggle { display: block; padding: 0.5rem; border: none; background: transparent; cursor: pointer; z-index: 1001; }
-    .navbar__toggle .bar { display: block; width: 25px; height: 3px; margin: 5px auto; background-color: #000; border-radius: 2px; }
+/* Background Canvas */
+canvas#bgCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
 
-    .navbar__menu { display: none; flex-direction: column; width: 100%; position: absolute; top: var(--navbar-height); left: 0; z-index: -1; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding-bottom: 1rem; }
-    .navbar__menu.is-active { display: flex; }
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background: white;
+  color: var(--text-dark);
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+}
 
-    .navbar__item { text-align: center; }
-    .navbar__link { display: block; padding: 1.25rem; font-weight: var(--font-weight-bold); color: #222 !important; text-decoration: none; }
-    .navbar__link:hover { background-color: rgba(255,255,255,0.25); }
+.navbar__container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+}
 
-    .image-background-section { position: relative; width: 100%; height: 500px; display: flex; align-items: center; padding-left: 50px; box-sizing: border-box; color: #fff; }
-    .image-background-section .overlay-text { position: relative; z-index: 2; }
-    .image-background-section h1 { font-size: 60px; text-shadow: 0 2px 6px rgba(0,0,0,0.7); }
-    .image-background-section p { max-width: 600px; text-shadow: 0 2px 6px rgba(0,0,0,0.7); }
+.navbar__brand {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
 
-    main.content { padding-top: 20px; min-height: 100vh; display: flex; flex-direction: column; }
-    .info-section { display: flex; align-items: center; justify-content: space-between; margin: 50px; gap: 2rem; flex-wrap: wrap; }
-    .info-image img { max-height: 280px; border-radius: 10px; }
-    .info-text { max-width: 400px; flex: 1; text-align: right; }
+.navbar__toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
 
-    .meet-team-section { margin: 20px 50px; text-align: center; }
-    .meet-team-section img { max-width: 100%; border-radius: 50px; }
+.bar {
+  width: 25px;
+  height: 3px;
+  background: black;
+  margin: 5px 0;
+  border-radius: 2px;
+}
 
-    @media (max-width: 768px) {
-      .info-section { flex-direction: column; text-align: center; }
-      .info-text { text-align: center; }
-    }
-  </style>
+.navbar__menu {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+}
+
+.navbar__menu.is-active { display: flex; }
+
+.navbar__item { text-align: center; list-style: none; }
+
+.navbar__link {
+  display: block;
+  padding: 1rem;
+  text-decoration: none;
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.navbar__link:hover { background: #f0f0f0; }
+
+/* Dropdown */
+.navbar__dropdown { position: relative; }
+
+.dropdown-menu {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: white;
+}
+
+.navbar__dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.dropdown-link {
+  display: block;
+  padding: 0.75rem;
+  color: var(--text-dark);
+  text-decoration: none;
+}
+
+.dropdown-link:hover { background: #f5f5f5; }
+
+/* Hero Section */
+.image-background-section {
+  height: 500px;
+  display: flex;
+  align-items: center;
+  padding-left: 50px;
+  position: relative;
+  background: url('team-photo-octopi.jpg') center/cover no-repeat;
+  margin-top: 70px;
+}
+
+.image-background-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.3));
+}
+
+.overlay-text {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+.overlay-text h1 {
+  font-size: 60px;
+  margin-bottom: 1rem;
+}
+
+.overlay-text p {
+  font-size: 1.1rem;
+}
+
+/* Sections */
+section {
+  padding: 80px 50px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.info-section {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.info-image img {
+  max-height: 300px;
+  border-radius: 15px;
+}
+
+.info-text {
+  max-width: 500px;
+}
+
+.ftc-section, .goals-section, .meet-team-section {
+  text-align: center;
+}
+
+.goals-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.goals-section li {
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+/* Mobile */
+@media(max-width:768px){
+  .info-section { flex-direction: column; text-align: center; }
+  .overlay-text h1 { font-size: 36px; }
+}
+</style>
 </head>
+
 <body>
 
 <canvas id="bgCanvas"></canvas>
@@ -86,21 +211,21 @@
   <div class="navbar__container">
     <div class="navbar__brand">Octopi Robotics</div>
     <button class="navbar__toggle" id="navbarToggle">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
     </button>
     <nav id="navbarMenu" class="navbar__menu">
-      <ul class="navbar__list">
-        <li class="navbar__item"><a href="index.html" class="navbar__link">Home</a></li>
-        <li class="navbar__item"><a href="about_us.html" class="navbar__link">About Us</a></li>
+      <ul>
+        <li class="navbar__item"><a href="#" class="navbar__link">Home</a></li>
+        <li class="navbar__item"><a href="#" class="navbar__link">About Us</a></li>
         <li class="navbar__item navbar__dropdown">
           <a href="#" class="navbar__link">FTC ▾</a>
           <ul class="dropdown-menu">
-            <li><a href="27361/index.html" class="dropdown-link">27361 Octopi Robotics</a></li>
+            <li><a href="#" class="dropdown-link">27361 Octopi Robotics</a></li>
           </ul>
         </li>
-        <li class="navbar__item"><a href="sponsorus.html" class="navbar__link">Sponsor us!</a></li>
+        <li class="navbar__item"><a href="#" class="navbar__link">Sponsor Us</a></li>
       </ul>
     </nav>
   </div>
@@ -109,99 +234,110 @@
 <div class="image-background-section">
   <div class="overlay-text">
     <h1>27361 Octopi Robotics</h1>
-    <p>FTC Team 27361 Octopi Robotics from Calgary is bringing innovation and teamwork to the 2025 season. Based at Renert School, they’re diving into robotics with creativity and determination.</p>
+    <p>FTC Team 27361 from Calgary is bringing innovation, creativity, and engineering excellence to the 2025 season.</p>
   </div>
 </div>
 
-<main class="content">
-  <div class="info-section">
-    <div class="info-image"><img src="sonic_v2_render.png" alt="Team Image"></div>
-    <div class="info-text">
-      <h3><strong>What We're Building Now</strong></h3>
-      <p>We’re currently designing our robot. Stay tuned for competition updates and behind-the-scenes insights from our engineering process!</p>
-    </div>
+<section class="info-section">
+  <div class="info-image">
+    <img src="sonic_v2_render.png">
   </div>
+  <div class="info-text">
+    <h2>What We're Building</h2>
+    <p>We’re designing and programming a competitive robot with advanced autonomous routines and strategic scoring systems.</p>
+  </div>
+</section>
 
-  <section class="meet-team-section">
-    <h3>Meet the Team</h3>
-    <p>Get to know the brilliant minds behind Octopi Robotics!</p>
-    <img src="team-photo-octopi.jpg" alt="Team Photo">
-  </section>
-</main>
+<section class="ftc-section">
+  <h2>FIRST Tech Challenge</h2>
+  <p>We compete in FTC, where teams design, build, and program robots to compete in exciting head-to-head challenges.</p>
+</section>
+
+<section class="goals-section">
+  <h2>2025 Season Goals</h2>
+  <ul>
+    <li>Build a reliable and competitive robot</li>
+    <li>Improve autonomous performance</li>
+    <li>Expand community STEM outreach</li>
+    <li>Develop strong engineering documentation</li>
+  </ul>
+</section>
+
+<section class="meet-team-section">
+  <h2>Meet the Team</h2>
+  <img src="team-photo-octopi.jpg" style="max-width:80%; border-radius:30px;">
+</section>
 
 <script>
-  // Navbar toggle
-  const navbarToggle = document.getElementById('navbarToggle');
-  const navbarMenu = document.getElementById('navbarMenu');
-  navbarToggle.addEventListener('click', () => {
-    navbarToggle.classList.toggle('is-active');
-    navbarMenu.classList.toggle('is-active');
+// Navbar toggle
+const navbarToggle = document.getElementById('navbarToggle');
+const navbarMenu = document.getElementById('navbarMenu');
+navbarToggle.addEventListener('click', () => {
+  navbarMenu.classList.toggle('is-active');
+});
+document.querySelectorAll('.navbar__link').forEach(link=>{
+  link.addEventListener('click',()=>navbarMenu.classList.remove('is-active'));
+});
+
+// Scroll animation
+const sections = document.querySelectorAll('section');
+const observer = new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting) entry.target.classList.add('show');
   });
+},{threshold:0.2});
+sections.forEach(sec=>observer.observe(sec));
 
-  // Glowing circuit-style background animation
-  const canvas = document.getElementById('bgCanvas');
-  const ctx = canvas.getContext('2d');
-  let width, height;
-  let nodes = [];
-
-  function resize() {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-    nodes = [];
-    for(let i=0; i<100; i++){
-      nodes.push({
-        x: Math.random()*width,
-        y: Math.random()*height,
-        vx: (Math.random()-0.5)*1.5,
-        vy: (Math.random()-0.5)*1.5,
-        size: Math.random()*2+1
-      });
-    }
+// Background animation (optimized)
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let width,height,nodes=[];
+function resize(){
+  width=canvas.width=window.innerWidth;
+  height=canvas.height=window.innerHeight;
+  nodes=[];
+  for(let i=0;i<70;i++){
+    nodes.push({
+      x:Math.random()*width,
+      y:Math.random()*height,
+      vx:(Math.random()-0.5)*1.2,
+      vy:(Math.random()-0.5)*1.2,
+      size:Math.random()*2+1
+    });
   }
-
-  function draw() {
-    ctx.fillStyle = '#0a0f1f';
-    ctx.fillRect(0,0,width,height);
-
-    // Draw connections
-    for(let i=0;i<nodes.length;i++){
-      let a = nodes[i];
-      for(let j=i+1;j<nodes.length;j++){
-        let b = nodes[j];
-        let dx = a.x-b.x;
-        let dy = a.y-b.y;
-        let dist = Math.sqrt(dx*dx+dy*dy);
-        if(dist<120){
-          ctx.strokeStyle = 'rgba(0,200,255,'+(1-dist/120)+')';
-          ctx.lineWidth=1;
-          ctx.beginPath();
-          ctx.moveTo(a.x,a.y);
-          ctx.lineTo(b.x,b.y);
-          ctx.stroke();
-        }
+}
+function draw(){
+  ctx.fillStyle='#0a0f1f';
+  ctx.fillRect(0,0,width,height);
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      let dx=nodes[i].x-nodes[j].x;
+      let dy=nodes[i].y-nodes[j].y;
+      let dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<120){
+        ctx.strokeStyle='rgba(0,200,255,'+(1-dist/120)+')';
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x,nodes[i].y);
+        ctx.lineTo(nodes[j].x,nodes[j].y);
+        ctx.stroke();
       }
     }
-
-    // Draw nodes
-    nodes.forEach(n=>{
-      ctx.fillStyle='rgba(0,255,200,0.8)';
-      ctx.beginPath();
-      ctx.arc(n.x,n.y,n.size,0,Math.PI*2);
-      ctx.fill();
-
-      n.x += n.vx;
-      n.y += n.vy;
-
-      if(n.x<0||n.x>width) n.vx*=-1;
-      if(n.y<0||n.y>height) n.vy*=-1;
-    });
-
-    requestAnimationFrame(draw);
   }
-
-  window.addEventListener('resize', resize);
-  resize();
-  draw();
+  nodes.forEach(n=>{
+    ctx.fillStyle='rgba(0,255,200,0.8)';
+    ctx.beginPath();
+    ctx.arc(n.x,n.y,n.size,0,Math.PI*2);
+    ctx.fill();
+    n.x+=n.vx;
+    n.y+=n.vy;
+    if(n.x<0||n.x>width) n.vx*=-1;
+    if(n.y<0||n.y>height) n.vy*=-1;
+  });
+  requestAnimationFrame(draw);
+}
+window.addEventListener('resize',resize);
+resize();
+draw();
 </script>
 
 </body>
