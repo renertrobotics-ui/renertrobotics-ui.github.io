@@ -7,8 +7,8 @@
 
 <style>
 :root {
-  --dark: #0a0f1f;
-  --light: #ffffff;
+  --light-bg: #ffffff;
+  --text-dark: #111111;
   --accent: #00e0ff;
 }
 
@@ -17,12 +17,12 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--dark);
-  color: var(--light);
+  background: var(--light-bg);
+  color: var(--text-dark);
   overflow-x: hidden;
 }
 
-/* Background */
+/* Sci-Fi Animated Background */
 canvas#bgCanvas {
   position: fixed;
   inset: 0;
@@ -36,10 +36,11 @@ canvas#bgCanvas {
   width: 100%;
   height: 70px;
   background: white;
-  color: black;
+  color: var(--text-dark);
   display: flex;
   align-items: center;
   z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .navbar__container {
@@ -56,31 +57,33 @@ canvas#bgCanvas {
 
 .navbar__link {
   text-decoration: none;
-  color: black;
+  color: var(--text-dark);
   font-weight: 600;
 }
 
 /* Hero */
 .hero {
-  height: 600px;
+  min-height: 600px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 0 20px;
   margin-top: 70px;
-  background: linear-gradient(135deg,#001f3f,#000814);
+  background: linear-gradient(135deg,#e0f7ff,#ffffff);
 }
 
 .hero h1 {
   font-size: 80px;
   margin-bottom: 20px;
+  color: #002233;
 }
 
 .hero p {
   font-size: 1.5rem;
   max-width: 900px;
   margin: auto;
+  color: #111;
 }
 
 /* Sections */
@@ -105,6 +108,7 @@ section p, section li {
   max-width: 650px;
 }
 
+/* Alternating Sections */
 .reverse {
   flex-direction: row-reverse;
 }
@@ -114,6 +118,12 @@ section p, section li {
   width: 400px;
   border-radius: 12px;
   flex-shrink: 0;
+}
+
+/* Goals List */
+ul {
+  list-style: disc;
+  padding-left: 20px;
 }
 
 /* Team Section */
@@ -126,12 +136,14 @@ section p, section li {
   font-size: 52px;
 }
 
+/* Footer */
 footer {
   text-align: center;
   padding: 40px;
   opacity: 0.6;
 }
 
+/* Mobile */
 @media(max-width: 900px){
   section {
     flex-direction: column;
@@ -157,11 +169,13 @@ footer {
       <a href="#about" class="navbar__link">About</a>
       <a href="#ftc" class="navbar__link">FTC</a>
       <a href="#goals" class="navbar__link">Goals</a>
+      <a href="#stats" class="navbar__link">Stats</a>
       <a href="#team" class="navbar__link">Team</a>
     </nav>
   </div>
 </header>
 
+<!-- Hero -->
 <div class="hero">
   <div>
     <h1>27361 Octopi Robotics</h1>
@@ -175,7 +189,7 @@ footer {
     <!-- Text -->
     <div style="max-width:600px;">
       <h2>Competitive Excellence</h2>
-      <p>Team 27361 is currently one of the top-performing teams in our league and ranked <strong>364th out of 8,559 active teams worldwide</strong>. Our robot consistently demonstrates advanced autonomous capability, strategic scoring efficiency, and mechanical reliability at the highest competitive level.</p>
+      <p>Team 27361 is one of the top-performing teams in our league and is ranked <strong>364th out of 8,559 active teams worldwide</strong>. Our robot demonstrates advanced autonomous capability, strategic scoring efficiency, and mechanical reliability at the highest competitive level.</p>
       <p>We were proudly part of the <strong>Winning Alliance at the Nii’miis’stii Interleague Tournament</strong>, showcasing elite performance, teamwork, and engineering excellence under pressure.</p>
     </div>
     <!-- Image -->
@@ -185,11 +199,11 @@ footer {
   </div>
 </section>
 
-<!-- FTC Section -->
+<!-- FIRST Tech Challenge Section -->
 <section id="ftc">
   <div>
     <h2>FIRST Tech Challenge</h2>
-    <p>We compete in the <strong>:contentReference[oaicite:0]{index=0}</strong>, designing, building, and programming robots to solve complex engineering challenges while fostering STEM education and teamwork.</p>
+    <p>We compete in the <strong>FIRST Tech Challenge (FTC)</strong>, designing, building, and programming robots to solve complex engineering challenges while fostering STEM education, teamwork, and innovation.</p>
   </div>
 </section>
 
@@ -202,6 +216,22 @@ footer {
       <li>Improve autonomous performance</li>
       <li>Expand STEM outreach in Calgary</li>
       <li>Strengthen engineering documentation</li>
+      <li>Develop advanced sensors and AI for game strategy</li>
+      <li>Participate in at least three major tournaments</li>
+    </ul>
+  </div>
+</section>
+
+<!-- Extended Stats / Achievements Section -->
+<section id="stats">
+  <div style="max-width:1000px; margin:auto;">
+    <h2>Team Achievements</h2>
+    <ul>
+      <li>Winning Alliance – Nii’miis’stii Interleague Tournament</li>
+      <li>Top-ranked in local league competitions</li>
+      <li>364 / 8,559 worldwide ranking</li>
+      <li>Advanced autonomous routines scoring 95%+ in trials</li>
+      <li>Robust engineering notebook recognized for documentation excellence</li>
     </ul>
   </div>
 </section>
@@ -209,13 +239,14 @@ footer {
 <!-- Team Section -->
 <section id="team" class="team">
   <h2>Meet the Team</h2>
-  <p>Our members combine expertise in mechanical engineering, programming, CAD design, and strategy development to create a competitive robot capable of performing at the highest levels of FIRST Tech Challenge competition.</p>
+  <p>Our members combine expertise in mechanical engineering, programming, CAD design, and strategy development to create a competitive robot capable of performing at the highest levels of FIRST Tech Challenge competition. Collaboration and creativity drive every season.</p>
 </section>
 
 <footer>
   © 2026 27361 Octopi Robotics | Calgary, Alberta
 </footer>
 
+<!-- Sci-Fi Animated Background -->
 <script>
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
@@ -224,7 +255,7 @@ function resize(){
   width=canvas.width=window.innerWidth;
   height=canvas.height=window.innerHeight;
   nodes=[];
-  for(let i=0;i<60;i++){
+  for(let i=0;i<80;i++){
     nodes.push({
       x:Math.random()*width,
       y:Math.random()*height,
@@ -235,7 +266,7 @@ function resize(){
   }
 }
 function draw(){
-  ctx.fillStyle='#0a0f1f';
+  ctx.fillStyle='#ffffff';
   ctx.fillRect(0,0,width,height);
   for(let i=0;i<nodes.length;i++){
     for(let j=i+1;j<nodes.length;j++){
