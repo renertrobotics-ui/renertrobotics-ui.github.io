@@ -7,7 +7,6 @@
 
 <style>
 :root {
-  --primary: #00d4ff;
   --dark: #0a0f1f;
   --light: #ffffff;
   --text-dark: #222;
@@ -23,12 +22,14 @@ body {
   overflow-x: hidden;
 }
 
+/* Animated Background */
 canvas#bgCanvas {
   position: fixed;
   inset: 0;
   z-index: -1;
 }
 
+/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -93,50 +94,16 @@ canvas#bgCanvas {
 
 .navbar__link:hover { background: #f0f0f0; }
 
-.navbar__dropdown { position: relative; }
-
-.dropdown-menu {
-  display: none;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  background: white;
-}
-
-.navbar__dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-.dropdown-link {
-  display: block;
-  padding: 0.75rem;
-  color: var(--text-dark);
-  text-decoration: none;
-}
-
-.dropdown-link:hover { background: #f5f5f5; }
-
+/* HERO SECTION — NO IMAGES */
 .image-background-section {
   height: 500px;
   display: flex;
   align-items: center;
-  padding-left: 50px;
-  position: relative;
-  background: url('team-photo-octopi.jpg') center/cover no-repeat;
+  justify-content: center;
+  text-align: center;
+  padding: 0 20px;
   margin-top: 70px;
-}
-
-.image-background-section::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to right, rgba(0,0,0,0.8), rgba(0,0,0,0.3));
-}
-
-.overlay-text {
-  position: relative;
-  z-index: 2;
-  max-width: 600px;
+  background: linear-gradient(135deg, #001f3f, #001028, #000814);
 }
 
 .overlay-text h1 {
@@ -144,8 +111,16 @@ canvas#bgCanvas {
   margin-bottom: 1rem;
 }
 
+.overlay-text p {
+  font-size: 1.1rem;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* Sections */
 section {
   padding: 80px 50px;
+  text-align: center;
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.8s ease;
@@ -154,22 +129,6 @@ section {
 section.show {
   opacity: 1;
   transform: translateY(0);
-}
-
-.info-section {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 2rem;
-}
-
-.info-image img {
-  max-height: 300px;
-  border-radius: 15px;
-}
-
-.ftc-section, .goals-section, .meet-team-section {
-  text-align: center;
 }
 
 .goals-section ul {
@@ -183,7 +142,6 @@ section.show {
 }
 
 @media(max-width:768px){
-  .info-section { flex-direction: column; text-align: center; }
   .overlay-text h1 { font-size: 36px; }
 }
 </style>
@@ -205,12 +163,7 @@ section.show {
       <ul>
         <li class="navbar__item"><a href="#" class="navbar__link">Home</a></li>
         <li class="navbar__item"><a href="#" class="navbar__link">About Us</a></li>
-        <li class="navbar__item navbar__dropdown">
-          <a href="#" class="navbar__link">FTC ▾</a>
-          <ul class="dropdown-menu">
-            <li><a href="#" class="dropdown-link">27361 Octopi Robotics</a></li>
-          </ul>
-        </li>
+        <li class="navbar__item"><a href="#" class="navbar__link">FTC</a></li>
         <li class="navbar__item"><a href="#" class="navbar__link">Sponsor Us</a></li>
       </ul>
     </nav>
@@ -220,21 +173,16 @@ section.show {
 <div class="image-background-section">
   <div class="overlay-text">
     <h1>27361 Octopi Robotics</h1>
-    <p>FTC Team 27361 from Calgary building innovative competition robots.</p>
+    <p>FTC Team 27361 from Calgary building innovative competition robots with creativity, engineering excellence, and teamwork.</p>
   </div>
 </div>
 
-<section class="info-section">
-  <div class="info-image">
-    <img src="sonic_v2_render.png">
-  </div>
-  <div>
-    <h2>What We're Building</h2>
-    <p>We’re designing and programming a competitive robot with advanced autonomous routines and strategic scoring systems.</p>
-  </div>
+<section>
+  <h2>What We're Building</h2>
+  <p>We’re designing and programming a competitive robot with advanced autonomous routines and strategic scoring systems.</p>
 </section>
 
-<section class="ftc-section">
+<section>
   <h2>FIRST Tech Challenge</h2>
   <p>We design, build, and program robots to compete in high-level FTC competitions.</p>
 </section>
@@ -249,9 +197,9 @@ section.show {
   </ul>
 </section>
 
-<section class="meet-team-section">
+<section>
   <h2>Meet the Team</h2>
-  <img src="team-photo-octopi.jpg" style="max-width:80%; border-radius:30px;">
+  <p>Team photo coming soon.</p>
 </section>
 
 <script>
@@ -279,7 +227,7 @@ function resize(){
   width=canvas.width=window.innerWidth;
   height=canvas.height=window.innerHeight;
   nodes=[];
-  for(let i=0;i<70;i++){
+  for(let i=0;i<60;i++){
     nodes.push({
       x:Math.random()*width,
       y:Math.random()*height,
