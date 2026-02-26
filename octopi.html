@@ -51,7 +51,6 @@ canvas#bgCanvas {
   z-index: -1;
 }
 
-/* Content */
 .content {
   position: relative;
   z-index: 5;
@@ -95,7 +94,7 @@ canvas#bgCanvas {
 
 /* Hero */
 .hero {
-  min-height: 600px;
+  min-height: 550px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -118,13 +117,9 @@ canvas#bgCanvas {
   text-transform: uppercase;
 }
 
-.hero p {
-  opacity: 0.8;
-}
-
-/* Sections (Reduced Spacing) */
+/* Reduced Section Spacing */
 section {
-  padding: 70px 8%;
+  padding: 60px 8%;
   display: flex;
   justify-content: center;
 }
@@ -198,6 +193,8 @@ footer {
     <div>OCTOPI_ROBOTICS</div>
     <nav class="navbar__menu">
       <a href="#about" class="navbar__link">About</a>
+      <a href="#growth" class="navbar__link">Growth</a>
+      <a href="#outreach" class="navbar__link">Outreach</a>
       <a href="#achievements" class="navbar__link">Achievements</a>
       <a href="#members" class="navbar__link">Members</a>
       <a href="#mentors" class="navbar__link">Mentors</a>
@@ -213,10 +210,31 @@ footer {
 
 <section id="about">
   <div class="panel">
-    <h2>About Octopi Robotics</h2>
+    <h2>About Us</h2>
     <p>
-      Octopi Robotics is Renert School’s FIRST Tech Challenge team, founded in September 2023. 
+      Octopi Robotics was founded in September 2023 and became Renert School’s official FIRST Tech Challenge team in 2024.
       We compete at the provincial level and beyond while building a sustainable, high-performance robotics program focused on technical excellence and long-term growth.
+    </p>
+  </div>
+</section>
+
+<section id="growth">
+  <div class="panel">
+    <h2>Program Development</h2>
+    <ul>
+      <li>Structured preseason technical workshops</li>
+      <li>Cross-training across engineering and programming disciplines</li>
+      <li>Documented systems for long-term sustainability</li>
+      <li>Multi-season competitive growth strategy</li>
+    </ul>
+  </div>
+</section>
+
+<section id="outreach">
+  <div class="panel">
+    <h2>Community Outreach</h2>
+    <p>
+      We promote STEM education within Renert School and the Calgary community, encouraging participation in robotics and technical learning initiatives.
     </p>
   </div>
 </section>
@@ -237,15 +255,11 @@ footer {
     <h2>Our Members</h2>
     <div class="member-grid">
       <div class="member-card">
-        <img src="member1.jpg" alt="Member Name">
+        <img src="member1.jpg">
         <p>Member Name</p>
       </div>
       <div class="member-card">
-        <img src="member2.jpg" alt="Member Name">
-        <p>Member Name</p>
-      </div>
-      <div class="member-card">
-        <img src="member3.jpg" alt="Member Name">
+        <img src="member2.jpg">
         <p>Member Name</p>
       </div>
     </div>
@@ -257,11 +271,7 @@ footer {
     <h2>Our Mentors</h2>
     <div class="member-grid">
       <div class="member-card">
-        <img src="mentor1.jpg" alt="Mentor Name">
-        <p>Mentor Name</p>
-      </div>
-      <div class="member-card">
-        <img src="mentor2.jpg" alt="Mentor Name">
+        <img src="mentor1.jpg">
         <p>Mentor Name</p>
       </div>
     </div>
