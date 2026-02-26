@@ -4,8 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>27361 Octopi Robotics</title>
-<meta name="description" content="27361 Octopi Robotics - Renert School's FIRST Tech Challenge team promoting STEM and robotics excellence.">
-<meta name="keywords" content="Robotics, FIRST Tech Challenge, STEM, Calgary, Renert School">
 
 <style>
 :root {
@@ -70,8 +68,11 @@ canvas#bgCanvas {
   display: flex;
   align-items: center;
   z-index: 10;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateY(0);
 }
 
+.navbar.is-visible { transform: translateY(0); }
 .navbar__container {
   width: 100%;
   display: flex;
@@ -103,7 +104,6 @@ canvas#bgCanvas {
   align-items: center;
   margin-top: 70px;
   text-align: center;
-  padding: 0 20px;
 }
 
 .hero h1 {
@@ -120,32 +120,11 @@ canvas#bgCanvas {
   text-transform: uppercase;
 }
 
-.hero p {
-  font-size: 18px;
-  margin-top: 15px;
-  opacity: 0.8;
-}
-
-/* Responsive Hero */
-@media(max-width: 768px){
-  .hero h1 { font-size: 60px; }
-  .hero h2 { font-size: 24px; }
-  .hero p { font-size: 16px; }
-}
-
-/* Sections */
+/* Reduced Section Spacing */
 section {
   padding: 60px 8%;
   display: flex;
   justify-content: center;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: 0.6s ease;
-}
-
-section.visible {
-  opacity: 1;
-  transform: translateY(0);
 }
 
 .panel {
@@ -155,12 +134,6 @@ section.visible {
   border-radius: 10px;
   width: 100%;
   max-width: 1100px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.panel:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,240,255,0.2);
 }
 
 h2 {
@@ -285,11 +258,11 @@ footer {
     <h2>Our Members</h2>
     <div class="member-grid">
       <div class="member-card">
-        <img src="member1.jpg" alt="Member Name">
+        <img src="member1.jpg">
         <p>Member Name</p>
       </div>
       <div class="member-card">
-        <img src="member2.jpg" alt="Member Name">
+        <img src="member2.jpg">
         <p>Member Name</p>
       </div>
     </div>
@@ -301,7 +274,7 @@ footer {
     <h2>Our Mentors</h2>
     <div class="member-grid">
       <div class="member-card">
-        <img src="mentor1.jpg" alt="Mentor Name">
+        <img src="mentor1.jpg">
         <p>Mentor Name</p>
       </div>
     </div>
@@ -315,7 +288,7 @@ footer {
 </div>
 
 <script>
-/* Canvas Particle Background */
+// --- Particle Background ---
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
 let width,height,nodes=[];
@@ -342,9 +315,6 @@ function draw(){
     ctx.fill();
     n.x+=n.vx;
     n.y+=n.vy;
-    // Bounce off edges
-    if(n.x<0 || n.x>width) n.vx*=-1;
-    if(n.y<0 || n.y>height) n.vy*=-1;
   });
   requestAnimationFrame(draw);
 }
@@ -352,14 +322,46 @@ window.addEventListener('resize',resize);
 resize();
 draw();
 
-/* Fade-in sections on scroll */
-const sections = document.querySelectorAll('section');
-const observer = new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting) e.target.classList.add('visible');
+// --- Smooth Scroll + Navbar Visibility ---
+function smoothScrollTo(targetPosition, duration) {
+  const startPosition = window.pageYOffset;
+  const distance = targetPosition - startPosition;
+  let startTime = null;
+  function animation(currentTime) {
+    if (startTime === null) startTime = currentTime;
+    const timeElapsed = currentTime - startTime;
+    const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
+    window.scrollTo(0, run);
+    if (timeElapsed < duration) requestAnimationFrame(animation);
+  }
+  function easeInOutCubic(t, b, c, d) {
+    t /= d/2; if(t<1) return c/2*t*t*t + b; t-=2; return c/2*(t*t*t+2)+b;
+  }
+  requestAnimationFrame(animation);
+}
+
+document.querySelectorAll('.navbar__link').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    const targetID = link.getAttribute('href').substring(1);
+    const targetSection = document.getElementById(targetID);
+    if (targetSection) {
+      const navbarHeight = document.querySelector('.navbar').offsetHeight;
+      const targetPos = targetSection.offsetTop - navbarHeight;
+      smoothScrollTo(targetPos, 1000);
+    }
   });
-}, {threshold:0.1});
-sections.forEach(s=>observer.observe(s));
+});
+
+// Show navbar on scroll down
+const navbar = document.querySelector('.navbar');
+window.addEventListener('scroll', () => {
+  if (window.pageYOffset > 50) {
+    navbar.classList.add('is-visible');
+  } else {
+    navbar.classList.remove('is-visible');
+  }
+});
 </script>
 
 </body>
