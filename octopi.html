@@ -24,7 +24,7 @@ body {
   overflow-x: hidden;
 }
 
-/* ===== BACKGROUND WRAPPER ===== */
+/* Background */
 .background-layer {
   position: fixed;
   inset: 0;
@@ -32,7 +32,6 @@ body {
   pointer-events: none;
 }
 
-/* Ambient glow */
 .background-layer::before {
   content: "";
   position: absolute;
@@ -46,34 +45,13 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* Scan lines */
-.background-layer::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(
-    to bottom,
-    rgba(255,255,255,0.02),
-    rgba(255,255,255,0.02) 1px,
-    transparent 2px,
-    transparent 4px
-  );
-  animation: scan 8s linear infinite;
-}
-
-@keyframes scan {
-  from { background-position: 0 0; }
-  to { background-position: 0 200px; }
-}
-
-/* Node Canvas */
 canvas#bgCanvas {
   position: absolute;
   inset: 0;
   z-index: -1;
 }
 
-/* ===== CONTENT ===== */
+/* Content */
 .content {
   position: relative;
   z-index: 5;
@@ -127,22 +105,21 @@ canvas#bgCanvas {
 }
 
 .hero h1 {
-  font-size: 90px;
+  font-size: 110px;
   color: var(--accent);
   margin: 0;
+  text-shadow: 0 0 25px rgba(0,240,255,0.6);
+  letter-spacing: 4px;
 }
 
 .hero h2 {
-  font-size: 50px;
-  color: var(--text);
-  margin: 10px 0 30px 0;
-  letter-spacing: 1px;
+  font-size: 45px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
 }
 
 .hero p {
-  max-width: 700px;
-  font-size: 1.2rem;
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
 /* Sections */
@@ -153,73 +130,21 @@ section {
 }
 
 .panel {
-  position: relative;
   background: var(--panel);
   padding: 50px;
   border: 1px solid var(--border);
   border-radius: 10px;
   width: 100%;
   max-width: 1000px;
-  transition: 0.4s ease;
-}
-
-/* Corner brackets */
-.panel::before,
-.panel::after {
-  content: "";
-  position: absolute;
-  width: 25px;
-  height: 25px;
-  border: 2px solid var(--accent);
-  opacity: 0.3;
-}
-
-.panel::before {
-  top: -1px;
-  left: -1px;
-  border-right: none;
-  border-bottom: none;
-}
-
-.panel::after {
-  bottom: -1px;
-  right: -1px;
-  border-left: none;
-  border-top: none;
-}
-
-.panel.visible {
-  border-color: rgba(0,240,255,0.6);
-  box-shadow: 0 0 20px rgba(0,240,255,0.2);
 }
 
 h2 {
   color: var(--accent);
-  position: relative;
-}
-
-h2::after {
-  content: "";
-  position: absolute;
-  bottom: -6px;
-  left: 0;
-  height: 2px;
-  width: 60px;
-  background: var(--accent);
-  animation: pulseLine 3s infinite ease-in-out;
-}
-
-@keyframes pulseLine {
-  0%,100% { width: 60px; }
-  50% { width: 120px; }
 }
 
 p, li {
   line-height: 1.7;
-  font-size: 1rem;
 }
-
-ul { padding-left: 20px; }
 
 footer {
   text-align: center;
@@ -242,9 +167,9 @@ footer {
     <div>OCTOPI_ROBOTICS</div>
     <nav class="navbar__menu">
       <a href="#about" class="navbar__link">About</a>
-      <a href="#ftc" class="navbar__link">FTC</a>
-      <a href="#stats" class="navbar__link">Stats</a>
-      <a href="#team" class="navbar__link">Team</a>
+      <a href="#growth" class="navbar__link">Growth</a>
+      <a href="#outreach" class="navbar__link">Outreach</a>
+      <a href="#achievements" class="navbar__link">Achievements</a>
     </nav>
   </div>
 </header>
@@ -252,40 +177,59 @@ footer {
 <div class="hero">
   <h1>27361</h1>
   <h2>Octopi Robotics</h2>
-  <p>Based in Calgary, Alberta. Founded in the 2023–2024 season.</p>
+  <p>Renert School • Calgary, Alberta • Founded September 2023</p>
 </div>
 
 <section id="about">
   <div class="panel">
-    <h2>Competitive Excellence</h2>
-    <p>Team 27361 is one of the top-performing FTC teams, ranked 364th out of 8,559 active teams worldwide. Our robot demonstrates advanced autonomous capability, strategic scoring efficiency, and mechanical reliability.</p>
+    <h2>Team Foundation</h2>
+    <p>
+      Octopi Robotics was founded in September 2023 and became Renert School’s official FIRST Tech Challenge team in 2024. The team was established to build a sustainable, competitive robotics program focused on long-term growth, mentorship, and technical excellence.
+    </p>
+    <p>
+      We compete in the FIRST Tech Challenge program, representing Calgary, Alberta at the provincial level and beyond.
+    </p>
   </div>
 </section>
 
-<section id="ftc">
+<section id="growth">
   <div class="panel">
-    <h2>FIRST Tech Challenge</h2>
-    <p>We compete in the FIRST Tech Challenge, designing, building, and programming competitive robots. Our design team is highly skilled and fully integrated with engineering, using Onshape to CAD and model all components.</p>
-  </div>
-</section>
-
-<section id="stats">
-  <div class="panel">
-    <h2>Team Achievements</h2>
+    <h2>Program Development & Sustainability</h2>
+    <p>
+      Octopi Robotics operates under a structured development model emphasizing offseason training, knowledge transfer between members, and continuous skill progression.
+    </p>
     <ul>
-      <li>Winning Alliance – Nii’miis’stii Interleague Tournament</li>
-      <li>Top-ranked in local league competitions</li>
-      <li>364 / 8,559 worldwide ranking</li>
-      <li>Advanced autonomous routines scoring 95%+ in trials</li>
-      <li>Robust engineering notebook recognized for documentation excellence</li>
+      <li>Structured preseason technical workshops</li>
+      <li>Cross-training across engineering and programming disciplines</li>
+      <li>Documented processes for long-term team continuity</li>
+      <li>Strategic planning for multi-season improvement</li>
     </ul>
   </div>
 </section>
 
-<section id="team">
+<section id="outreach">
   <div class="panel">
-    <h2>Meet the Team</h2>
-    <p>Our members combine expertise in mechanical engineering, programming, CAD design, and strategy development to create a competitive robot capable of performing at the highest levels of FTC competition.</p>
+    <h2>Community Engagement</h2>
+    <p>
+      Our team is committed to expanding STEM access within our school and broader community. We actively promote robotics education, mentorship, and participation in competitive STEM programs.
+    </p>
+    <ul>
+      <li>STEM advocacy within Renert School</li>
+      <li>Mentorship of newer robotics students</li>
+      <li>Promotion of FIRST values and gracious professionalism</li>
+    </ul>
+  </div>
+</section>
+
+<section id="achievements">
+  <div class="panel">
+    <h2>Competition Achievements</h2>
+    <ul>
+      <li>Winning Alliance – Nii’miis’stii Interleague Tournament</li>
+      <li>Top-ranked in local league competitions</li>
+      <li>Ranked 303th out of 8,559 active FTC teams worldwide</li>
+      <li>Alberta Championship Competitor</li>
+    </ul>
   </div>
 </section>
 
@@ -296,7 +240,6 @@ footer {
 </div>
 
 <script>
-/* ===== Node Background ===== */
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
 let width,height,nodes=[];
@@ -317,7 +260,7 @@ function resize(){
 function draw(){
   ctx.clearRect(0,0,width,height);
   nodes.forEach(n=>{
-    ctx.fillStyle='rgba(0,240,255,0.5)';
+    ctx.fillStyle='rgba(0,240,255,0.6)';
     ctx.beginPath();
     ctx.arc(n.x,n.y,n.size,0,Math.PI*2);
     ctx.fill();
@@ -329,17 +272,6 @@ function draw(){
 window.addEventListener('resize',resize);
 resize();
 draw();
-
-/* Scroll Glow */
-const panels = document.querySelectorAll('.panel');
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if(entry.isIntersecting){
-      entry.target.classList.add('visible');
-    }
-  });
-},{ threshold: 0.3 });
-panels.forEach(panel => observer.observe(panel));
 </script>
 
 </body>
