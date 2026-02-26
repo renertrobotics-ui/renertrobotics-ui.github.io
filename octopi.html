@@ -18,29 +18,27 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: "Consolas", monospace;
+  font-family: Consolas, monospace;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
-  position: relative;
-  z-index: 1;
 }
 
-/* ===== Animated Node Background ===== */
-canvas#bgCanvas {
+/* ===== BACKGROUND WRAPPER ===== */
+.background-layer {
   position: fixed;
   inset: 0;
-  z-index: -3;
+  z-index: 0;
+  pointer-events: none;
 }
 
-/* Ambient Gradient */
-body::before {
+/* Ambient glow */
+.background-layer::before {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: -50%;
-  background: radial-gradient(circle at 30% 40%, rgba(0,240,255,0.05), transparent 40%);
-  animation: drift 30s linear infinite;
-  z-index: -2;
+  background: radial-gradient(circle at 30% 40%, rgba(0,240,255,0.06), transparent 40%);
+  animation: drift 40s linear infinite;
 }
 
 @keyframes drift {
@@ -48,10 +46,10 @@ body::before {
   to { transform: rotate(360deg); }
 }
 
-/* Scan Lines */
-body::after {
+/* Scan lines */
+.background-layer::after {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
   background: repeating-linear-gradient(
     to bottom,
@@ -61,8 +59,6 @@ body::after {
     transparent 4px
   );
   animation: scan 8s linear infinite;
-  pointer-events: none;
-  z-index: -1;
 }
 
 @keyframes scan {
@@ -70,7 +66,20 @@ body::after {
   to { background-position: 0 200px; }
 }
 
-/* ===== Navbar ===== */
+/* Node Canvas */
+canvas#bgCanvas {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+/* ===== CONTENT ===== */
+.content {
+  position: relative;
+  z-index: 5;
+}
+
+/* Navbar */
 .navbar {
   position: fixed;
   top: 0;
@@ -104,50 +113,43 @@ body::after {
 
 .navbar__link:hover {
   color: var(--accent);
-  text-shadow: 0 0 8px var(--accent);
 }
 
-/* ===== Hero ===== */
+/* Hero */
 .hero {
   min-height: 650px;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 20px;
-  margin-top: 70px;
   flex-direction: column;
-  position: relative;
-  z-index: 5;
+  justify-content: center;
+  align-items: center;
+  margin-top: 70px;
+  text-align: center;
 }
 
 .hero h1 {
-  font-size: 64px;
+  font-size: 90px;
   color: var(--accent);
-  margin-bottom: 10px;
-  letter-spacing: 2px;
+  margin: 0;
 }
 
-.telemetry {
-  font-size: 0.9rem;
-  opacity: 0.7;
-  margin-bottom: 30px;
-  letter-spacing: 2px;
+.hero h2 {
+  font-size: 50px;
+  color: var(--text);
+  margin: 10px 0 30px 0;
+  letter-spacing: 1px;
 }
 
 .hero p {
-  max-width: 800px;
+  max-width: 700px;
   font-size: 1.2rem;
   opacity: 0.85;
 }
 
-/* ===== Sections ===== */
+/* Sections */
 section {
   padding: 120px 10%;
   display: flex;
   justify-content: center;
-  position: relative;
-  z-index: 5;
 }
 
 .panel {
@@ -161,7 +163,7 @@ section {
   transition: 0.4s ease;
 }
 
-/* Corner Brackets */
+/* Corner brackets */
 .panel::before,
 .panel::after {
   content: "";
@@ -186,25 +188,21 @@ section {
   border-top: none;
 }
 
-/* Scroll Glow */
 .panel.visible {
   border-color: rgba(0,240,255,0.6);
-  box-shadow: 0 0 25px rgba(0,240,255,0.2);
+  box-shadow: 0 0 20px rgba(0,240,255,0.2);
 }
 
-/* Heading Data Line */
 h2 {
-  font-size: 36px;
   color: var(--accent);
-  margin-bottom: 25px;
   position: relative;
 }
 
 h2::after {
   content: "";
   position: absolute;
+  bottom: -6px;
   left: 0;
-  bottom: -8px;
   height: 2px;
   width: 60px;
   background: var(--accent);
@@ -212,8 +210,8 @@ h2::after {
 }
 
 @keyframes pulseLine {
-  0%,100% { width: 60px; opacity: 0.6; }
-  50% { width: 120px; opacity: 1; }
+  0%,100% { width: 60px; }
+  50% { width: 120px; }
 }
 
 p, li {
@@ -227,26 +225,17 @@ footer {
   text-align: center;
   padding: 40px;
   opacity: 0.5;
-  border-top: 1px solid var(--border);
-  position: relative;
-  z-index: 5;
-}
-
-/* Panel Hover */
-.panel:hover {
-  background: #0f1625;
-  transform: translateY(-4px);
-}
-
-@media(max-width: 900px){
-  .hero h1 { font-size: 42px; }
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="bgCanvas"></canvas>
+<div class="background-layer">
+  <canvas id="bgCanvas"></canvas>
+</div>
+
+<div class="content">
 
 <header class="navbar">
   <div class="navbar__container">
@@ -254,7 +243,7 @@ footer {
     <nav class="navbar__menu">
       <a href="#about" class="navbar__link">About</a>
       <a href="#ftc" class="navbar__link">FTC</a>
-      <a href="#goals" class="navbar__link">Goals</a>
+      <a href="#stats" class="navbar__link">Stats</a>
       <a href="#team" class="navbar__link">Team</a>
     </nav>
   </div>
@@ -262,48 +251,49 @@ footer {
 
 <div class="hero">
   <h1>27361</h1>
-  <div class="telemetry">
-    STATUS: ACTIVE | RANK: 364/8559 | MODE: AUTONOMOUS_READY
-  </div>
-  <p>Mission Control for precision-engineered FTC robotics systems built in Calgary.</p>
+  <h2>Octopi Robotics</h2>
+  <p>Based in Calgary, Alberta. Founded in the 2023–2024 season.</p>
 </div>
 
 <section id="about">
   <div class="panel">
     <h2>Competitive Excellence</h2>
-    <p>Winning Alliance – Nii’miis’stii Interleague Tournament. Top 5% global FTC ranking.</p>
+    <p>Team 27361 is one of the top-performing FTC teams, ranked 364th out of 8,559 active teams worldwide. Our robot demonstrates advanced autonomous capability, strategic scoring efficiency, and mechanical reliability.</p>
   </div>
 </section>
 
 <section id="ftc">
   <div class="panel">
     <h2>FIRST Tech Challenge</h2>
-    <p>Designing, building, and programming advanced robotics systems while promoting STEM innovation.</p>
+    <p>We compete in the FIRST Tech Challenge, designing, building, and programming competitive robots. Our design team is highly skilled and fully integrated with engineering, using Onshape to CAD and model all components.</p>
   </div>
 </section>
 
-<section id="goals">
+<section id="stats">
   <div class="panel">
-    <h2>2025 Objectives</h2>
+    <h2>Team Achievements</h2>
     <ul>
-      <li>Refine autonomous navigation</li>
-      <li>Enhance mechanical efficiency</li>
-      <li>Expand Calgary STEM outreach</li>
-      <li>Advance AI-driven strategy systems</li>
+      <li>Winning Alliance – Nii’miis’stii Interleague Tournament</li>
+      <li>Top-ranked in local league competitions</li>
+      <li>364 / 8,559 worldwide ranking</li>
+      <li>Advanced autonomous routines scoring 95%+ in trials</li>
+      <li>Robust engineering notebook recognized for documentation excellence</li>
     </ul>
   </div>
 </section>
 
 <section id="team">
   <div class="panel">
-    <h2>Engineering Division</h2>
-    <p>Mechanical design, software architecture, CAD modeling, and integrated competition strategy.</p>
+    <h2>Meet the Team</h2>
+    <p>Our members combine expertise in mechanical engineering, programming, CAD design, and strategy development to create a competitive robot capable of performing at the highest levels of FTC competition.</p>
   </div>
 </section>
 
 <footer>
   © 2026 27361 Octopi Robotics | Calgary, Alberta
 </footer>
+
+</div>
 
 <script>
 /* ===== Node Background ===== */
@@ -314,32 +304,18 @@ function resize(){
   width=canvas.width=window.innerWidth;
   height=canvas.height=window.innerHeight;
   nodes=[];
-  for(let i=0;i<70;i++){
+  for(let i=0;i<60;i++){
     nodes.push({
       x:Math.random()*width,
       y:Math.random()*height,
-      vx:(Math.random()-0.5)*0.6,
-      vy:(Math.random()-0.5)*0.6,
+      vx:(Math.random()-0.5)*0.5,
+      vy:(Math.random()-0.5)*0.5,
       size:Math.random()*2+1
     });
   }
 }
 function draw(){
   ctx.clearRect(0,0,width,height);
-  for(let i=0;i<nodes.length;i++){
-    for(let j=i+1;j<nodes.length;j++){
-      let dx=nodes[i].x-nodes[j].x;
-      let dy=nodes[i].y-nodes[j].y;
-      let dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<130){
-        ctx.strokeStyle='rgba(0,240,255,'+(1-dist/130)*0.3+')';
-        ctx.beginPath();
-        ctx.moveTo(nodes[i].x,nodes[i].y);
-        ctx.lineTo(nodes[j].x,nodes[j].y);
-        ctx.stroke();
-      }
-    }
-  }
   nodes.forEach(n=>{
     ctx.fillStyle='rgba(0,240,255,0.5)';
     ctx.beginPath();
@@ -347,8 +323,6 @@ function draw(){
     ctx.fill();
     n.x+=n.vx;
     n.y+=n.vy;
-    if(n.x<0||n.x>width) n.vx*=-1;
-    if(n.y<0||n.y>height) n.vy*=-1;
   });
   requestAnimationFrame(draw);
 }
