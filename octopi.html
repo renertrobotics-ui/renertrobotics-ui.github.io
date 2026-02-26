@@ -95,7 +95,7 @@ canvas#bgCanvas {
 
 /* Hero */
 .hero {
-  min-height: 650px;
+  min-height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -113,7 +113,7 @@ canvas#bgCanvas {
 }
 
 .hero h2 {
-  font-size: 45px;
+  font-size: 40px;
   letter-spacing: 3px;
   text-transform: uppercase;
 }
@@ -122,33 +122,64 @@ canvas#bgCanvas {
   opacity: 0.8;
 }
 
-/* Sections */
+/* Sections (Reduced Spacing) */
 section {
-  padding: 120px 10%;
+  padding: 70px 8%;
   display: flex;
   justify-content: center;
 }
 
 .panel {
   background: var(--panel);
-  padding: 50px;
+  padding: 40px;
   border: 1px solid var(--border);
   border-radius: 10px;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1100px;
 }
 
 h2 {
   color: var(--accent);
+  margin-bottom: 20px;
 }
 
 p, li {
   line-height: 1.7;
 }
 
+/* Member Grid */
+.member-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.member-card {
+  background: #0f172a;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid var(--border);
+  transition: 0.3s ease;
+}
+
+.member-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-5px);
+}
+
+.member-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
 footer {
   text-align: center;
-  padding: 40px;
+  padding: 30px;
   opacity: 0.5;
 }
 </style>
@@ -167,9 +198,9 @@ footer {
     <div>OCTOPI_ROBOTICS</div>
     <nav class="navbar__menu">
       <a href="#about" class="navbar__link">About</a>
-      <a href="#growth" class="navbar__link">Growth</a>
-      <a href="#outreach" class="navbar__link">Outreach</a>
       <a href="#achievements" class="navbar__link">Achievements</a>
+      <a href="#members" class="navbar__link">Members</a>
+      <a href="#mentors" class="navbar__link">Mentors</a>
     </nav>
   </div>
 </header>
@@ -177,47 +208,16 @@ footer {
 <div class="hero">
   <h1>27361</h1>
   <h2>Octopi Robotics</h2>
-  <p>Renert School • Calgary, Alberta • Founded September 2023</p>
+  <p>Renert School • Calgary, Alberta • Founded 2023</p>
 </div>
 
 <section id="about">
   <div class="panel">
-    <h2>Team Foundation</h2>
+    <h2>About Octopi Robotics</h2>
     <p>
-      Octopi Robotics was founded in September 2023 and became Renert School’s official FIRST Tech Challenge team in 2024. The team was established to build a sustainable, competitive robotics program focused on long-term growth, mentorship, and technical excellence.
+      Octopi Robotics is Renert School’s FIRST Tech Challenge team, founded in September 2023. 
+      We compete at the provincial level and beyond while building a sustainable, high-performance robotics program focused on technical excellence and long-term growth.
     </p>
-    <p>
-      We compete in the FIRST Tech Challenge program, representing Calgary, Alberta at the provincial level and beyond.
-    </p>
-  </div>
-</section>
-
-<section id="growth">
-  <div class="panel">
-    <h2>Program Development & Sustainability</h2>
-    <p>
-      Octopi Robotics operates under a structured development model emphasizing offseason training, knowledge transfer between members, and continuous skill progression.
-    </p>
-    <ul>
-      <li>Structured preseason technical workshops</li>
-      <li>Cross-training across engineering and programming disciplines</li>
-      <li>Documented processes for long-term team continuity</li>
-      <li>Strategic planning for multi-season improvement</li>
-    </ul>
-  </div>
-</section>
-
-<section id="outreach">
-  <div class="panel">
-    <h2>Community Engagement</h2>
-    <p>
-      Our team is committed to expanding STEM access within our school and broader community. We actively promote robotics education, mentorship, and participation in competitive STEM programs.
-    </p>
-    <ul>
-      <li>STEM advocacy within Renert School</li>
-      <li>Mentorship of newer robotics students</li>
-      <li>Promotion of FIRST values and gracious professionalism</li>
-    </ul>
   </div>
 </section>
 
@@ -227,9 +227,44 @@ footer {
     <ul>
       <li>Winning Alliance – Nii’miis’stii Interleague Tournament</li>
       <li>Top-ranked in local league competitions</li>
-      <li>Ranked 303th out of 8,559 active FTC teams worldwide</li>
-      <li>Alberta Championship Competitor</li>
+      <li>Ranked 364th out of 8,559 active FTC teams worldwide</li>
     </ul>
+  </div>
+</section>
+
+<section id="members">
+  <div class="panel">
+    <h2>Our Members</h2>
+    <div class="member-grid">
+      <div class="member-card">
+        <img src="member1.jpg" alt="Member Name">
+        <p>Member Name</p>
+      </div>
+      <div class="member-card">
+        <img src="member2.jpg" alt="Member Name">
+        <p>Member Name</p>
+      </div>
+      <div class="member-card">
+        <img src="member3.jpg" alt="Member Name">
+        <p>Member Name</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mentors">
+  <div class="panel">
+    <h2>Our Mentors</h2>
+    <div class="member-grid">
+      <div class="member-card">
+        <img src="mentor1.jpg" alt="Mentor Name">
+        <p>Mentor Name</p>
+      </div>
+      <div class="member-card">
+        <img src="mentor2.jpg" alt="Mentor Name">
+        <p>Mentor Name</p>
+      </div>
+    </div>
   </div>
 </section>
 
