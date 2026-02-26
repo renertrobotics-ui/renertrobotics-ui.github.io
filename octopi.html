@@ -18,13 +18,22 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: "Consolas", "Courier New", monospace;
+  font-family: "Consolas", monospace;
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
+  position: relative;
+  z-index: 1;
 }
 
-/* Ambient gradient */
+/* ===== Animated Node Background ===== */
+canvas#bgCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+}
+
+/* Ambient Gradient */
 body::before {
   content: "";
   position: fixed;
@@ -39,7 +48,29 @@ body::before {
   to { transform: rotate(360deg); }
 }
 
-/* Navbar */
+/* Scan Lines */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.02),
+    rgba(255,255,255,0.02) 1px,
+    transparent 2px,
+    transparent 4px
+  );
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes scan {
+  from { background-position: 0 0; }
+  to { background-position: 0 200px; }
+}
+
+/* ===== Navbar ===== */
 .navbar {
   position: fixed;
   top: 0;
@@ -50,7 +81,7 @@ body::before {
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
-  z-index: 1000;
+  z-index: 10;
 }
 
 .navbar__container {
@@ -76,7 +107,7 @@ body::before {
   text-shadow: 0 0 8px var(--accent);
 }
 
-/* Hero */
+/* ===== Hero ===== */
 .hero {
   min-height: 650px;
   display: flex;
@@ -86,6 +117,8 @@ body::before {
   padding: 0 20px;
   margin-top: 70px;
   flex-direction: column;
+  position: relative;
+  z-index: 5;
 }
 
 .hero h1 {
@@ -108,11 +141,13 @@ body::before {
   opacity: 0.85;
 }
 
-/* Sections */
+/* ===== Sections ===== */
 section {
   padding: 120px 10%;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 5;
 }
 
 .panel {
@@ -126,7 +161,7 @@ section {
   transition: 0.4s ease;
 }
 
-/* Corner brackets */
+/* Corner Brackets */
 .panel::before,
 .panel::after {
   content: "";
@@ -151,13 +186,13 @@ section {
   border-top: none;
 }
 
-/* Scroll glow */
+/* Scroll Glow */
 .panel.visible {
-  border-color: rgba(0,240,255,0.5);
-  box-shadow: 0 0 20px rgba(0,240,255,0.15);
+  border-color: rgba(0,240,255,0.6);
+  box-shadow: 0 0 25px rgba(0,240,255,0.2);
 }
 
-/* Heading data line */
+/* Heading Data Line */
 h2 {
   font-size: 36px;
   color: var(--accent);
@@ -193,15 +228,16 @@ footer {
   padding: 40px;
   opacity: 0.5;
   border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 5;
 }
 
-/* Terminal hover */
+/* Panel Hover */
 .panel:hover {
   background: #0f1625;
   transform: translateY(-4px);
 }
 
-/* Responsive */
 @media(max-width: 900px){
   .hero h1 { font-size: 42px; }
 }
@@ -209,6 +245,8 @@ footer {
 </head>
 
 <body>
+
+<canvas id="bgCanvas"></canvas>
 
 <header class="navbar">
   <div class="navbar__container">
@@ -268,6 +306,57 @@ footer {
 </footer>
 
 <script>
+/* ===== Node Background ===== */
+const canvas = document.getElementById('bgCanvas');
+const ctx = canvas.getContext('2d');
+let width,height,nodes=[];
+function resize(){
+  width=canvas.width=window.innerWidth;
+  height=canvas.height=window.innerHeight;
+  nodes=[];
+  for(let i=0;i<70;i++){
+    nodes.push({
+      x:Math.random()*width,
+      y:Math.random()*height,
+      vx:(Math.random()-0.5)*0.6,
+      vy:(Math.random()-0.5)*0.6,
+      size:Math.random()*2+1
+    });
+  }
+}
+function draw(){
+  ctx.clearRect(0,0,width,height);
+  for(let i=0;i<nodes.length;i++){
+    for(let j=i+1;j<nodes.length;j++){
+      let dx=nodes[i].x-nodes[j].x;
+      let dy=nodes[i].y-nodes[j].y;
+      let dist=Math.sqrt(dx*dx+dy*dy);
+      if(dist<130){
+        ctx.strokeStyle='rgba(0,240,255,'+(1-dist/130)*0.3+')';
+        ctx.beginPath();
+        ctx.moveTo(nodes[i].x,nodes[i].y);
+        ctx.lineTo(nodes[j].x,nodes[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+  nodes.forEach(n=>{
+    ctx.fillStyle='rgba(0,240,255,0.5)';
+    ctx.beginPath();
+    ctx.arc(n.x,n.y,n.size,0,Math.PI*2);
+    ctx.fill();
+    n.x+=n.vx;
+    n.y+=n.vy;
+    if(n.x<0||n.x>width) n.vx*=-1;
+    if(n.y<0||n.y>height) n.vy*=-1;
+  });
+  requestAnimationFrame(draw);
+}
+window.addEventListener('resize',resize);
+resize();
+draw();
+
+/* Scroll Glow */
 const panels = document.querySelectorAll('.panel');
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
