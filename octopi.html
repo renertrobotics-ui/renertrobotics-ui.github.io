@@ -7,8 +7,9 @@
 
 <style>
 :root {
-  --light-bg: #ffffff;
-  --text-dark: #111111;
+  --dark-bg: #0a0f1c;
+  --section-bg: #11182b;
+  --text-light: #e6f1ff;
   --accent: #00e0ff;
 }
 
@@ -17,12 +18,12 @@ html { scroll-behavior: smooth; }
 body {
   margin: 0;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--light-bg);
-  color: var(--text-dark);
+  background: var(--dark-bg);
+  color: var(--text-light);
   overflow-x: hidden;
 }
 
-/* Sci-Fi Animated Background */
+/* Animated Background */
 canvas#bgCanvas {
   position: fixed;
   inset: 0;
@@ -35,12 +36,12 @@ canvas#bgCanvas {
   top: 0;
   width: 100%;
   height: 70px;
-  background: white;
-  color: var(--text-dark);
+  background: rgba(10,15,28,0.95);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   z-index: 1000;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 15px rgba(0,0,0,0.6);
 }
 
 .navbar__container {
@@ -57,8 +58,13 @@ canvas#bgCanvas {
 
 .navbar__link {
   text-decoration: none;
-  color: var(--text-dark);
+  color: var(--text-light);
   font-weight: 600;
+  transition: 0.3s;
+}
+
+.navbar__link:hover {
+  color: var(--accent);
 }
 
 /* Hero */
@@ -70,20 +76,19 @@ canvas#bgCanvas {
   text-align: center;
   padding: 0 20px;
   margin-top: 70px;
-  background: linear-gradient(135deg,#e0f7ff,#ffffff);
+  background: linear-gradient(135deg,#0a0f1c,#11182b);
 }
 
 .hero h1 {
   font-size: 80px;
   margin-bottom: 20px;
-  color: #002233;
+  color: var(--accent);
 }
 
 .hero p {
   font-size: 1.5rem;
   max-width: 900px;
   margin: auto;
-  color: #111;
 }
 
 /* Sections */
@@ -94,6 +99,8 @@ section {
   align-items: center;
   gap: 60px;
   flex-wrap: wrap;
+  background: var(--section-bg);
+  border-top: 1px solid rgba(0,224,255,0.1);
 }
 
 section h2 {
@@ -108,42 +115,35 @@ section p, section li {
   max-width: 650px;
 }
 
-/* Alternating Sections */
 .reverse {
   flex-direction: row-reverse;
 }
 
-/* Stats Image */
 .stats-image img {
   width: 400px;
   border-radius: 12px;
   flex-shrink: 0;
+  box-shadow: 0 0 30px rgba(0,224,255,0.3);
 }
 
-/* Goals List */
 ul {
   list-style: disc;
   padding-left: 20px;
 }
 
-/* Team Section */
 .team {
   flex-direction: column;
   text-align: center;
 }
 
-.team h2 {
-  font-size: 52px;
-}
-
-/* Footer */
 footer {
   text-align: center;
   padding: 40px;
   opacity: 0.6;
+  background: #0a0f1c;
+  border-top: 1px solid rgba(0,224,255,0.1);
 }
 
-/* Mobile */
 @media(max-width: 900px){
   section {
     flex-direction: column;
@@ -175,7 +175,6 @@ footer {
   </div>
 </header>
 
-<!-- Hero -->
 <div class="hero">
   <div>
     <h1>27361 Octopi Robotics</h1>
@@ -183,70 +182,58 @@ footer {
   </div>
 </div>
 
-<!-- Competitive Excellence + Stats Image -->
 <section id="about" class="reverse">
   <div style="display:flex; align-items:center; justify-content:space-between; gap:60px; flex-wrap:wrap;">
-    <!-- Text -->
     <div style="max-width:600px;">
       <h2>Competitive Excellence</h2>
-      <p>Team 27361 is one of the top-performing teams in our league and is ranked <strong>364th out of 8,559 active teams worldwide</strong>. Our robot demonstrates advanced autonomous capability, strategic scoring efficiency, and mechanical reliability at the highest competitive level.</p>
-      <p>We were proudly part of the <strong>Winning Alliance at the Nii’miis’stii Interleague Tournament</strong>, showcasing elite performance, teamwork, and engineering excellence under pressure.</p>
+      <p>Team 27361 is ranked <strong>364th out of 8,559 active teams worldwide</strong>.</p>
+      <p>Winning Alliance – Nii’miis’stii Interleague Tournament.</p>
     </div>
-    <!-- Image -->
     <div class="stats-image">
       <img src="quickstats.png" alt="Team 27361 Stats">
     </div>
   </div>
 </section>
 
-<!-- FIRST Tech Challenge Section -->
 <section id="ftc">
   <div>
     <h2>FIRST Tech Challenge</h2>
-    <p>We compete in the <strong>FIRST Tech Challenge (FTC)</strong>, designing, building, and programming robots to solve complex engineering challenges while fostering STEM education, teamwork, and innovation. Our team has consistently ranked among the top teams in our league, and our robot 27361 was part of the Winning Alliance at the Nii’miis’stii Interleague Tournament.</p>
+    <p>We design, build, and program advanced competition robots while fostering STEM education and innovation.</p>
   </div>
 </section>
 
-<!-- Goals Section -->
 <section id="goals" class="reverse">
   <div>
     <h2>2025 Season Goals</h2>
     <ul>
-      <li>Build a reliable and competitive robot</li>
+      <li>Build a reliable competitive robot</li>
       <li>Improve autonomous performance</li>
-      <li>Expand STEM outreach in Calgary</li>
-      <li>Strengthen engineering documentation</li>
-      <li>Develop advanced sensors and AI for game strategy</li>
-      <li>Participate in at least three major tournaments</li>
+      <li>Expand STEM outreach</li>
+      <li>Advance AI-based strategy systems</li>
     </ul>
   </div>
 </section>
 
-<!-- Extended Stats / Achievements Section -->
 <section id="stats">
   <div style="max-width:1000px; margin:auto;">
     <h2>Team Achievements</h2>
     <ul>
-      <li>Winning Alliance – Nii’miis’stii Interleague Tournament</li>
-      <li>Top-ranked in local league competitions</li>
-      <li>364 / 8,559 worldwide ranking</li>
-      <li>Advanced autonomous routines scoring 95%+ in trials</li>
-      <li>Robust engineering notebook recognized for documentation excellence</li>
+      <li>Winning Alliance – Nii’miis’stii Tournament</li>
+      <li>Top Local League Ranking</li>
+      <li>95%+ Autonomous Trial Accuracy</li>
     </ul>
   </div>
 </section>
 
-<!-- Team Section -->
 <section id="team" class="team">
   <h2>Meet the Team</h2>
-  <p>Our members combine expertise in mechanical engineering, programming, CAD design, and strategy development to create a competitive robot capable of performing at the highest levels of FIRST Tech Challenge competition. Collaboration and creativity drive every season.</p>
+  <p>Mechanical engineering, programming, CAD design, and strategy combined to compete at the highest FTC level.</p>
 </section>
 
 <footer>
   © 2026 27361 Octopi Robotics | Calgary, Alberta
 </footer>
 
-<!-- Sci-Fi Animated Background -->
 <script>
 const canvas = document.getElementById('bgCanvas');
 const ctx = canvas.getContext('2d');
@@ -266,7 +253,7 @@ function resize(){
   }
 }
 function draw(){
-  ctx.fillStyle='#ffffff';
+  ctx.fillStyle='#0a0f1c';
   ctx.fillRect(0,0,width,height);
   for(let i=0;i<nodes.length;i++){
     for(let j=i+1;j<nodes.length;j++){
@@ -274,7 +261,7 @@ function draw(){
       let dy=nodes[i].y-nodes[j].y;
       let dist=Math.sqrt(dx*dx+dy*dy);
       if(dist<120){
-        ctx.strokeStyle='rgba(0,200,255,'+(1-dist/120)+')';
+        ctx.strokeStyle='rgba(0,224,255,'+(1-dist/120)+')';
         ctx.beginPath();
         ctx.moveTo(nodes[i].x,nodes[i].y);
         ctx.lineTo(nodes[j].x,nodes[j].y);
@@ -283,7 +270,7 @@ function draw(){
     }
   }
   nodes.forEach(n=>{
-    ctx.fillStyle='rgba(0,255,200,0.8)';
+    ctx.fillStyle='rgba(0,224,255,0.8)';
     ctx.beginPath();
     ctx.arc(n.x,n.y,n.size,0,Math.PI*2);
     ctx.fill();
