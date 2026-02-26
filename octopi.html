@@ -7,27 +7,36 @@
 
 <style>
 :root {
-  --dark-bg: #0a0f1c;
-  --section-bg: #11182b;
-  --text-light: #e6f1ff;
-  --accent: #00e0ff;
+  --bg: #0a0f18;
+  --panel: #111827;
+  --accent: #00f0ff;
+  --text: #dbeafe;
+  --border: rgba(0,240,255,0.15);
 }
 
 html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  background: var(--dark-bg);
-  color: var(--text-light);
+  font-family: "Consolas", "Courier New", monospace;
+  background: var(--bg);
+  color: var(--text);
   overflow-x: hidden;
 }
 
-/* Animated Background */
-canvas#bgCanvas {
+/* Ambient gradient */
+body::before {
+  content: "";
   position: fixed;
-  inset: 0;
-  z-index: -1;
+  inset: -50%;
+  background: radial-gradient(circle at 30% 40%, rgba(0,240,255,0.05), transparent 40%);
+  animation: drift 30s linear infinite;
+  z-index: -2;
+}
+
+@keyframes drift {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* Navbar */
@@ -36,12 +45,12 @@ canvas#bgCanvas {
   top: 0;
   width: 100%;
   height: 70px;
-  background: rgba(10,15,28,0.95);
+  background: rgba(10,15,24,0.9);
   backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   z-index: 1000;
-  box-shadow: 0 2px 15px rgba(0,0,0,0.6);
 }
 
 .navbar__container {
@@ -58,176 +67,200 @@ canvas#bgCanvas {
 
 .navbar__link {
   text-decoration: none;
-  color: var(--text-light);
-  font-weight: 600;
+  color: var(--text);
   transition: 0.3s;
 }
 
 .navbar__link:hover {
   color: var(--accent);
+  text-shadow: 0 0 8px var(--accent);
 }
 
 /* Hero */
 .hero {
-  min-height: 600px;
+  min-height: 650px;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   padding: 0 20px;
   margin-top: 70px;
-  background: linear-gradient(135deg,#0a0f1c,#11182b);
+  flex-direction: column;
 }
 
 .hero h1 {
-  font-size: 80px;
-  margin-bottom: 20px;
+  font-size: 64px;
   color: var(--accent);
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+}
+
+.telemetry {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
 }
 
 .hero p {
-  font-size: 1.5rem;
-  max-width: 900px;
-  margin: auto;
+  max-width: 800px;
+  font-size: 1.2rem;
+  opacity: 0.85;
 }
 
 /* Sections */
 section {
-  padding: 140px 10%;
+  padding: 120px 10%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 60px;
-  flex-wrap: wrap;
-  background: var(--section-bg);
-  border-top: 1px solid rgba(0,224,255,0.1);
+  justify-content: center;
 }
 
-section h2 {
-  font-size: 52px;
+.panel {
+  position: relative;
+  background: var(--panel);
+  padding: 50px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 1000px;
+  transition: 0.4s ease;
+}
+
+/* Corner brackets */
+.panel::before,
+.panel::after {
+  content: "";
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border: 2px solid var(--accent);
+  opacity: 0.3;
+}
+
+.panel::before {
+  top: -1px;
+  left: -1px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.panel::after {
+  bottom: -1px;
+  right: -1px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Scroll glow */
+.panel.visible {
+  border-color: rgba(0,240,255,0.5);
+  box-shadow: 0 0 20px rgba(0,240,255,0.15);
+}
+
+/* Heading data line */
+h2 {
+  font-size: 36px;
   color: var(--accent);
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  position: relative;
 }
 
-section p, section li {
-  font-size: 1.4rem;
-  line-height: 1.8;
-  max-width: 650px;
+h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  height: 2px;
+  width: 60px;
+  background: var(--accent);
+  animation: pulseLine 3s infinite ease-in-out;
 }
 
-.reverse {
-  flex-direction: row-reverse;
+@keyframes pulseLine {
+  0%,100% { width: 60px; opacity: 0.6; }
+  50% { width: 120px; opacity: 1; }
 }
 
-.stats-image img {
-  width: 400px;
-  border-radius: 12px;
-  flex-shrink: 0;
-  box-shadow: 0 0 30px rgba(0,224,255,0.3);
+p, li {
+  line-height: 1.7;
+  font-size: 1rem;
 }
 
-ul {
-  list-style: disc;
-  padding-left: 20px;
-}
-
-.team {
-  flex-direction: column;
-  text-align: center;
-}
+ul { padding-left: 20px; }
 
 footer {
   text-align: center;
   padding: 40px;
-  opacity: 0.6;
-  background: #0a0f1c;
-  border-top: 1px solid rgba(0,224,255,0.1);
+  opacity: 0.5;
+  border-top: 1px solid var(--border);
 }
 
+/* Terminal hover */
+.panel:hover {
+  background: #0f1625;
+  transform: translateY(-4px);
+}
+
+/* Responsive */
 @media(max-width: 900px){
-  section {
-    flex-direction: column;
-    text-align: center;
-  }
-  .reverse {
-    flex-direction: column;
-  }
-  .hero h1 { font-size: 48px; }
-  section h2 { font-size: 36px; }
+  .hero h1 { font-size: 42px; }
 }
 </style>
 </head>
 
 <body>
 
-<canvas id="bgCanvas"></canvas>
-
 <header class="navbar">
   <div class="navbar__container">
-    <div><strong>Octopi Robotics</strong></div>
+    <div>OCTOPI_ROBOTICS</div>
     <nav class="navbar__menu">
       <a href="#about" class="navbar__link">About</a>
       <a href="#ftc" class="navbar__link">FTC</a>
       <a href="#goals" class="navbar__link">Goals</a>
-      <a href="#stats" class="navbar__link">Stats</a>
       <a href="#team" class="navbar__link">Team</a>
     </nav>
   </div>
 </header>
 
 <div class="hero">
-  <div>
-    <h1>27361 Octopi Robotics</h1>
-    <p>FTC Team 27361 based in Calgary, building elite competition robots focused on precision engineering, advanced autonomous systems, and strategic performance.</p>
+  <h1>27361</h1>
+  <div class="telemetry">
+    STATUS: ACTIVE | RANK: 364/8559 | MODE: AUTONOMOUS_READY
   </div>
+  <p>Mission Control for precision-engineered FTC robotics systems built in Calgary.</p>
 </div>
 
-<section id="about" class="reverse">
-  <div style="display:flex; align-items:center; justify-content:space-between; gap:60px; flex-wrap:wrap;">
-    <div style="max-width:600px;">
-      <h2>Competitive Excellence</h2>
-      <p>Team 27361 is ranked <strong>364th out of 8,559 active teams worldwide</strong>.</p>
-      <p>Winning Alliance – Nii’miis’stii Interleague Tournament.</p>
-    </div>
-    <div class="stats-image">
-      <img src="quickstats.png" alt="Team 27361 Stats">
-    </div>
+<section id="about">
+  <div class="panel">
+    <h2>Competitive Excellence</h2>
+    <p>Winning Alliance – Nii’miis’stii Interleague Tournament. Top 5% global FTC ranking.</p>
   </div>
 </section>
 
 <section id="ftc">
-  <div>
+  <div class="panel">
     <h2>FIRST Tech Challenge</h2>
-    <p>We design, build, and program advanced competition robots while fostering STEM education and innovation.</p>
+    <p>Designing, building, and programming advanced robotics systems while promoting STEM innovation.</p>
   </div>
 </section>
 
-<section id="goals" class="reverse">
-  <div>
-    <h2>2025 Season Goals</h2>
+<section id="goals">
+  <div class="panel">
+    <h2>2025 Objectives</h2>
     <ul>
-      <li>Build a reliable competitive robot</li>
-      <li>Improve autonomous performance</li>
-      <li>Expand STEM outreach</li>
-      <li>Advance AI-based strategy systems</li>
+      <li>Refine autonomous navigation</li>
+      <li>Enhance mechanical efficiency</li>
+      <li>Expand Calgary STEM outreach</li>
+      <li>Advance AI-driven strategy systems</li>
     </ul>
   </div>
 </section>
 
-<section id="stats">
-  <div style="max-width:1000px; margin:auto;">
-    <h2>Team Achievements</h2>
-    <ul>
-      <li>Winning Alliance – Nii’miis’stii Tournament</li>
-      <li>Top Local League Ranking</li>
-      <li>95%+ Autonomous Trial Accuracy</li>
-    </ul>
+<section id="team">
+  <div class="panel">
+    <h2>Engineering Division</h2>
+    <p>Mechanical design, software architecture, CAD modeling, and integrated competition strategy.</p>
   </div>
-</section>
-
-<section id="team" class="team">
-  <h2>Meet the Team</h2>
-  <p>Mechanical engineering, programming, CAD design, and strategy combined to compete at the highest FTC level.</p>
 </section>
 
 <footer>
@@ -235,55 +268,15 @@ footer {
 </footer>
 
 <script>
-const canvas = document.getElementById('bgCanvas');
-const ctx = canvas.getContext('2d');
-let width,height,nodes=[];
-function resize(){
-  width=canvas.width=window.innerWidth;
-  height=canvas.height=window.innerHeight;
-  nodes=[];
-  for(let i=0;i<80;i++){
-    nodes.push({
-      x:Math.random()*width,
-      y:Math.random()*height,
-      vx:(Math.random()-0.5)*1.2,
-      vy:(Math.random()-0.5)*1.2,
-      size:Math.random()*2+1
-    });
-  }
-}
-function draw(){
-  ctx.fillStyle='#0a0f1c';
-  ctx.fillRect(0,0,width,height);
-  for(let i=0;i<nodes.length;i++){
-    for(let j=i+1;j<nodes.length;j++){
-      let dx=nodes[i].x-nodes[j].x;
-      let dy=nodes[i].y-nodes[j].y;
-      let dist=Math.sqrt(dx*dx+dy*dy);
-      if(dist<120){
-        ctx.strokeStyle='rgba(0,224,255,'+(1-dist/120)+')';
-        ctx.beginPath();
-        ctx.moveTo(nodes[i].x,nodes[i].y);
-        ctx.lineTo(nodes[j].x,nodes[j].y);
-        ctx.stroke();
-      }
+const panels = document.querySelectorAll('.panel');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
     }
-  }
-  nodes.forEach(n=>{
-    ctx.fillStyle='rgba(0,224,255,0.8)';
-    ctx.beginPath();
-    ctx.arc(n.x,n.y,n.size,0,Math.PI*2);
-    ctx.fill();
-    n.x+=n.vx;
-    n.y+=n.vy;
-    if(n.x<0||n.x>width) n.vx*=-1;
-    if(n.y<0||n.y>height) n.vy*=-1;
   });
-  requestAnimationFrame(draw);
-}
-window.addEventListener('resize',resize);
-resize();
-draw();
+},{ threshold: 0.3 });
+panels.forEach(panel => observer.observe(panel));
 </script>
 
 </body>
