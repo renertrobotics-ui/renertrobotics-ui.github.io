@@ -3,37 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Renert Robotics - FTC Team 31663 Cuttlefish</title>
+  <title>31663 RSR Cuttlefish - Renert Robotics</title>
   <style>
     :root {
-      --primary-blue: #00a8cc;
-      --primary-purple: #6a5acd;
       --primary-cyan: #00d4ff;
-      --gradient-1: linear-gradient(135deg, var(--primary-cyan), var(--primary-blue));
-      --gradient-2: linear-gradient(135deg, var(--primary-blue), var(--primary-purple));
-      --shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.2);
-      --shadow-medium: 0 8px 25px rgba(0, 0, 0, 0.3);
-      --shadow-strong: 0 12px 35px rgba(0, 212, 255, 0.3);
+      --secondary-blue: #0099cc;
+      --dark-bg: #003366;
+      --light-text: #ffffff;
+      --gradient-1: linear-gradient(135deg, #00d4ff, #0099cc);
+      --gradient-2: linear-gradient(135deg, #0099cc, #003366);
+      --shadow-soft: 0 4px 20px rgba(0, 212, 255, 0.15);
+      --shadow-medium: 0 8px 30px rgba(0, 153, 204, 0.25);
+      --shadow-strong: 0 12px 40px rgba(0, 212, 255, 0.35);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(180deg, #0a2540 0%, #1e3a5f 50%, #0a2540 100%);
-      color: #ffffff;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background-image:
-        radial-gradient(circle at 20% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 40% 40%, rgba(0, 168, 204, 0.05) 0%, transparent 50%);
-      animation: float 20s ease-in-out infinite; pointer-events: none; z-index: 0;
-    }
-
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--dark-bg); color: var(--light-text); overflow-x: hidden; }
+    body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(0, 153, 204, 0.1) 0%, transparent 50%); z-index: -1; animation: float 20s ease-in-out infinite; pointer-events: none; }
     @keyframes float { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 33% { transform: translate(30px, -30px) rotate(120deg); } 66% { transform: translate(-20px, 20px) rotate(240deg); } }
 
     .navbar {
@@ -49,9 +35,56 @@
     .banner-image img { height: 50px; filter: drop-shadow(0 0 10px rgba(0, 212, 255, 0.5)); transition: transform 0.3s ease; }
     .navbar__menu { display: flex; gap: 1rem; align-items: center; list-style: none; }
     .navbar__list { display: flex; gap: 1rem; align-items: center; list-style: none; }
-    .navbar__item { display: inline-block; }
+    .navbar__item { display: inline-block; position: relative; }
     .navbar__link { color: #ffffff; text-decoration: none; padding: 0.7rem 1.5rem; border-radius: 25px; transition: all 0.3s ease; display: inline-block; white-space: nowrap; }
     .navbar__link:hover { background: rgba(0, 212, 255, 0.2); border: 2px solid var(--primary-cyan); box-shadow: 0 0 20px rgba(0, 212, 255, 0.4); }
+    
+    /* Dropdown Menu Styles */
+    .dropdown {
+      position: relative;
+    }
+    
+    .dropdown-toggle::after {
+      content: " \25BC";
+      font-size: 0.7em;
+    }
+    
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: rgba(10, 37, 64, 0.95);
+      backdrop-filter: blur(20px);
+      border: 2px solid rgba(0, 212, 255, 0.3);
+      border-radius: 15px;
+      padding: 0.5rem 0;
+      min-width: 200px;
+      box-shadow: var(--shadow-medium);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .dropdown-item {
+      display: block;
+      padding: 0.5rem 1.5rem;
+      color: #ffffff;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover {
+      background: rgba(0, 212, 255, 0.2);
+      color: var(--primary-cyan);
+    }
 
     .image-background-section { position: relative; width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; padding: 0 5%; overflow: hidden; background-color: #003366; }
     #particleCanvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
@@ -292,11 +325,16 @@
       </div>
       <nav class="navbar__menu" role="navigation">
         <ul class="navbar__list">
-          <li class="navbar__item"><a href="index.html" class="navbar__link">Home</a></li>
           <li class="navbar__item"><a href="about_us.html" class="navbar__link">About Us</a></li>
-          <li class="navbar__item"><a href="cuttlefish.html" class="navbar__link">FTC Cuttlefish</a></li>
-          <li class="navbar__item"><a href="octopi.html" class="navbar__link">FTC Octopi</a></li>
-          <li class="navbar__item"><a href="contact.html" class="navbar__link">Contact</a></li>
+          <li class="navbar__item dropdown">
+            <a href="#" class="navbar__link dropdown-toggle">Our Robots</a>
+            <div class="dropdown-menu">
+              <a href="cuddler_og.html" class="dropdown-item">Cuddler OG</a>
+              <a href="cuddler_mk2.html" class="dropdown-item">Cuddler Mk2</a>
+            </div>
+          </li>
+          <li class="navbar__item"><a href="stats.html" class="navbar__link">Stats</a></li>
+          <li class="navbar__item"><a href="contact.html" class="navbar__link">Contact Us</a></li>
         </ul>
       </nav>
     </div>
