@@ -4,926 +4,504 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Renert Robotics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
         :root {
-            --color-glass-bg: rgba(255, 255, 255, 0.2);
-            --color-glass-border: rgba(255, 255, 255, 0.3);
-            --color-link-highlight: rgba(255, 255, 255, 0.25);
-        
-            --color-text: #333333;
-            --color-focus-outline: #5ab1ff;
-        
-            --font-family-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            --font-weight-bold: 600;
-        
-            --blur-value: 10px;
-            --border-radius-soft: 8px;
-            --navbar-height: 70px;
-            --navbar-padding: 1.5rem;
-            --container-width: 1140px;
-            --transition-speed: 0.3s;
-            
-            /* FTC section calculations */
-            --total-width: calc(100vw - 150px);
-            --ftc-text-width: calc(0.40 * var(--total-width));
-            --ftc-image-box-width: calc(var(--total-width) - var(--ftc-text-width));
-            --fll-text-width: calc(0.40 * var(--total-width));
-            --fll-image-box-width: calc(var(--total-width) - var(--fll-text-width));
-        }
-        h1, h2, h3, h4, h5, h6, p, a, li, span, div {
-          color: #333333 !important;
-        }
-        .image-background-section .overlay-text h1,
-        .image-background-section .overlay-text p {
-          color: #ffffff !important;
+            --orange:        #f19122;
+            --orange-dark:   #c97310;
+            --orange-light:  #fff4e4;
+            --red:           #af1f26;
+            --red-dark:      #8c181e;
+            --red-light:     #fdecea;
+            --cyan:          #0097a7;
+            --cyan-dark:     #00788a;
+            --cyan-light:    #e0f7fa;
+            --violet:        #6a3db8;
+            --violet-dark:   #52309a;
+            --violet-light:  #ede7f6;
+            --dark:          #333333;
+            --mid:           #555555;
+            --muted:         #888888;
+            --border:        #e4e1dc;
+            --surface:       #f9f7f4;
+            --white:         #ffffff;
+            --navbar-h:      70px;
+            --radius:        8px;
+            --radius-lg:     20px;
+            --ease:          0.25s ease;
+            --font:          system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
-
-        /* Background image section */
-        .image-background-section {
-          position: relative;
-          width: 100%;
-          height: 500px;
-          overflow: hidden;
-          color: white;
-          display: flex;
-          align-items: center;
-          padding-left: 50px;
-          box-sizing: border-box;
-        }
-        
-        .bg-image {
-          position: absolute;
-          top: 0; left: 0;
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          z-index: 0;
-        }
-        .overlay-text p{
-          padding-top: -30px;  
-          position: relative;
-          z-index: 1;
-          max-width: 450px;
-          text-shadow: 0 2px 6px rgba(0,0,0,0.7);
-          color: #ffffff;  
-        }
-
-        
-        .overlay-text h1{
-          padding-top: -30px;  
-          position: relative;
-          z-index: 1;
-          max-width: 600px;
-          text-shadow: 0 2px 6px rgba(0,0,0,0.7);
-          color: #ffffff;
-        }
-
-        h1 { font-size: 60px; }
-
-        * { box-sizing: border-box; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            margin: 0;
-            font-family: var(--font-family-sans-serif);
+            font-family: var(--font);
             font-size: 1rem;
-            line-height: 1.5;
-            color: var(--color-text);
-            background-color: #ffffff;
-            background-attachment: fixed;
-        }
-        
-        .content {
-            padding-top: 40px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: left;
-        }
-        
-        
-        .content-container {
-            display: flex;
-            align-items: left;
-            width: 100%;
-        }
-        
-        .content-text {
-            flex: 0 0 auto;
-            text-align: left;
-            margin-left: 50px;
-            max-width: 600px;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--white);
         }
 
-        .content-text .intro {
-            margin-top: -40px;
-        }
-        .content-text .introp {
-            margin-top: -40px;
-            max-width: 500px;
-        }
-        .content-text p {
-            margin-top: 0;
-        }    
-        
-        .content-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding-right: var(--navbar-padding);
-            padding-top: 20px;
-            left-margin: 50px;
-        }
-        
-        .content-image img {
-            height: 400px;
-            width: auto;
-            object-fit: contain;
-        }
-        
-        ul { list-style: none; margin: 0; padding: 0; }
+        h1, h2, h3, p, span, li { color: inherit; }
         a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
 
+        /* ── NAVBAR ── */
         .navbar {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: var(--navbar-height);
-          display: flex;
-          align-items: center;
-          z-index: 1000;
-          background-color: #ffffff;
-          color: #222222;
-          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: var(--navbar-h);
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
         }
-
         .navbar__container {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             width: 100%;
-            max-width: var(--container-width);
-            margin-right: 50px;
-            margin-left: 50px;
-            margin-top: 0px;
-            margin-bottom: 0px;
+            padding: 0 50px;
         }
-        
-        .navbar__brand {
-            font-size: 1.5rem;
-            font-weight: var(--font-weight-bold);
-        }
-        
-        .navbar__link {
-          color: #222222 !important;
-          text-shadow: none;
-        }
-
-        .navbar__brand-section { display: flex; align-items: center; }
-
-        .banner-image {
-            width: 200px;
-            height: 50px;
-            overflow: hidden;
-            margin-left: -20px;
-        }        
+        .banner-image { width: 200px; height: 50px; margin-left: -20px; }
         .banner-image img { width: 100%; height: 100%; object-fit: contain; }
 
         .navbar__toggle {
-            display: block;
-            padding: 0.5rem;
+            display: none;
+            flex-direction: column;
+            gap: 5px;
             border: none;
             background: transparent;
             cursor: pointer;
-            z-index: 1001;
+            padding: 4px;
         }
-        
         .navbar__toggle .bar {
             display: block;
-            width: 25px;
-            height: 3px;
-            margin: 5px auto;
-            background-color: var(--color-text);
-            transition: all var(--transition-speed) ease-in-out;
+            width: 25px; height: 3px;
+            background: var(--dark);
             border-radius: 2px;
+            transition: all var(--ease);
         }
-
         .navbar__toggle.is-active .bar:nth-child(2) { opacity: 0; }
         .navbar__toggle.is-active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
         .navbar__toggle.is-active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-        
-        .navbar__menu {
-            display: none;
-            flex-direction: column;
-            width: 100%;
-            position: absolute;
-            top: var(--navbar-height);
-            left: 0;
-            z-index: -1;
-            background: var(--color-glass-bg);
-            backdrop-filter: blur(var(--blur-value));
-            -webkit-backdrop-filter: blur(var(--blur-value));
-            border-top: 1px solid var(--color-glass-border);
-            padding-bottom: 1rem;
-        }
-        
-        .navbar__menu.is-active { 
-            display: flex; 
-            background-color: #fafafa;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        }
 
-        .navbar__item { text-align: center; }
+        .navbar__menu { display: flex; align-items: center; }
+        .navbar__list { display: flex; align-items: center; gap: 4px; }
 
         .navbar__link {
             display: block;
-            padding: 1.25rem;
-            font-weight: var(--font-weight-bold);
-            transition: background-color var(--transition-speed) ease;
+            padding: 0.5rem 1rem;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--dark) !important;
+            border-radius: var(--radius);
+            transition: background var(--ease);
         }
-        
-        .navbar__link:hover, .navbar__link:focus {
-            background-color: var(--color-link-highlight);
+        .navbar__link:hover { background: var(--surface); }
+
+        .navbar__dropdown { position: relative; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            min-width: 220px;
+            z-index: 999;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.10);
+            padding: 6px;
+        }
+        .dropdown-menu .dropdown-link {
+            display: block;
+            padding: 0.7rem 1rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--dark) !important;
+            border-radius: 8px;
+            transition: background var(--ease);
+            text-align: center;
+        }
+        .dropdown-menu .dropdown-link:hover { background: var(--surface); }
+
+        @media (min-width: 769px) {
+            .navbar__dropdown:hover .dropdown-menu { display: block; }
         }
 
-        :is(.navbar__toggle, .navbar__link):focus-visible {
-            outline: 2px solid var(--color-focus-outline);
-            outline-offset: 2px;
-            border-radius: var(--border-radius-soft);
-        }
-
-        .navbar__dropdown {
-          position: relative;
-        }
-        .right-justified {
-            text-align: right;
-            padding-left: 2rem;
-            padding-right: 50px;
-        }
-        
-        button {
-          margin-top: 1rem;
-          padding: 0.6rem 1.2rem;
-          background-color: #333333;
-          color: #ffffff !important;
-          border: none;
-          border-radius: var(--border-radius-soft);
-          font-weight: var(--font-weight-bold);
-          cursor: pointer;
-          transition: background-color 0.3s ease;
-        }
-        
-        button:hover {
-          background-color: #222222;
-          color: #ffffff !important;
-        }
-
-        /* ── Team buttons ── */
-        .team-buttons-label {
-          margin-top: 1.5rem;
-          margin-bottom: 0.3rem;
-          font-weight: var(--font-weight-bold);
-          font-size: 0.95rem;
-          color: #555555 !important;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-        }
-
-        .team-buttons-row {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.6rem;
-          margin-top: 0;
-        }
-
-        .team-btn {
-          margin-top: 0 !important;
-          padding: 0.55rem 1rem;
-          font-size: 0.88rem;
-          border-radius: var(--border-radius-soft);
-          white-space: nowrap;
-        }
-
-        .team-btn--cuttlefish {
-          background-color: #f19122 !important;
-        }
-        .team-btn--cuttlefish:hover {
-          background-color: #d97d15 !important;
-        }
-        .team-btn--octopi {
-          background-color: #2b6cb0 !important;
-        }
-        .team-btn--octopi:hover {
-          background-color: #1a4f8a !important;
-        }
-
-        /* FLL team buttons */
-        .team-btn--fll1 {
-          background-color: #af1f26 !important;
-        }
-        .team-btn--fll1:hover {
-          background-color: #8e181e !important;
-        }
-
-        /* Divider inside content text */
-        .section-divider {
-          border: none;
-          border-top: 1px solid #e0e0e0;
-          margin: 1.2rem 0 0.8rem 0;
-        }
-
-        /* FTC/FLL reusable */
-        .ftc-section {
-            margin-top: 4rem;
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            display: flex;
             align-items: center;
+            padding: 0 50px;
+            overflow: hidden;
+            margin-top: var(--navbar-h);
         }
-        .fll-section {
-            margin-top: 4rem;
-            align-items: center;
-            margin-bottom: 40px;
+        .hero__bg {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover; z-index: 0;
         }
-        .ftc-section .content-text {
-            flex: 0 0 auto;
-            text-align: left;
-            margin-left: 50px;
-            margin-right: 50px;
-            max-width: 600px;
+        .hero__overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to right,
+                rgba(0,0,0,0.62) 0%,
+                rgba(0,0,0,0.30) 60%,
+                rgba(0,0,0,0.08) 100%
+            );
+            z-index: 1;
+        }
+        .hero__content { position: relative; z-index: 2; max-width: 520px; }
+        .hero__title {
+            font-size: clamp(2.4rem, 5vw, 3.8rem);
+            font-weight: 700;
+            line-height: 1.1;
+            color: #ffffff !important;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            margin-bottom: 14px;
+        }
+        .hero__desc {
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.88) !important;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.5);
+            max-width: 440px;
         }
 
-        .content-container.ftc-section {
+        /* ── PROGRAM SECTIONS ── */
+        .content { padding-bottom: 60px; }
+
+        .program-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+            padding: 56px 50px;
+        }
+        .program-section--fll {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .program-section--fll .program-image-wrap { order: -1; }
+
+        /* Tag pill */
+        .program-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 5px 13px;
+            border-radius: 999px;
+            margin-bottom: 14px;
+        }
+        .program-tag--ftc {
+            background: var(--orange-light);
+            color: var(--orange-dark) !important;
+            border: 1px solid rgba(241,145,34,0.3);
+        }
+        .program-tag--fll {
+            background: var(--red-light);
+            color: var(--red-dark) !important;
+            border: 1px solid rgba(175,31,38,0.22);
+        }
+
+        .program-title {
+            font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--dark) !important;
+            margin-bottom: 12px;
+        }
+        .program-desc {
+            font-size: 0.97rem;
+            color: var(--mid) !important;
+            line-height: 1.75;
+            margin-bottom: 22px;
+        }
+
+        /* Buttons — match original style closely */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 0.6rem 1.2rem;
+            font-family: var(--font);
+            font-size: 0.88rem;
+            font-weight: 600;
+            border-radius: var(--radius);
+            border: none;
+            cursor: pointer;
+            transition: background var(--ease), transform var(--ease);
+            color: #ffffff !important;
+        }
+        .btn:hover { transform: translateY(-1px); }
+        .btn:active { transform: translateY(0); }
+
+        .btn--dark   { background: var(--dark); }
+        .btn--dark:hover { background: #222; }
+        .btn--orange { background: var(--orange); }
+        .btn--orange:hover { background: var(--orange-dark); }
+        .btn--cyan   { background: var(--cyan); }
+        .btn--cyan:hover { background: var(--cyan-dark); }
+        .btn--violet { background: var(--violet); }
+        .btn--violet:hover { background: var(--violet-dark); }
+        .btn--red    { background: var(--red); }
+        .btn--red:hover { background: var(--red-dark); }
+
+        /* "Meet our teams" sub-label */
+        .teams-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 24px;
+            margin-bottom: 10px;
+        }
+        .teams-label span {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted) !important;
+        }
+        .teams-label::before,
+        .teams-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        .teams-label::before { display: none; }
+
+        .btn-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        /* Image card */
+        .program-image-wrap { display: flex; align-items: center; justify-content: center; }
+        .image-card {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            padding: 10px;
+        }
+        .image-card--ftc { background: var(--orange); }
+        .image-card--fll { background: var(--red); }
+        .image-card img { width: 100%; height: auto; display: block; border-radius: 12px; }
+
+        /* ── FOOTER ── */
+        footer {
+            background: #222222;
+            padding: 14px 50px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            flex-direction: row;
+            gap: 12px;
+            flex-wrap: wrap;
         }
+        footer p { font-size: 0.82rem; color: #aaaaaa !important; }
+        .footer-social { display: flex; gap: 16px; }
+        .footer-social a { color: #aaaaaa !important; font-size: 1.1rem; transition: color var(--ease); }
+        .footer-social a:hover { color: #ffffff !important; }
 
-        .content-container.fll-section {
-            display: flex;
-            align-items: center;
-            flex-direction: row;
-        }
-
-        .fll-section .content-text {
-            flex: 1;
-            text-align: left;
-            margin-left: 50px;
-            margin-right: 50px;
-            max-width: 600px;
-        }
-        
-        .fll-section .content-image {
-            flex: 0 0 auto;
-            margin-right: 50px;
-            padding-left: 0;
-            padding-right: 0;
-            margin-top: -20px;
-            max-width: calc(100vw-550px);
-        }
-
-        .ftc-section .content-text.center-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: left;
-            flex: 1;
-            padding: 0px;
-        }
-        .fll-section .content-text.center-wrapper {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: left;
-            flex: 1;
-            padding: 0px;
-        }
-        
-        .center-content {
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100%;
-        }
-        .fll-section .center-content {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          text-align: left;
-        }
-
-        .ftc-section .center-content {
-          display: flex;
-          flex-direction: column;
-          align-items: flex-start;
-          text-align: left;
-        }
-
-        .center-content h2 { margin: 0; }
-        .center-content button { display: inline-block; margin: 0; }
-
-        .dropdown-menu {
-          display: none;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          background: #fafafa;
-          border: 1px solid #eee;
-          backdrop-filter: blur(var(--blur-value));
-          border-radius: var(--border-radius-soft);
-          min-width: 220px;
-          z-index: 999;
-          box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-          padding: 0.5rem 0;
-          text-align: center;
-        }
-        
-        .dropdown-menu .dropdown-link {
-          display: block;
-          padding: 0.75rem 1rem;
-          color: #333333;
-          font-weight: var(--font-weight-bold);
-          text-decoration: none;
-          transition: background 0.2s ease-in-out;
-          text-align: center;
-        }
-        
-        .dropdown-menu .dropdown-link:hover {
-          background-color: #f0f0f0;
-        }
-        
-        @media (min-width: 768px) {
-          .navbar__dropdown:hover .dropdown-menu {
-            display: block;
-          }
-        }
-        
-        @media (max-width: 767px) {
-          .navbar__dropdown .dropdown-menu {
-            display: none;
-            position: static;
-            padding-left: 1rem;
-            background: #f5f5f5;
-            box-shadow: none;
-            border: none;
-            text-align: center;
-          }
-        
-          .navbar__dropdown.is-open .dropdown-menu {
-            display: block;
-          }
-          
-          .navbar__menu.is-active .navbar__link {
-            color: #222222 !important;
-          }
-          
-          .navbar__menu.is-active .dropdown-link {
-            color: #222222 !important;
-            text-align: center;
-          }
-        }
-
-        @media (min-width: 768px) {
-            .navbar__toggle { display: none; }
-
+        /* ── MOBILE ── */
+        @media (max-width: 768px) {
+            .navbar__container { padding: 0 20px; }
+            .navbar__toggle { display: flex; }
             .navbar__menu {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
+                display: none;
+                position: absolute;
+                top: var(--navbar-h); left: 0;
+                width: 100%;
+                background: #fafafa;
+                border-bottom: 1px solid var(--border);
+                flex-direction: column;
+                padding: 10px 0 16px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            }
+            .navbar__menu.is-active { display: flex; }
+            .navbar__list { flex-direction: column; width: 100%; gap: 0; }
+            .navbar__item { width: 100%; text-align: center; }
+            .navbar__link { width: 100%; text-align: center; padding: 0.9rem; }
+            .dropdown-menu {
+                display: none;
                 position: static;
-                width: auto;
-                background-color: transparent !important;
-                background-image: none !important;
-                backdrop-filter: none;
-                -webkit-backdrop-filter: none;
-                border: none;
-                z-index: 1;
-                padding: 0;
+                transform: none;
+                border: none; box-shadow: none;
+                background: #f0f0f0;
+                border-radius: 0;
+                padding: 4px 16px;
+                margin: 2px 0;
             }
-            
-            .navbar__list { display: flex; align-items: center; }
-            .navbar__item { margin-left: 0.5rem; }
+            .navbar__dropdown.is-open .dropdown-menu { display: block; }
+            .dropdown-menu .dropdown-link { text-align: center; }
 
-            .navbar__link {
-                padding: 0.6rem 1.1rem;
-                border-radius: var(--border-radius-soft);
+            .hero { padding: 0 24px 0; height: 420px; align-items: flex-end; padding-bottom: 40px; }
+
+            .program-section {
+                grid-template-columns: 1fr;
+                gap: 28px;
+                padding: 40px 24px;
             }
-            
-            .navbar__link:hover,
-            .navbar__link:focus,
-            .navbar__link--active {
-                background-color: var(--color-link-highlight);
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .content-container {
-                flex-direction: column;
-                padding: 0 var(--navbar-padding);
-            }
-            
-            .content-text {
-                text-align: center;
-                margin-left: 0;
-                margin-right: 0;
-                padding: 0 0 2rem 0;
-                max-length: 700px
-            }
-            
-            .content-image img {
-                max-width: 100%;
-                height: auto;
-            }
+            .program-section--fll .program-image-wrap { order: 0; }
+            .program-section--fll .program-text { order: 1; }
+
+            footer { padding: 14px 24px; }
         }
 
-        .image-box {
-          border-radius: 20px;
-          padding: 10px;
-          background-color: #f0f0f0;
-          display: inline-block;
-        }
-        
-        .image-box img {
-          width: 100%;
-          height: auto;
-          border-radius: 15px;
-          display: block;
-        }
-
-        /* FTC section specific sizing */
-        .ftc-section .content-text {
-            width: var(--ftc-text-width);
-            max-width: none;
-            flex: 0 0 auto;
-        }
-
-        .ftc-section .content-image {
-            width: var(--ftc-image-box-width);
-            max-width: none;
-            flex: 0 0 auto;
-            margin-right: 0;
-        }
-
-        .ftc-image-box {
-            width: 100%;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0px;
-        }
-
-        .ftc-box {
-          background-color: #f19122;
-          padding: 10px;
-          border-radius: 20px;
-          box-sizing: border-box;
-          margin-left: 50px;  
-        }
-        
-        .ftc-box img {
-          width: 100%;
-          height: auto;
-          display: block;
-          border-radius: 15px;
-        }
-
-        .ftc-section .content-text.center-wrapper {
-            margin-left: 50px !important;
-            margin-right: 50px !important;
-            padding: 0 !important;
-            max-width: none !important;
-            width: auto !important;
-            flex: 1 1 auto !important;
-        }
-
-        /* FLL section specific sizing */
-        .fll-section .content-text {
-            width: var(--ftc-text-width);
-            max-width: none;
-            flex: 0 0 auto;
-        }
-
-        .fll-section .content-image {
-            width: var(--ftc-image-box-width);
-            max-width: none;
-            flex: 0 0 auto;
-            margin-right: 0;
-        }
-
-        .fll-image-box {
-            width: 100%;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 0px;
-        }
-
-        .fll-box {
-          background-color: #af1f26;
-          padding: 10px;
-          border-radius: 20px;
-          box-sizing: border-box;
-          margin-right: 50px;  
-        }
-        
-        .fll-box img {
-          width: 100%;
-          height: auto;
-          display: block;
-          border-radius: 15px;
-        }
-
-        .fll-section .content-text.center-wrapper {
-            margin-left: 50px !important;
-            padding: 0 !important;
-            max-width: none !important;
-            width: auto !important;
-            flex: 1 1 auto !important;
-        }
-
-        @media (max-width: 768px) {
-            .content-container.ftc-section,
-            .content-container.fll-section {
-                flex-direction: column;
-                align-items: center;
-            }
-        
-            .content-container.ftc-section .content-text {
-                order: 1;
-                max-width: calc(100vw - 100px);
-                text-align: center;
-                align-items: center;
-                margin: 0 auto 20px auto;
-                padding: 0;
-            }
-        
-            .content-container.ftc-section .content-image {
-                order: 2;
-                max-width: calc(100vw - 100px);
-                margin: 0 auto 20px auto;
-            }
-        
-            .content-container.fll-section .content-text {
-                order: 1;
-                max-width: calc(100vw - 100px);
-                text-align: center;
-                align-items: center;
-                margin: 0 auto 20px auto;
-                padding: 0;
-            }
-        
-            .content-container.fll-section .content-image {
-                order: 2;
-                max-width: calc(100vw - 100px);
-                margin: 0 auto;
-            }
-        
-            .center-content {
-                align-items: center !important;
-                text-align: center !important;
-            }
-
-            .team-buttons-row {
-              justify-content: center;
-            }
-
-            .ftc-box { margin-left: 0 !important; }
-            .ftc-section .content-text { margin-right: 0 !important; }
-            .fll-box { margin-right: 0 !important; }
-
-            .ftc-section .content-text.center-wrapper,
-            .fll-section .content-text.center-wrapper {
-              margin-left: 0 !important;
-              margin-right: 0 !important;
-            }
-
-            .ftc-section { margin-top: 20px !important; }
-
-            .ftc-section .content-image,
-            .fll-section .content-image {
-              width: calc(100vw - 48px) !important;
-              max-width: 100% !important;
-              padding: 10 !important;
-            }
-
-            .ftc-image-box {
-              width: calc(100vw - 48px);
-              height: auto;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              padding: 0px;
-            }
-
-            .fll-image-box {
-              width: calc(100vw - 48px);
-              height: auto;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              padding: 0px;
-            }
-
-            .fll-box {
-              padding: 10px;
-              border-radius: 20px;
-              box-sizing: border-box;
-            }
+        @media (max-width: 480px) {
+            .btn-row { flex-direction: column; }
+            .btn { justify-content: center; }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 </head>
 <body>
 
+    <!-- NAVBAR -->
     <header class="navbar" role="banner">
         <div class="navbar__container">
-            <div class="navbar__brand-section">
-                <div class="banner-image">
-                    <img src="Screenshot_2025-04-22_130549-removebg-preview.png" alt="Renert Robotics Logo">
-                </div>
+            <div class="banner-image">
+                <img src="Screenshot_2025-04-22_130549-removebg-preview.png" alt="Renert Robotics Logo">
             </div>
-            
-            <button class="navbar__toggle" 
-                    id="navbarToggle" 
-                    aria-label="Toggle navigation" 
-                    aria-controls="navbarMenu" 
-                    aria-expanded="false">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+
+            <button class="navbar__toggle" id="navbarToggle" aria-label="Toggle navigation" aria-controls="navbarMenu" aria-expanded="false">
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
             </button>
-            
-            <nav id="navbarMenu" class="navbar__menu" role="navigation" aria-labelledby="navbarToggle">
+
+            <nav id="navbarMenu" class="navbar__menu" role="navigation">
                 <ul class="navbar__list">
-                  <li class="navbar__item"><a href="index.html" class="navbar__link navbar__link--active">Home</a></li>
-                  <li class="navbar__item"><a href="about_us.html" class="navbar__link">About Us</a></li>
-                  <li class="navbar__item navbar__dropdown">
-                    <a href="#" class="navbar__link dropdown-toggle">FTC ▾</a>
-                    <ul class="dropdown-menu">
-                      <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotics</a></li>
-                      <li><a href="octopi.html" class="dropdown-link">27361 Octopi Robotics</a></li>
-                    </ul>
-                  </li>
-                  <li class="navbar__item navbar__dropdown">
-                    <a href="#" class="navbar__link dropdown-toggle">FLL ▾</a>
-                    <ul class="dropdown-menu">
-                      <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotic</a></li>
-                      <li><a href="octopi.html" class="dropdown-link">27361 Octopi Robotics</a></li>
-                    </ul>
-                  </li>
-                  <li class="navbar__item"><a href="contact.html" class="navbar__link">Contact Us</a></li>
+                    <li class="navbar__item"><a href="index.html" class="navbar__link">Home</a></li>
+                    <li class="navbar__item"><a href="about_us.html" class="navbar__link">About Us</a></li>
+                    <li class="navbar__item navbar__dropdown">
+                        <a href="#" class="navbar__link dropdown-toggle">FTC ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="cuttlefish.html" class="dropdown-link">31663 Cuttlefish Robotics</a></li>
+                            <li><a href="octopi.html" class="dropdown-link">27361 Octopi Robotics</a></li>
+                        </ul>
+                    </li>
+                    <li class="navbar__item navbar__dropdown">
+                        <a href="#" class="navbar__link dropdown-toggle">FLL ▾</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="fll1.html" class="dropdown-link">FLL Team 1</a></li>
+                            <li><a href="fll2.html" class="dropdown-link">FLL Team 2</a></li>
+                        </ul>
+                    </li>
+                    <li class="navbar__item"><a href="contact.html" class="navbar__link">Contact Us</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <div class="image-background-section">
-      <img src="DSC00575-Enhanced-NR.jpg" alt="Background" class="bg-image" />
-      <div class="overlay-text">
-        <h1>Renert Robotics</h1>
-        <p>Renert Robotics includes two FTC teams—31663 Cuttlefish Robotics and 27361 Octopi Robotics—and five FLL teams. Our students design, build, and program robots while developing skills in engineering and teamwork.</p>
-      </div>
-    </div>
+    <!-- HERO -->
+    <section class="hero">
+        <img src="DSC00575-Enhanced-NR.jpg" alt="Renert Robotics team at competition" class="hero__bg">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+            <h1 class="hero__title">Renert Robotics</h1>
+            <p class="hero__desc">Two FTC teams and five FLL teams — our students design, build, and program robots while developing real-world skills in engineering, coding, and teamwork.</p>
+        </div>
+    </section>
 
+    <!-- MAIN -->
     <main class="content">
 
-        <!-- FTC Section -->
-        <div class="content-container ftc-section">
-            <div class="content-image ftc-image-box">
-              <div class="image-box ftc-box">
-                <img src="Screenshot 2025-10-01 153501.png" alt="FTC Robots" />
-              </div>
-            </div>
-
-            <div class="content-text center-wrapper">
-                <div class="center-content">
-                    <h2>Learn About FTC</h2>
-                    <p>
-                        FIRST Tech Challenge (FTC) is a high school robotics program where students design, build, and code robots to compete in global engineering challenges. Our FTC teams thrive on collaboration and innovation, competing at regional, provincial, and world championship levels each season.
-                    </p>
-                    <a href="https://www.firstinspires.org/programs/ftc/" target="_blank" rel="noopener noreferrer">
-                        <button>Learn more about FTC here</button>
-                    </a>
-
-                    <hr class="section-divider" style="width:100%;" />
-
-                    <p class="team-buttons-label">Learn about our teams!</p>
-                    <div class="team-buttons-row">
-                        <a href="cuttlefish.html">
-                            <button class="team-btn team-btn--cuttlefish">31663 RSR Cuttlefish</button>
-                        </a>
-                        <a href="octopi.html">
-                            <button class="team-btn team-btn--octopi">27361 RSR Octopi</button>
-                        </a>
-                    </div>
+        <!-- FTC -->
+        <section class="program-section program-section--ftc">
+            <div class="program-image-wrap">
+                <div class="image-card image-card--ftc">
+                    <img src="Screenshot 2025-10-01 153501.png" alt="FTC robot">
                 </div>
             </div>
-        </div>
-        
-        <!-- FLL Section -->
-        <div class="content-container fll-section">
-          <div class="content-text center-wrapper">
-            <div class="center-content">
-              <h2>Learn About FLL</h2>
-              <p>
-                FIRST LEGO League (FLL) introduces younger students to STEM through hands-on challenges using LEGO robots. It fosters critical thinking, teamwork, and creativity in a fun and engaging environment. Renert's five FLL teams compete annually and regularly advance to provincial championships.
-              </p>
-              <a href="https://www.firstinspires.org/programs/fll/" target="_blank" rel="noopener noreferrer">
-                <button class="team-btn team-btn--fll1" style="margin-top:1rem;">Learn more about FLL here</button>
-              </a>
+
+            <div class="program-text">
+                <div class="program-tag program-tag--ftc">
+                    <i class="fa-solid fa-microchip" style="font-size:0.68rem;" aria-hidden="true"></i>
+                    FIRST Tech Challenge
+                </div>
+                <h2 class="program-title">Learn About FTC</h2>
+                <p class="program-desc">
+                    FIRST Tech Challenge (FTC) is a high school robotics program where students design, build, and code robots to compete in global engineering challenges. Our FTC teams thrive on collaboration and innovation, competing at regional, provincial, and world championship levels each season.
+                </p>
+                <a href="https://www.firstinspires.org/programs/ftc/" target="_blank" rel="noopener noreferrer" class="btn btn--dark">
+                    Learn more about FTC &nbsp;↗
+                </a>
+
+                <div class="teams-label"><span>Meet our teams</span></div>
+                <div class="btn-row">
+                    <a href="cuttlefish.html" class="btn btn--cyan">31663 RSR Cuttlefish</a>
+                    <a href="octopi.html" class="btn btn--violet">27361 RSR Octopi</a>
+                </div>
             </div>
-          </div>
-          <div class="content-image fll-image-box">
-              <div class="image-box fll-box">
-                <img src="maxresdefault (1).jpg" alt="FLL Robots" />
-              </div>
+        </section>
+
+        <!-- FLL -->
+        <section class="program-section program-section--fll">
+            <div class="program-text">
+                <div class="program-tag program-tag--fll">
+                    <i class="fa-solid fa-puzzle-piece" style="font-size:0.68rem;" aria-hidden="true"></i>
+                    FIRST LEGO League
+                </div>
+                <h2 class="program-title">Learn About FLL</h2>
+                <p class="program-desc">
+                    FIRST LEGO League (FLL) introduces younger students to STEM through hands-on challenges using LEGO robots. It fosters critical thinking, teamwork, and creativity in a fun, engaging environment. Renert's five FLL teams compete annually and regularly advance to provincial championships, inspiring the next generation of roboticists.
+                </p>
+                <a href="https://www.firstinspires.org/programs/fll/" target="_blank" rel="noopener noreferrer" class="btn btn--red">
+                    Learn more about FLL &nbsp;↗
+                </a>
             </div>
-        </div>
+
+            <div class="program-image-wrap">
+                <div class="image-card image-card--fll">
+                    <img src="maxresdefault (1).jpg" alt="FLL LEGO robot">
+                </div>
+            </div>
+        </section>
 
     </main>
 
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2025 Renert Robotics. All rights reserved.</p>
+        <div class="footer-social">
+            <a href="https://www.instagram.com/renertrobotics/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/@RenertRobotics" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+    </footer>
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const navbarToggle = document.getElementById('navbarToggle');
-            const navbarMenu = document.getElementById('navbarMenu');
-        
-            if (navbarToggle && navbarMenu) {
-                navbarToggle.addEventListener('click', function () {
-                    navbarToggle.classList.toggle('is-active');
-                    navbarMenu.classList.toggle('is-active');
-                    const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
-                    navbarToggle.setAttribute('aria-expanded', !isExpanded);
-                });
-            }
-        
-            const dropdowns = document.querySelectorAll('.navbar__dropdown');
-        
-            dropdowns.forEach(dropdown => {
-                const link = dropdown.querySelector('.dropdown-toggle');
-        
+            const toggle = document.getElementById('navbarToggle');
+            const menu   = document.getElementById('navbarMenu');
+
+            toggle.addEventListener('click', function () {
+                toggle.classList.toggle('is-active');
+                menu.classList.toggle('is-active');
+                toggle.setAttribute('aria-expanded', menu.classList.contains('is-active'));
+            });
+
+            document.querySelectorAll('.navbar__dropdown .dropdown-toggle').forEach(function (link) {
                 link.addEventListener('click', function (e) {
-                    if (window.innerWidth < 768) {
+                    if (window.innerWidth < 769) {
                         e.preventDefault();
                         e.stopPropagation();
-                        const isOpen = dropdown.classList.contains('is-open');
-                        dropdowns.forEach(d => d.classList.remove('is-open'));
-                        if (!isOpen) dropdown.classList.add('is-open');
+                        const dropdown = link.closest('.navbar__dropdown');
+                        const open = dropdown.classList.contains('is-open');
+                        document.querySelectorAll('.navbar__dropdown').forEach(d => d.classList.remove('is-open'));
+                        if (!open) dropdown.classList.add('is-open');
                     }
                 });
             });
-
-            // FTC image box height
-            const ftcImage = document.querySelector('.ftc-box img');
-            const ftcBox = document.querySelector('.ftc-box');
-            
-            if (ftcImage && ftcBox) {
-                function setFtcBoxHeight() {
-                    const boxWidth = ftcBox.offsetWidth;
-                    const maxImageWidth = boxWidth - 20;
-                    const aspectRatio = ftcImage.naturalHeight / ftcImage.naturalWidth;
-                    ftcBox.style.height = (maxImageWidth * aspectRatio + 20) + 'px';
-                }
-                if (ftcImage.complete) { setFtcBoxHeight(); }
-                else { ftcImage.onload = setFtcBoxHeight; }
-                window.addEventListener('resize', setFtcBoxHeight);
-            }
-            
-            // FLL image box height
-            const fllImage = document.querySelector('.fll-box img');
-            const fllBox = document.querySelector('.fll-box');
-            
-            if (fllImage && fllBox) {
-                function setFllBoxHeight() {
-                    const boxWidth = fllBox.offsetWidth;
-                    const maxImageWidth = boxWidth - 20;
-                    const aspectRatio = fllImage.naturalHeight / fllImage.naturalWidth;
-                    fllBox.style.height = (maxImageWidth * aspectRatio + 20) + 'px';
-                }
-                if (fllImage.complete) { setFllBoxHeight(); }
-                else { fllImage.onload = setFllBoxHeight; }
-                window.addEventListener('resize', setFllBoxHeight);
-            }
         });
     </script>
-
-    <footer style="background: #222222; color: #ccc; text-align: center; padding: 10px 0; font-size: 14px;">
-      <div style="margin-bottom: 5px;">
-        <a href="https://www.instagram.com/renertrobotics/" target="_blank" style="color: #ccc; margin: 0 10px; text-decoration: none;">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.youtube.com/@RenertRobotics" target="_blank" style="color: #ccc; margin: 0 10px; text-decoration: none;">
-          <i class="fab fa-youtube"></i>
-        </a>
-      </div>
-      <div>
-        &copy; 2025 Renert Robotics. All rights reserved.
-      </div>
-    </footer>
 </body>
-    
 </html>
